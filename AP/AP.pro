@@ -12,18 +12,18 @@ SOURCES += \
     admin.cpp \
     client.cpp \
     costumer.cpp \
-    good.cpp \
     main.cpp \
     login.cpp \
-    person.cpp
+    person.cpp \
+    product.cpp
 
 HEADERS += \
     admin.h \
     client.h \
     costumer.h \
-    good.h \
     login.h \
-    person.h
+    person.h \
+    product.h
 
 FORMS += \
     login.ui
