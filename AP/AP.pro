@@ -12,6 +12,7 @@ SOURCES += \
     admin.cpp \
     client.cpp \
     costumer.cpp \
+    forgot_pass_dialog.cpp \
     load_save.cpp \
     main.cpp \
     login.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     admin.h \
     client.h \
     costumer.h \
+    forgot_pass_dialog.h \
     load_save.h \
     login.h \
     person.h \
@@ -30,6 +32,7 @@ HEADERS += \
     register_dialog.h
 
 FORMS += \
+    forgot_pass_dialog.ui \
     login.ui \
     register_dialog.ui
 

@@ -7,6 +7,7 @@
 #include "client.h"
 #include "costumer.h"
 #include "load_save.h"
+#include "forgot_pass_dialog.h"
 using namespace std;
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +28,10 @@ private slots:
     void recieve_register(QString, QString, QString, QString, QString, QString, bool, bool);
 
     void on_pushButton_clicked();
+
+    void on_pushButton_forgot_pass_clicked();
+
+    void recieve_forgot_pass(QString, QString, bool, bool);
 
 private:
     Ui::Login *ui;

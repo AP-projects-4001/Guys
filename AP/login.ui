@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>User name :</string>
+     <string>Username :</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -63,7 +63,7 @@
    <widget class="QPushButton" name="register_pushButton">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>140</x>
       <y>230</y>
       <width>141</width>
       <height>41</height>
@@ -76,7 +76,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>460</x>
       <y>230</y>
       <width>111</width>
       <height>41</height>
@@ -131,6 +131,19 @@
      <string>Admin</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_forgot_pass">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>230</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Forgot Password</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -138,7 +151,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
