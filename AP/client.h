@@ -12,5 +12,6 @@ private:
 public:
     Client(int _balance);
     // Add anything needed
+    Client();
 };
 #endif // CLIENT_H

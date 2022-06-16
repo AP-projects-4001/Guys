@@ -15,7 +15,8 @@ SOURCES += \
     main.cpp \
     login.cpp \
     person.cpp \
-    product.cpp
+    product.cpp \
+    register_dialog.cpp
 
 HEADERS += \
     admin.h \
@@ -23,10 +24,12 @@ HEADERS += \
     costumer.h \
     login.h \
     person.h \
-    product.h
+    product.h \
+    register_dialog.h
 
 FORMS += \
-    login.ui
+    login.ui \
+    register_dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
