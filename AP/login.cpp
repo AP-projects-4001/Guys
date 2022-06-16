@@ -1,6 +1,6 @@
 #include "login.h"
 #include "ui_login.h"
-
+#include <QMessageBox>
 vector<Client> client_users;
 vector<Costumer> costumer_users;
 
@@ -26,7 +26,7 @@ void Login::on_register_pushButton_clicked()
 {
     Register_Dialog * _register = new Register_Dialog(this);
     connect(_register, SIGNAL(send_register(QString, QString, QString, QString, QString, QString, bool, bool)), this, SLOT(recieve_register(QString, QString, QString, QString, QString, QString, bool, bool)));
-    _register->show();
+    _register->exec();
 }
 
 void Login::recieve_register(QString _name, QString _user_name, QString _address, QString _email, QString _password, QString _phone_num, bool client, bool costumer)
@@ -62,56 +62,64 @@ void Login::recieve_register(QString _name, QString _user_name, QString _address
 
 void Login::on_pushButton_clicked()
 {
-    if(ui->radioButton_client->isChecked())
-    {
-        unsigned long long int i = 0;
-        for(i; i<client_users.size(); i++)
+    // If fields are empty
+    if (ui->lineEdit_user->text() == ""){
+        QMessageBox::warning(this, "Error", "Username can't be empty...");
+    }
+    else if (ui->lineEdit_password->text() == ""){
+        QMessageBox::warning(this, "Error", "Password can't be empty...");
+    }else{
+        if(ui->radioButton_client->isChecked())
         {
-            if(client_users[i].get_user_name() == ui->lineEdit_user->text())
+            unsigned long long int i = 0;
+            for(i; i<client_users.size(); i++)
             {
-                if(client_users[i].get_password() == ui->lineEdit_password->text())
+                if(client_users[i].get_user_name() == ui->lineEdit_user->text())
                 {
+                    if(client_users[i].get_password() == ui->lineEdit_password->text())
+                    {
 
+                    }
+                    else
+                    {
+                        ui->statusbar->showMessage("Wrong Password!", 5000);
+                    }
+                    break;
                 }
-                else
-                {
-                    ui->statusbar->showMessage("Wrong Password!", 5000);
-                }
-                break;
+            }
+            if(i == client_users.size())
+            {
+                ui->statusbar->showMessage("No client with such username!", 5000);
             }
         }
-        if(i == client_users.size())
+        else if(ui->radioButton_costumer->isChecked())
         {
-            ui->statusbar->showMessage("No client with such username!", 5000);
-        }
-    }
-    else if(ui->radioButton_costumer->isChecked())
-    {
-        unsigned long long int i = 0;
-        for(i; i<client_users.size(); i++)
-        {
-            if(costumer_users[i].get_user_name() == ui->lineEdit_user->text())
+            unsigned long long int i = 0;
+            for(i; i<client_users.size(); i++)
             {
-                if(costumer_users[i].get_password() == ui->lineEdit_password->text())
+                if(costumer_users[i].get_user_name() == ui->lineEdit_user->text())
                 {
+                    if(costumer_users[i].get_password() == ui->lineEdit_password->text())
+                    {
 
+                    }
+                    else
+                    {
+                        ui->statusbar->showMessage("Wrong Password!", 5000);
+                    }
+                    break;
                 }
-                else
-                {
-                    ui->statusbar->showMessage("Wrong Password!", 5000);
-                }
-                break;
+            }
+            if(i == client_users.size())
+            {
+                ui->statusbar->showMessage("No costumer with such username!", 5000);
             }
         }
-        if(i == client_users.size())
+
+        else
         {
-            ui->statusbar->showMessage("No costumer with such username!", 5000);
+
         }
-    }
-
-    else
-    {
-
     }
 }
 
