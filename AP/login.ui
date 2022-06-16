@@ -63,7 +63,7 @@
    <widget class="QPushButton" name="register_pushButton">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>170</x>
       <y>230</y>
       <width>141</width>
       <height>41</height>
@@ -71,6 +71,58 @@
     </property>
     <property name="text">
      <string>Register Account</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>230</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Log in</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_client">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>90</y>
+      <width>110</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Client</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_costumer">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>130</y>
+      <width>110</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Costumer</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_admin">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>170</y>
+      <width>110</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Admin</string>
     </property>
    </widget>
   </widget>

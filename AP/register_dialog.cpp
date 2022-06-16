@@ -15,6 +15,6 @@ Register_Dialog::~Register_Dialog()
 
 void Register_Dialog::on_buttonBox_accepted()
 {
-    emit send_register(ui->lineEdit_name->text(), ui->lineEdit_username->text(), ui->lineEdit_address->text(), ui->lineEdit_email->text(), ui->lineEdit_password->text(), ui->lineEdit_phone->text(), ui->radioButton_client->isEnabled(), ui->radioButton_customer->isEnabled());
+    emit send_register(ui->lineEdit_name->text(), ui->lineEdit_username->text(), ui->lineEdit_address->text(), ui->lineEdit_email->text(), ui->lineEdit_password->text(), ui->lineEdit_phone->text(), ui->radioButton_client->isChecked(), ui->radioButton_customer->isChecked());
 }
 

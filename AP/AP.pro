@@ -12,6 +12,7 @@ SOURCES += \
     admin.cpp \
     client.cpp \
     costumer.cpp \
+    load_save.cpp \
     main.cpp \
     login.cpp \
     person.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     admin.h \
     client.h \
     costumer.h \
+    load_save.h \
     login.h \
     person.h \
     product.h \
