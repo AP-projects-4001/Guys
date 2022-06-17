@@ -40,7 +40,7 @@
          <string>Add to products</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>340</x>
@@ -79,13 +79,13 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>30</x>
           <y>41</y>
           <width>174</width>
-          <height>260</height>
+          <height>275</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -183,7 +183,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_weight"/>
+            <widget class="QLineEdit" name="lineEdit_weight">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter a number in grams&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -219,7 +223,7 @@
      <x>0</x>
      <y>0</y>
      <width>770</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

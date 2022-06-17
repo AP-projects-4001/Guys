@@ -7,7 +7,7 @@
 class Transaction
 {
 private:
-    std::vector <Product> bouhgt_product ;
+    std::vector <Product> bouhgt_product;
     QString client_username;
 public:
     Transaction();

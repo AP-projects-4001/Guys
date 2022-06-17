@@ -2,6 +2,8 @@
 #define COSTUMER_UI_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include "load_save.h"
 
 namespace Ui {
 class costumer_Ui;
@@ -16,6 +18,9 @@ public:
     ~costumer_Ui();
 public slots:
     void set_userID(QString user);
+private slots:
+    void on_Button_add_clicked();
+
 private:
     Ui::costumer_Ui *ui;
 };

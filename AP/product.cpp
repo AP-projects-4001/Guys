@@ -5,7 +5,7 @@ Product::Product()
 
 }
 
-Product::Product(QString _name, QString _brand, QString _type, QString _color, int _price, int _stock, int _weight)
+Product::Product(QString _name, QString _brand, QString _type, QString _color, long long int _price, int _stock, int _weight)
 {
     this->name = _name;
     this->color = _color;
@@ -18,7 +18,7 @@ Product::Product(QString _name, QString _brand, QString _type, QString _color, i
     this->additional_info = "";
 }
 
-Product::Product(QString _name, QString _brand, QString _type, QString color, QString _additional_info, int _price, int _stock, int _weight, int _size)
+Product::Product(QString _name, QString _brand, QString _type, QString color, QString _additional_info, long long int _price, int _stock, int _weight, int _size)
 {
     this->name = _name;
     this->color = color;
@@ -51,7 +51,7 @@ void Product::set_type(QString _type)
     this->type = _type;
 }
 
-void Product::set_price(int _price)
+void Product::set_price(long long int _price)
 {
     this->price = _price;
 }
@@ -76,6 +76,16 @@ void Product::set_weight(int _weight)
     this->weight = abs(_weight);
 }
 
+void Product::set_bought(int num)
+{
+    this->bought = num;
+}
+
+void Product::set_costumer_username(QString tmp)
+{
+    this->costumer_username = tmp;
+}
+
 QString Product::get_name() const
 {
     return this->name;
@@ -89,6 +99,16 @@ QString Product::get_color() const
 QString Product::get_additional_info() const
 {
     return this->additional_info ;
+}
+
+QString Product::get_costumer_username() const
+{
+    return this->costumer_username;
+}
+
+int Product::get_bought() const
+{
+    return this->bought;
 }
 
 int Product::get_weight() const
@@ -111,7 +131,7 @@ int Product::get_size() const
     return this->size;
 }
 
-int Product::get_price() const
+long long int Product::get_price() const
 {
     return this->price;
 }

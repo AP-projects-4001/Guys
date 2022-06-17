@@ -17,6 +17,7 @@ using namespace std;
 void save_client(vector<Client>);
 void save_costumer(vector<Costumer>);
 void save_product(vector<Product>);
+void save_product(Product &);
 void save_transaction(Transaction &a);
 Transaction load_transaction();
 vector<Client> load_client();
