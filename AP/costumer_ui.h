@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "load_save.h"
 
+inline QString current_costumer ;
 namespace Ui {
 class costumer_Ui;
 }
@@ -20,6 +21,9 @@ public slots:
     void set_userID(QString user);
 private slots:
     void on_Button_add_clicked();
+
+
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     Ui::costumer_Ui *ui;

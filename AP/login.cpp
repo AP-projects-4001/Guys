@@ -12,17 +12,12 @@ Login::Login(QWidget *parent)
 {
 
     ui->setupUi(this);
+    // Check files ==>
     this->setWindowTitle("Login Menu");
-    // Create the costumer and client UI
-//    Costumer_Ui *CostumerUi = new Costumer_Ui();
-//    client_Ui *ClientUi = new client_Ui();
-
-    // Connectig  signals and slots for sending userID to the related UI
-//    connect(this, SIGNAL(send_clientID(QString)), ClientUi, SLOT(set_uesrId(QString)));
-//    connect(this, SIGNAL(send_costumerID(QString)), CostumerUi, SLOT(set_uesrID(QString)));
 
     if(check_file("All_client.json"))
         client_users = load_client();
+
     if(check_file("All_costumer.json"))
         costumer_users = load_costumer();
 }
@@ -47,6 +42,7 @@ void Login::recieve_register(QString _name, QString _user_name, QString _address
     {
         if(client)
         {
+
             Client *tmp = new Client;
             tmp->set_name(_name);
             tmp->set_user_name(_user_name);
@@ -115,7 +111,7 @@ void Login::on_pushButton_clicked()
         else if(ui->radioButton_costumer->isChecked())
         {
             unsigned long long int i = 0;
-            for(i; i<client_users.size(); i++)
+            for(i; i<costumer_users.size(); i++)
             {
                 if(costumer_users[i].get_user_name() == ui->lineEdit_user->text())
                 {
@@ -135,7 +131,7 @@ void Login::on_pushButton_clicked()
                     break;
                 }
             }
-            if(i == client_users.size())
+            if(i == costumer_users.size())
             {
                 ui->statusbar->showMessage("No costumer with such username!", 5000);
             }
@@ -143,7 +139,7 @@ void Login::on_pushButton_clicked()
 
         else
         {
-
+            // For admin panels
         }
     }
 }

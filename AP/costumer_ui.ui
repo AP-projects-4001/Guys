@@ -212,6 +212,11 @@
        <attribute name="title">
         <string>Show Products</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="show_table"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -223,7 +228,7 @@
      <x>0</x>
      <y>0</y>
      <width>770</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

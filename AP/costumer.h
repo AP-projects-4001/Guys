@@ -3,6 +3,7 @@
 #include <QVector>
 #include "person.h"
 #include "product.h"
+
 class Costumer : public Person
 {
 private:
