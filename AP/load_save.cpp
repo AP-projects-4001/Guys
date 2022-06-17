@@ -56,7 +56,7 @@ void save_costumer(vector<Costumer> costumer_user)
 
 void save_product(vector<Product> products)
 {
-    QJsonArray names, brands, types, colors, prices, stocks, sizes;
+    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights;
     for(unsigned long long int i = 0; i<products.size(); i++)
     {
         names.append(products[i].get_name());
@@ -66,6 +66,8 @@ void save_product(vector<Product> products)
         prices.append(products[i].get_price());
         stocks.append(products[i].get_stock());
         sizes.append(products[i].get_size());
+        additional_info.append(products[i].get_additional_info());
+        weights.append(products[i].get_weight());
     }
 
     QJsonObject j;
@@ -76,6 +78,9 @@ void save_product(vector<Product> products)
     j["Prices"] = prices;
     j["Stocks"] = stocks;
     j["Sizes"] = sizes;
+    j["Info"] = additional_info;
+    j["Weight"] = weights;
+
     QJsonDocument d(j);
     QFile f("All_product.json");
     f.open(QIODevice::WriteOnly);
@@ -156,7 +161,7 @@ vector<Product> load_product()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, brands, types, colors, prices, stocks, sizes;
+    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights;
     names = o["Names"].toArray();
     brands = o["Brands"].toArray();
     types = o["Types"].toArray();
@@ -164,6 +169,8 @@ vector<Product> load_product()
     prices = o["Prices"].toArray();
     stocks = o["Stocks"].toArray();
     sizes = o["Sizes"].toArray();
+    additional_info = o["Info"].toArray();
+    weights = o["Weight"].toArray();
 
     vector<Product> product_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -176,6 +183,8 @@ vector<Product> load_product()
         tmp->set_price(prices[i].toInt());
         tmp->set_size(sizes[i].toInt());
         tmp->set_stock(stocks[i].toInt());
+        tmp->set_additional_info(additional_info[i].toString());
+        tmp->set_weight(weights[i].toInt());
         product_tmp.push_back(*tmp);
         delete(tmp);
     }

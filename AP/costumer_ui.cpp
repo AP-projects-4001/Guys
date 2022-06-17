@@ -7,6 +7,8 @@ costumer_Ui::costumer_Ui(QWidget *parent) :
     ui(new Ui::costumer_Ui)
 {
     ui->setupUi(this);
+//    ui->tableView->sethori
+//    ui->tableWidget->sethor
 }
 
 costumer_Ui::~costumer_Ui()
