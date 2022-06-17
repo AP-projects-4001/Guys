@@ -5,6 +5,7 @@
 class Product
 {
 protected:
+    QString costumer_username;
     QString name;
     QString brand;
     QString type; // mobile | television | dress | food | laptop | shoe | ...

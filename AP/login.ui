@@ -85,6 +85,9 @@
     <property name="text">
      <string>Log in</string>
     </property>
+    <property name="shortcut">
+     <string>Return</string>
+    </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_client">
     <property name="geometry">
@@ -151,7 +154,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

@@ -11,27 +11,35 @@ CONFIG += c++17
 SOURCES += \
     admin.cpp \
     client.cpp \
+    client_ui.cpp \
     costumer.cpp \
+    costumer_ui.cpp \
     forgot_pass_dialog.cpp \
     load_save.cpp \
     main.cpp \
     login.cpp \
     person.cpp \
     product.cpp \
-    register_dialog.cpp
+    register_dialog.cpp \
+    transaction.cpp
 
 HEADERS += \
     admin.h \
     client.h \
+    client_ui.h \
     costumer.h \
+    costumer_ui.h \
     forgot_pass_dialog.h \
     load_save.h \
     login.h \
     person.h \
     product.h \
-    register_dialog.h
+    register_dialog.h \
+    transaction.h
 
 FORMS += \
+    client_ui.ui \
+    costumer_ui.ui \
     forgot_pass_dialog.ui \
     login.ui \
     register_dialog.ui

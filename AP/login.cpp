@@ -1,15 +1,26 @@
 #include "login.h"
 #include "ui_login.h"
 #include <QMessageBox>
-vector<Client> client_users;
-vector<Costumer> costumer_users;
+vector <Client> client_users;
+vector <Costumer> costumer_users;
+QString user ;
+
 
 Login::Login(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Login)
 {
+
     ui->setupUi(this);
     this->setWindowTitle("Login Menu");
+    // Create the costumer and client UI
+//    Costumer_Ui *CostumerUi = new Costumer_Ui();
+//    client_Ui *ClientUi = new client_Ui();
+
+    // Connectig  signals and slots for sending userID to the related UI
+//    connect(this, SIGNAL(send_clientID(QString)), ClientUi, SLOT(set_uesrId(QString)));
+//    connect(this, SIGNAL(send_costumerID(QString)), CostumerUi, SLOT(set_uesrID(QString)));
+
     if(check_file("All_client.json"))
         client_users = load_client();
     if(check_file("All_costumer.json"))
@@ -83,6 +94,11 @@ void Login::on_pushButton_clicked()
                     if(client_users[i].get_password() == ui->lineEdit_password->text())
                     {
                         ui->statusbar->showMessage("Login successful!", 5000);
+                        client_Ui *ClientUi = new client_Ui();
+                        connect(this, SIGNAL(send_clientID(QString)), ClientUi, SLOT(set_userId(QString)));
+                        emit send_clientID(client_users[i].get_user_name());
+                        close();
+                        ClientUi->show();
                     }
                     else
                     {
@@ -106,6 +122,11 @@ void Login::on_pushButton_clicked()
                     if(costumer_users[i].get_password() == ui->lineEdit_password->text())
                     {
                         ui->statusbar->showMessage("Login successful!", 5000);
+                        costumer_Ui *CostumerUi = new costumer_Ui();
+                        connect(this, SIGNAL(send_costumerID(QString)), CostumerUi, SLOT(set_userID(QString)));
+                        emit send_costumerID(costumer_users[i].get_user_name());
+                        close();
+                        CostumerUi->show();
                     }
                     else
                     {
