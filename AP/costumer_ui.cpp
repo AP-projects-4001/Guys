@@ -107,6 +107,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
         if (current_costumer != products[i].get_costumer_username())
             continue;
 //        QTableWidgetItem *item = filesTable->item(row, column);
+
         ui->show_table->setItem(i , 0, new QTableWidgetItem(products[i].get_name()));
         ui->show_table->item(i , 0)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
         ui->show_table->setItem(i , 1, new QTableWidgetItem(products[i].get_brand()));
