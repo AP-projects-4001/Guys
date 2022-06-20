@@ -24,5 +24,5 @@ vector<Client> load_client();
 vector<Costumer> load_costumer();
 vector<Product> load_product();
 bool check_file(QString);
-
+vector<Product> sort_function(vector<Product>, QString,QString,QString,QString,QString,QString,QString, bool,bool,bool,bool,bool,bool,bool,bool);
 #endif // LOAD_SAVE_H

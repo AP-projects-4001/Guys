@@ -2,7 +2,7 @@
 #define CLIENT_UI_H
 
 #include <QMainWindow>
-#include "more_search_tools.h"
+#include "search_tools.h"
 
 namespace Ui {
 class client_Ui;
@@ -19,6 +19,10 @@ private slots:
     void set_userId(QString user);
 
 
+
+    void on_toolButton_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::client_Ui *ui;

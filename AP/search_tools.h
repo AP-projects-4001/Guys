@@ -2,7 +2,7 @@
 #define SEARCH_TOOLS_H
 
 #include <QDialog>
-
+#include <QIntValidator>
 namespace Ui {
 class search_tools;
 }

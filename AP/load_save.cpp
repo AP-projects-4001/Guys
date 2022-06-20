@@ -396,3 +396,8 @@ bool check_file(QString path)
         return false;
     }
 }
+
+vector<Product> sort_function(vector<Product>, QString, QString, QString, QString, QString, QString, QString, bool, bool, bool, bool, bool, bool, bool, bool)
+{
+    //
+}
