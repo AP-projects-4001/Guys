@@ -2,6 +2,7 @@
 #define LOAD_SAVE_H
 
 #include <vector>
+#include <algorithm>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
