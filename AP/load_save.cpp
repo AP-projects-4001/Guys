@@ -397,7 +397,68 @@ bool check_file(QString path)
     }
 }
 
-vector<Product> sort_function(vector<Product>, QString, QString, QString, QString, QString, QString, QString, bool, bool, bool, bool, bool, bool, bool, bool)
+vector<Product> sort_function(vector<Product> allproducts, QString from_price, QString to_price, QString from_weight, QString to_weight, QString color, QString brand, QString type, bool min, bool max, bool newest, bool oldest, bool M_shopped, bool M_viewed, bool none, bool availale)
 {
-    //
+    vector<Product> updated = allproducts;
+    vector<unsigned long long int> list;
+    for(unsigned long long int i = 0; i <updated.size() ;i++)
+    {
+        bool check{false};
+        if(updated[i].get_color() != color || updated[i].get_brand() != brand || updated[i].get_type() != type)
+            check = true;
+        else if(updated[i].get_price()<from_price.toInt() || updated[i].get_price() > to_price.toInt() || updated[i].get_weight()<from_weight.toInt() || updated[i].get_weight() > to_weight.toInt())
+            check = true;
+        else if(availale)
+            if(updated[i].get_stock()==0)
+                check = true;
+        if(check)
+            list.push_back(i);
+    }
+    sort(list.begin(), list.end(), greater<int>());
+    for(unsigned long long int i = 0; i<list.size(); i++)
+    {
+        updated.erase(updated.begin()+i);
+    }
+    if(min)
+    {
+        sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
+            return a.get_price() < b.get_price();});
+    }
+    else if(max)
+    {
+        sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
+            return a.get_price() > b.get_price();});
+    }
+    else if(oldest)
+    {
+        reverse(updated.begin(),updated.end());
+    }
+    else if(M_shopped)
+    {
+        sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
+            return a.get_bought() > b.get_bought();});
+    }
+    else if(M_viewed)
+    {
+//        sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
+//            return a.get_view() > b.get_view();});
+    }
+    else if(newest||none)
+        return updated;
+    return updated;
 }
+
+
+//bool incresingorder(Product a, Product b, QString order)
+//{
+//    if(order == "MintoMax")
+//        return a.get_price() < b.get_price();
+//    else if(order == "MaxtoMin")
+//        return a.get_price() > b.get_price();
+//    else if(order == "Mostshopped")
+//        return a.get_bought() < b.get_bought();
+////    else if(order == )
+//    return true;
+//}
+
+
