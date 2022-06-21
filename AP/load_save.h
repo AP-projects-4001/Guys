@@ -13,14 +13,15 @@
 #include "process.h"
 #include "admin.h"
 #include "transaction.h"
+#include "product.h"
 using namespace std;
 
-void save_client(vector<Client>);
+void save_client(vector<Client>&);
 void save_costumer(vector<Costumer>);
 void save_product(vector<Product>);
 void save_product(Product &);
 void save_transaction(Transaction &a);
-Transaction load_transaction();
+vector<Transaction> load_transaction();
 vector<Client> load_client();
 vector<Costumer> load_costumer();
 vector<Product> load_product();

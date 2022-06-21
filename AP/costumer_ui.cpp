@@ -85,13 +85,8 @@ void costumer_Ui::on_Button_add_clicked()
 }
 
 
-
-
-
-
 void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 {
-
     ui->show_table->setColumnCount(9);
     ui->show_table->setRowCount(products.size());
     ui->show_table->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
@@ -127,7 +122,6 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
         ui->show_table->setItem(i , 8, new QTableWidgetItem(products[i].get_additional_info()));
         ui->show_table->item(i , 8)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
     }
-
 }
 
 

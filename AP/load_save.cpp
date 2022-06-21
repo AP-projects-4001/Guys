@@ -1,9 +1,9 @@
 #include "load_save.h"
 
-void save_client(vector<Client> client_user)
+void save_client(vector<Client>& client_user)
 {
-    QJsonArray names, addresses, emails, phones, users, passwords;
-    for(unsigned long long int i = 0; i<client_user.size(); i++)
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped;
+    for(unsigned int i = 0; i<client_user.size(); i++)
     {
         names.append(client_user[i].get_name());
         addresses.append(client_user[i].get_address());
@@ -11,6 +11,19 @@ void save_client(vector<Client> client_user)
         phones.append(client_user[i].get_phone_number());
         users.append(client_user[i].get_user_name());
         passwords.append(client_user[i].get_password());
+        QString line;
+        for (unsigned int j = 0; j<client_user[j].get_shopped_items().size(); j++)
+        {
+            line = client_user[i].get_user_name();
+            line.append(",");
+            line.append(client_user[i].get_shopped_items()[j].get_name());
+            line.append(",");
+            line.append(client_user[i].get_shopped_items()[j].get_costumer_username());
+            line.append(",");
+            shopped.append(line);
+        }
+        if(shopped.size() == 0)
+            shopped.append("");
     }
 
     QJsonObject j;
@@ -20,17 +33,32 @@ void save_client(vector<Client> client_user)
     j["Phones"] = phones;
     j["Users"] = users;
     j["Passwords"] = passwords;
+    j["Shopped"] = shopped;
     QJsonDocument d(j);
     QFile f("All_client.json");
     f.open(QIODevice::WriteOnly);
     f.write(d.toJson());
     f.close();
+    for(int i=0; i<names.count(); i++)
+        names.removeAt(0);
+    for(int i=0; i<addresses.count(); i++)
+        addresses.removeAt(0);
+    for(int i=0; i<emails.count(); i++)
+        emails.removeAt(0);
+    for(int i=0; i<phones.count(); i++)
+        phones.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
+    for(int i=0; i<shopped.count(); i++)
+        shopped.removeAt(0);
 }
 
 void save_costumer(vector<Costumer> costumer_user)
 {
     QJsonArray names, addresses, emails, phones, users, passwords;
-    for(unsigned long long int i = 0; i<costumer_user.size(); i++)
+    for(unsigned int i = 0; i<costumer_user.size(); i++)
     {
         names.append(costumer_user[i].get_name());
         addresses.append(costumer_user[i].get_address());
@@ -52,12 +80,24 @@ void save_costumer(vector<Costumer> costumer_user)
     f.open(QIODevice::WriteOnly);
     f.write(d.toJson());
     f.close();
+    for(int i=0; i<names.count(); i++)
+        names.removeAt(0);
+    for(int i=0; i<addresses.count(); i++)
+        addresses.removeAt(0);
+    for(int i=0; i<emails.count(); i++)
+        emails.removeAt(0);
+    for(int i=0; i<phones.count(); i++)
+        phones.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
 }
 
 void save_product(vector<Product> products)
 {
     QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts;
-    for(unsigned long long int i = 0; i<products.size(); i++)
+    for(unsigned int i = 0; i<products.size(); i++)
     {
         names.append(products[i].get_name());
         brands.append(products[i].get_brand());
@@ -259,12 +299,13 @@ vector<Client> load_client()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords;
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
     phones = o["Phones"].toArray();
     users = o["Users"].toArray();
+    shopped = o["Shopped"].toArray();
     passwords = o["Passwords"].toArray();
 
     vector<Client> client_tmp;
@@ -277,11 +318,77 @@ vector<Client> load_client()
         tmp->set_phone_number(phones[i].toString());
         tmp->set_user_name(users[i].toString());
         tmp->set_password(passwords[i].toString());
+        vector<Product> pro_temp;
+        if(shopped[0].toString() != "")
+        {
+            for(int l = 0; l<users.size(); l++)
+            {
+                for(int j = 0; j<shopped.size(); j++)
+                {
+                    string dummyLine = shopped[j].toString().toStdString();
+                    size_t pos = 0;
+                    vector<string> line_splitted;
+                    string delimiter = ",";
+                    while ((pos = dummyLine.find(delimiter)) != string::npos)
+                    {
+                        line_splitted.push_back(dummyLine.substr(0, pos));
+                        dummyLine.erase(0, pos + delimiter.length());
+                    }
+                    if(line_splitted[0] == users[l].toString().toStdString())
+                    {
+                        Product temporary;
+                        QString tempo = QString::fromStdString(line_splitted[1]); // pro name
+                        temporary.set_name(tempo);
+                        tempo = QString::fromStdString(line_splitted[2]); // costumer
+                        temporary.set_costumer_username(tempo);
+                        vector<Product> all_products = load_product();
+                        for (unsigned int k = 0; k<all_products.size(); k++)
+                        {
+                            if(all_products[k].get_name().toStdString() == line_splitted[1] &&
+                               all_products[k].get_costumer_username().toStdString() == line_splitted[2])
+                            {
+                                temporary.set_additional_info(all_products[k].get_additional_info());
+                                temporary.set_bought(all_products[k].get_bought());
+                                temporary.set_brand(all_products[k].get_brand());
+                                temporary.set_color(all_products[k].get_color());
+                                temporary.set_price(all_products[k].get_price());
+                                temporary.set_size(all_products[k].get_size());
+                                temporary.set_stock(all_products[k].get_stock());
+                                temporary.set_type(all_products[k].get_type());
+                                temporary.set_weight(all_products[k].get_weight());
+                                break;
+                            }
+                        }
+                        pro_temp.push_back(temporary);
+                        all_products.clear();
+                        all_products.shrink_to_fit();
+                    }
+                }
+                tmp->set_shopped_items(pro_temp);
+                pro_temp.clear();
+                pro_temp.shrink_to_fit();
+            }
+        }
+        pro_temp.clear();
+        pro_temp.shrink_to_fit();
         client_tmp.push_back(*tmp);
         delete(tmp);
     }
     f.close();
-
+    for(int i=0; i<names.count(); i++)
+        names.removeAt(0);
+    for(int i=0; i<addresses.count(); i++)
+        addresses.removeAt(0);
+    for(int i=0; i<emails.count(); i++)
+        emails.removeAt(0);
+    for(int i=0; i<phones.count(); i++)
+        phones.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
+    for(int i=0; i<shopped.count(); i++)
+        shopped.removeAt(0);
     return client_tmp;
 }
 
@@ -314,7 +421,18 @@ vector<Costumer> load_costumer()
         delete(tmp);
     }
     f.close();
-
+    for(int i=0; i<names.count(); i++)
+        names.removeAt(0);
+    for(int i=0; i<addresses.count(); i++)
+        addresses.removeAt(0);
+    for(int i=0; i<emails.count(); i++)
+        emails.removeAt(0);
+    for(int i=0; i<phones.count(); i++)
+        phones.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
+    for(int i=0; i<users.count(); i++)
+        users.removeAt(0);
     return costumer_tmp;
 }
 
@@ -397,6 +515,165 @@ bool check_file(QString path)
     }
 }
 
+void save_transaction(Transaction& tmp)
+{
+    if(check_file("All_transaction.json"))
+    {
+        QFile f("All_transaction.json");
+        f.open(QIODevice::ReadOnly);
+        QByteArray b = f.readAll();
+        QJsonDocument d = QJsonDocument::fromJson(b);
+        QJsonObject o = d.object();
+        QJsonArray products, names;
+        products = o["Products"].toArray();
+        names = o["Names"].toArray();
+        f.close();
+        bool flag = false;
+        for(int i = 0; i<names.size(); i++)
+        {
+            if (names[i].toString() == tmp.get_client_user_name())
+            {
+                flag = true;
+                break;
+            }
+        }
+        if(!flag)
+            names.append(tmp.get_client_user_name());
+        QString line;
+        for (unsigned int i = 0; i<tmp.get_bought_product().size(); i++)
+        {
+            line = tmp.get_client_user_name();
+            line.append(",");
+            line.append(tmp.get_bought_product()[i].get_name());
+            line.append(",");
+            line.append(tmp.get_bought_product()[i].get_costumer_username());
+            line.append(",");
+            products.append(line);
+        }
+        QJsonObject j;
+        j["Products"] = products;
+        j["Names"] = names;
+        QJsonDocument d2(j);
+        f.open(QIODevice::WriteOnly);
+        f.write(d2.toJson());
+        f.close();
+        for(int i=0; i<products.count(); i++)
+            products.removeAt(0);
+        for(int i=0; i<names.count(); i++)
+            names.removeAt(0);
+    }
+
+    else
+    {
+        //vector product, client user name
+        QJsonArray products, names;
+        names.append(tmp.get_client_user_name());
+        QString line;
+        for (unsigned int i = 0; i<tmp.get_bought_product().size(); i++)
+        {
+            line = tmp.get_client_user_name();
+            line.append(",");
+            line.append(tmp.get_bought_product()[i].get_name());
+            line.append(",");
+            line.append(tmp.get_bought_product()[i].get_costumer_username());
+            line.append(",");
+            products.append(line);
+        }
+        QJsonObject j;
+        j["Names"] = names;
+        j["Products"] = products;
+        QJsonDocument d(j);
+        QFile f("All_transaction.json");
+        f.open(QIODevice::WriteOnly);
+        f.write(d.toJson());
+        f.close();
+        for(int i=0; i<products.count(); i++)
+            products.removeAt(0);
+        names.removeAt(0);
+    }
+}
+
+vector<Transaction> load_transaction()
+{
+    vector<Transaction> trans;
+    if(check_file("All_transaction.json"))
+    {
+        QFile f("All_transaction.json");
+        f.open(QIODevice::ReadOnly);
+        QByteArray b = f.readAll();
+        QJsonDocument d = QJsonDocument::fromJson(b);
+        QJsonObject o = d.object();
+        QJsonArray products, names;
+        products = o["Products"].toArray();
+        names = o["Names"].toArray();
+        f.close();
+        Transaction tmp;
+        vector<Product> pro_temp;
+        for(int i = 0; i<names.size(); i++)
+        {
+            for(int j = 0; j<products.size(); j++)
+            {
+                string dummyLine = products[j].toString().toStdString();
+                size_t pos = 0;
+                vector<string> line_splitted;
+                string delimiter = ",";
+                while ((pos = dummyLine.find(delimiter)) != string::npos)
+                {
+                    line_splitted.push_back(dummyLine.substr(0, pos));
+                    dummyLine.erase(0, pos + delimiter.length());
+                }
+                if(line_splitted[0] == names[i].toString().toStdString())
+                {
+                    QString tempo = QString::fromStdString(line_splitted[0]);
+                    tmp.set_client_user_name(tempo);
+                    Product temporary;
+                    tempo = QString::fromStdString(line_splitted[1]);
+                    temporary.set_name(tempo);
+                    tempo = QString::fromStdString(line_splitted[2]);
+                    temporary.set_costumer_username(tempo);
+                    vector<Product> all_products = load_product();
+                    for (unsigned int k = 0; k<all_products.size(); k++)
+                    {
+                        if(all_products[k].get_name().toStdString() == line_splitted[1] &&
+                           all_products[k].get_costumer_username().toStdString() == line_splitted[2])
+                        {
+                            temporary.set_additional_info(all_products[k].get_additional_info());
+                            temporary.set_bought(all_products[k].get_bought());
+                            temporary.set_brand(all_products[k].get_brand());
+                            temporary.set_color(all_products[k].get_color());
+                            temporary.set_price(all_products[k].get_price());
+                            temporary.set_size(all_products[k].get_size());
+                            temporary.set_stock(all_products[k].get_stock());
+                            temporary.set_type(all_products[k].get_type());
+                            temporary.set_weight(all_products[k].get_weight());
+                            break;
+                        }
+                    }
+                    pro_temp.push_back(temporary);
+                    all_products.clear();
+                    all_products.shrink_to_fit();
+                }
+            }
+            tmp.set_bought_product(pro_temp);
+            trans.push_back(tmp);
+            pro_temp.clear();
+            pro_temp.shrink_to_fit();
+        }
+
+        pro_temp.clear();
+        pro_temp.shrink_to_fit();
+        for(int i=0; i<products.count(); i++)
+            products.removeAt(0);
+        for(int i=0; i<names.count(); i++)
+            names.removeAt(0);
+    }
+    else
+    {
+        //hey
+    }
+    return trans;
+}
+
 vector<Product> sort_function(vector<Product> allproducts, QString from_price, QString to_price, QString from_weight, QString to_weight, QString color, QString brand, QString type, bool min, bool max, bool newest, bool oldest, bool M_shopped, bool M_viewed, bool none, bool availale)
 {
     vector<Product> updated = allproducts;
@@ -457,8 +734,6 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
 //        return a.get_price() > b.get_price();
 //    else if(order == "Mostshopped")
 //        return a.get_bought() < b.get_bought();
-////    else if(order == )
+//    else if(order == )
 //    return true;
 //}
-
-

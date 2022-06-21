@@ -1,18 +1,15 @@
 #include "client_ui.h"
 #include "ui_client_ui.h"
-#include <QMessageBox>
 
 // Global vectors
-//std::vector <Product> products;
-// products vector
-//std::vector
-// copy
+std::vector <Product> products_2;
+
 client_Ui::client_Ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::client_Ui)
 {
     ui->setupUi(this);
-
+    products_2 = load_product();
 }
 
 client_Ui::~client_Ui()
@@ -33,11 +30,3 @@ void client_Ui::on_toolButton_clicked()
     // connect
     s->exec();
 }
-
-
-void client_Ui::on_pushButton_3_clicked()
-{
-    QMessageBox::warning(this, "Help", ui->lineEdit_2->whatsThis());
-
-}
-

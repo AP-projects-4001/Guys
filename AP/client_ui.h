@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include "search_tools.h"
-//#include "product.h"
+#include <QMessageBox>
+#include "transaction.h"
+#include "load_save.h"
 inline QString current_client;
 
 namespace Ui {
@@ -20,11 +22,7 @@ public:
 private slots:
     void set_userId(QString user);
 
-
-
     void on_toolButton_clicked();
-
-    void on_pushButton_3_clicked();
 
 private:
     Ui::client_Ui *ui;
