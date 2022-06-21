@@ -1,9 +1,11 @@
 #include "client_ui.h"
 #include "ui_client_ui.h"
 #include <QMessageBox>
-QString current_client;
+
 // Global vectors
+//std::vector <Product> products;
 // products vector
+//std::vector
 // copy
 client_Ui::client_Ui(QWidget *parent) :
     QMainWindow(parent),

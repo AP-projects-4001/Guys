@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "search_tools.h"
+//#include "product.h"
+inline QString current_client;
 
 namespace Ui {
 class client_Ui;
