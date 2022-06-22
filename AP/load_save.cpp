@@ -39,19 +39,26 @@ void save_client(vector<Client>& client_user)
     f.open(QIODevice::WriteOnly);
     f.write(d.toJson());
     f.close();
-    for(int i=0; i<=names.size(); i++)
+    int len = names.count();
+    for(int i=0; i<len; i++)
         names.removeAt(0);
-    for(int i=0; i<=addresses.size(); i++)
+    len = addresses.count();
+    for(int i=0; i<len; i++)
         addresses.removeAt(0);
-    for(int i=0; i<=emails.size(); i++)
+    len = emails.count();
+    for(int i=0; i<len; i++)
         emails.removeAt(0);
-    for(int i=0; i<=phones.size(); i++)
+    len = phones.count();
+    for(int i=0; i<len; i++)
         phones.removeAt(0);
-    for(int i=0; i<=users.size(); i++)
+    len = users.count();
+    for(int i=0; i<len; i++)
         users.removeAt(0);
-    for(int i=0; i<=passwords.size(); i++)
+    len = passwords.count();
+    for(int i=0; i<len; i++)
         passwords.removeAt(0);
-    for(int i=0; i<=shopped.size(); i++)
+    len = shopped.count();
+    for(int i=0; i<len; i++)
         shopped.removeAt(0);
 }
 
@@ -80,23 +87,29 @@ void save_costumer(vector<Costumer> costumer_user)
     f.open(QIODevice::WriteOnly);
     f.write(d.toJson());
     f.close();
-    for(int i=0; i<=names.size(); i++)
+    int len = names.count();
+    for(int i=0; i<len; i++)
         names.removeAt(0);
-    for(int i=0; i<=addresses.size(); i++)
+    len = addresses.count();
+    for(int i=0; i<len; i++)
         addresses.removeAt(0);
-    for(int i=0; i<=emails.size(); i++)
+    len = emails.count();
+    for(int i=0; i<len; i++)
         emails.removeAt(0);
-    for(int i=0; i<=phones.size(); i++)
+    len = phones.count();
+    for(int i=0; i<len; i++)
         phones.removeAt(0);
-    for(int i=0; i<=users.size(); i++)
+    len = users.count();
+    for(int i=0; i<len; i++)
         users.removeAt(0);
-    for(int i=0; i<=passwords.size(); i++)
+    len = passwords.count();
+    for(int i=0; i<len; i++)
         passwords.removeAt(0);
 }
 
 void save_product(vector<Product> products)
 {
-    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts;
+    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths;
     for(unsigned int i = 0; i<products.size(); i++)
     {
         names.append(products[i].get_name());
@@ -110,6 +123,7 @@ void save_product(vector<Product> products)
         weights.append(products[i].get_weight());
         costumers.append(products[i].get_costumer_username());
         boughts.append(products[i].get_bought());
+        paths.append(products[i].get_path());
     }
 
     QJsonObject j;
@@ -124,6 +138,7 @@ void save_product(vector<Product> products)
     j["Weight"] = weights;
     j["Costumers"] = costumers;
     j["Boughts"] = boughts;
+    j["Paths"] = paths;
 
     QJsonDocument d(j);
     QFile f("All_product.json");
@@ -131,29 +146,42 @@ void save_product(vector<Product> products)
     f.write(d.toJson());
     f.close();
 
-    for(int i=0; i<=names.count(); i++)
+    int len = names.count();
+    for(int i=0; i<len; i++)
         names.removeAt(0);
-    for(int i=0; i<=brands.count(); i++)
+    len = brands.count();
+    for(int i=0; i<len; i++)
         brands.removeAt(0);
-    for(int i=0; i<=types.count(); i++)
+    len = types.count();
+    for(int i=0; i<len; i++)
         types.removeAt(0);
-    for(int i=0; i<=colors.count(); i++)
+    len = colors.count();
+    for(int i=0; i<len; i++)
         colors.removeAt(0);
-    for(int i=0; i<=prices.count(); i++)
+    len = prices.count();
+    for(int i=0; i<len; i++)
         prices.removeAt(0);
-    for(int i=0; i<=stocks.count(); i++)
+    len = stocks.count();
+    for(int i=0; i<len; i++)
         stocks.removeAt(0);
-    for(int i=0; i<=sizes.count(); i++)
+    len = sizes.count();
+    for(int i=0; i<len; i++)
         sizes.removeAt(0);
-    for(int i=0; i<=additional_info.count(); i++)
+    len = additional_info.count();
+    for(int i=0; i<len; i++)
         additional_info.removeAt(0);
-    for(int i=0; i<=weights.count(); i++)
+    len = weights.count();
+    for(int i=0; i<len; i++)
         weights.removeAt(0);
-    for(int i=0; i<=costumers.count(); i++)
+    len = costumers.count();
+    for(int i=0; i<len; i++)
         costumers.removeAt(0);
-    for(int i=0; i<=boughts.count(); i++)
+    len = boughts.count();
+    for(int i=0; i<len; i++)
         boughts.removeAt(0);
-
+    len = paths.count();
+    for(int i=0; i<len; i++)
+        paths.removeAt(0);
 }
 
 void save_product(Product& pro)
@@ -165,7 +193,7 @@ void save_product(Product& pro)
         QByteArray b = f.readAll();
         QJsonDocument d = QJsonDocument::fromJson(b);
         QJsonObject o = d.object();
-        QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts;
+        QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths;
         names = o["Names"].toArray();
         brands = o["Brands"].toArray();
         types = o["Types"].toArray();
@@ -177,6 +205,7 @@ void save_product(Product& pro)
         weights = o["Weight"].toArray();
         costumers = o["Costumers"].toArray();
         boughts = o["Boughts"].toArray();
+        paths = o["Paths"].toArray();
         f.close();
 
         names.append(pro.get_name());
@@ -190,6 +219,7 @@ void save_product(Product& pro)
         weights.append(pro.get_weight());
         costumers.append(pro.get_costumer_username());
         boughts.append(pro.get_bought());
+        paths.append(pro.get_path());
 
         QJsonObject j;
         j["Names"] = names;
@@ -203,35 +233,49 @@ void save_product(Product& pro)
         j["Weight"] = weights;
         j["Costumers"] = costumers;
         j["Boughts"] = boughts;
+        j["Paths"] = paths;
 
         QJsonDocument d2(j);
         f.open(QIODevice::WriteOnly);
         f.write(d2.toJson());
         f.close();
 
-        for(int i=0; i<=names.count(); i++)
+        int len = names.count();
+        for(int i=0; i<len; i++)
             names.removeAt(0);
-        for(int i=0; i<=brands.count(); i++)
+        len = brands.count();
+        for(int i=0; i<len; i++)
             brands.removeAt(0);
-        for(int i=0; i<=types.count(); i++)
+        len = types.count();
+        for(int i=0; i<len; i++)
             types.removeAt(0);
-        for(int i=0; i<=colors.count(); i++)
+        len = colors.count();
+        for(int i=0; i<len; i++)
             colors.removeAt(0);
-        for(int i=0; i<=prices.count(); i++)
+        len = prices.count();
+        for(int i=0; i<len; i++)
             prices.removeAt(0);
-        for(int i=0; i<=stocks.count(); i++)
+        len = stocks.count();
+        for(int i=0; i<len; i++)
             stocks.removeAt(0);
-        for(int i=0; i<=sizes.count(); i++)
+        len = sizes.count();
+        for(int i=0; i<len; i++)
             sizes.removeAt(0);
-        for(int i=0; i<=additional_info.count(); i++)
+        len = additional_info.count();
+        for(int i=0; i<len; i++)
             additional_info.removeAt(0);
-        for(int i=0; i<=weights.count(); i++)
+        len = weights.count();
+        for(int i=0; i<len; i++)
             weights.removeAt(0);
-        for(int i=0; i<=costumers.count(); i++)
+        len = costumers.count();
+        for(int i=0; i<len; i++)
             costumers.removeAt(0);
-        for(int i=0; i<=boughts.count(); i++)
+        len = boughts.count();
+        for(int i=0; i<len; i++)
             boughts.removeAt(0);
-
+        len = paths.count();
+        for(int i=0; i<len; i++)
+            paths.removeAt(0);
     }
     else
     {
@@ -354,6 +398,7 @@ vector<Client> load_client()
                         temporary.set_stock(all_products[k].get_stock());
                         temporary.set_type(all_products[k].get_type());
                         temporary.set_weight(all_products[k].get_weight());
+                        temporary.set_path(all_products[k].get_path());
                         break;
                     }
                 }
@@ -371,19 +416,26 @@ vector<Client> load_client()
         delete(tmp);
     }
     f.close();
-    for(int i=0; i<=names.size(); i++)
+    int len = names.count();
+    for(int i=0; i<len; i++)
         names.removeAt(0);
-    for(int i=0; i<=addresses.size(); i++)
+    len = addresses.count();
+    for(int i=0; i<len; i++)
         addresses.removeAt(0);
-    for(int i=0; i<=emails.size(); i++)
+    len = emails.count();
+    for(int i=0; i<len; i++)
         emails.removeAt(0);
-    for(int i=0; i<=phones.size(); i++)
+    len = phones.count();
+    for(int i=0; i<len; i++)
         phones.removeAt(0);
-    for(int i=0; i<=users.size(); i++)
+    len = users.count();
+    for(int i=0; i<len; i++)
         users.removeAt(0);
-    for(int i=0; i<=passwords.size(); i++)
+    len = passwords.count();
+    for(int i=0; i<len; i++)
         passwords.removeAt(0);
-    for(int i=0; i<=shopped.size(); i++)
+    len = shopped.count();
+    for(int i=0; i<len; i++)
         shopped.removeAt(0);
     return client_tmp;
 }
@@ -417,17 +469,23 @@ vector<Costumer> load_costumer()
         delete(tmp);
     }
     f.close();
-    for(int i=0; i<=names.size(); i++)
+    int len = names.count();
+    for(int i=0; i<len; i++)
         names.removeAt(0);
-    for(int i=0; i<=addresses.size(); i++)
+    len = addresses.count();
+    for(int i=0; i<len; i++)
         addresses.removeAt(0);
-    for(int i=0; i<=emails.size(); i++)
+    len = emails.count();
+    for(int i=0; i<len; i++)
         emails.removeAt(0);
-    for(int i=0; i<=phones.size(); i++)
+    len = phones.count();
+    for(int i=0; i<len; i++)
         phones.removeAt(0);
-    for(int i=0; i<=users.size(); i++)
+    len = users.count();
+    for(int i=0; i<len; i++)
         users.removeAt(0);
-    for(int i=0; i<=passwords.size(); i++)
+    len = passwords.count();
+    for(int i=0; i<len; i++)
         passwords.removeAt(0);
     return costumer_tmp;
 }
@@ -439,7 +497,7 @@ vector<Product> load_product()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts;
+    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths;
     names = o["Names"].toArray();
     brands = o["Brands"].toArray();
     types = o["Types"].toArray();
@@ -451,6 +509,7 @@ vector<Product> load_product()
     weights = o["Weight"].toArray();
     costumers = o["Costumers"].toArray();
     boughts = o["Boughts"].toArray();
+    paths = o["Paths"].toArray();
 
     vector<Product> product_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -471,28 +530,42 @@ vector<Product> load_product()
         delete(tmp);
     }
     f.close();
-    for(int i=0; i<=names.count(); i++)
+    int len = names.count();
+    for(int i=0; i<len; i++)
         names.removeAt(0);
-    for(int i=0; i<=brands.count(); i++)
+    len = brands.count();
+    for(int i=0; i<len; i++)
         brands.removeAt(0);
-    for(int i=0; i<=types.count(); i++)
+    len = types.count();
+    for(int i=0; i<len; i++)
         types.removeAt(0);
-    for(int i=0; i<=colors.count(); i++)
+    len = colors.count();
+    for(int i=0; i<len; i++)
         colors.removeAt(0);
-    for(int i=0; i<=prices.count(); i++)
+    len = prices.count();
+    for(int i=0; i<len; i++)
         prices.removeAt(0);
-    for(int i=0; i<=stocks.count(); i++)
+    len = stocks.count();
+    for(int i=0; i<len; i++)
         stocks.removeAt(0);
-    for(int i=0; i<=sizes.count(); i++)
+    len = sizes.count();
+    for(int i=0; i<len; i++)
         sizes.removeAt(0);
-    for(int i=0; i<=additional_info.count(); i++)
+    len = additional_info.count();
+    for(int i=0; i<len; i++)
         additional_info.removeAt(0);
-    for(int i=0; i<=weights.count(); i++)
+    len = weights.count();
+    for(int i=0; i<len; i++)
         weights.removeAt(0);
-    for(int i=0; i<=costumers.count(); i++)
+    len = costumers.count();
+    for(int i=0; i<len; i++)
         costumers.removeAt(0);
-    for(int i=0; i<=boughts.count(); i++)
+    len = boughts.count();
+    for(int i=0; i<len; i++)
         boughts.removeAt(0);
+    len = paths.count();
+    for(int i=0; i<len; i++)
+        paths.removeAt(0);
 
     return product_tmp;
 }
@@ -643,6 +716,7 @@ vector<Transaction> load_transaction()
                             temporary.set_stock(all_products[k].get_stock());
                             temporary.set_type(all_products[k].get_type());
                             temporary.set_weight(all_products[k].get_weight());
+                            temporary.set_path(all_products[k].get_path());
                             break;
                         }
                     }

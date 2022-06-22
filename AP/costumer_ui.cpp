@@ -87,6 +87,7 @@ void costumer_Ui::on_Button_add_clicked()
 
 void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 {
+    products = load_product();
     for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
         ui->show_table->removeRow(i);
     ui->show_table->clearContents();
