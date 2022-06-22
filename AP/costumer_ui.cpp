@@ -9,6 +9,7 @@ costumer_Ui::costumer_Ui(QWidget *parent) :
     ui(new Ui::costumer_Ui)
 {
     ui->setupUi(this);
+    ui->hidden_lineedit->hide();
     products = load_product();
 
 }
@@ -60,6 +61,7 @@ void costumer_Ui::on_Button_add_clicked()
         tmp->set_type(ui->lineEdit_type->text());
         tmp->set_price(ui->lineEdit_price->text().toLongLong());
         tmp->set_weight(ui->lineEdit_weight->text().toInt());
+        tmp->set_path(ui->hidden_lineedit->text());
         if(!ui->lineEdit_size->text().isEmpty())
             tmp->set_size(ui->lineEdit_size->text());
         else
@@ -80,6 +82,7 @@ void costumer_Ui::on_Button_add_clicked()
         ui->lineEdit_size->setText("");
         ui->lineEdit_price->setText("");
         ui->lineEdit_weight->setText("");
+
         ui->plainTextEdit_info->setPlainText("");
     }
 }
@@ -147,4 +150,29 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
     ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
+
+
+void costumer_Ui::on_pushButton_clicked()
+{
+    QString dirfilename =  QFileDialog::getOpenFileName(this,"Open Document",QDir::currentPath(),tr("*.png *.jpeg *.jpg"));
+    QFileInfo dir_filename(dirfilename);
+    QString filename = dir_filename.fileName();
+    QDir("product_images").exists();
+    QDir().mkdir("product_images");
+    QFile::copy(dirfilename, "product_images/"+filename);
+    ui->hidden_lineedit->setText("product_images/"+filename);
+
+    QPixmap picture("product_images/"+filename);
+    int h = ui->product_image->height();
+    int w = ui->product_image->width();
+    ui->product_image->setPixmap(picture);
+    ui->product_image->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+    ui->product_image->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    //            products[i].set_path("product_images/"+filename);
+
+
+
+//    ui->product_image->set
+}
 

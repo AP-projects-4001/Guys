@@ -6,6 +6,11 @@
 #include "load_save.h"
 #include <QPushButton>
 #include "costumer_products.h"
+#include <QFileDialog>
+#include <QFile>
+#include <QFileInfo>
+#include <QPixmap>
+#include <QDir>
 inline QString current_costumer ;
 namespace Ui {
 class costumer_Ui;
@@ -23,6 +28,8 @@ public slots:
 private slots:
     void on_Button_add_clicked();
     void on_tabWidget_tabBarClicked(int index);
+    void on_pushButton_clicked();
+
 signals:
     void send_index(int);
 private:

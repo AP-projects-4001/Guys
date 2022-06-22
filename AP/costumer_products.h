@@ -4,7 +4,7 @@
 #include <QDialog>
 #include "load_save.h"
 #include <QMessageBox>
-
+#include <QPixmap>
 namespace Ui {
 class costumer_products;
 }
