@@ -18,6 +18,7 @@ SOURCES += \
     load_save.cpp \
     main.cpp \
     login.cpp \
+    payment_gateway.cpp \
     person.cpp \
     product.cpp \
     register_dialog.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     forgot_pass_dialog.h \
     load_save.h \
     login.h \
+    payment_gateway.h \
     person.h \
     product.h \
     register_dialog.h \
@@ -46,6 +48,7 @@ FORMS += \
     costumer_ui.ui \
     forgot_pass_dialog.ui \
     login.ui \
+    payment_gateway.ui \
     register_dialog.ui \
     search_tools.ui \
     admin_ui.ui

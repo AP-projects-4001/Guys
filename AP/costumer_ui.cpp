@@ -87,8 +87,17 @@ void costumer_Ui::on_Button_add_clicked()
 
 void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 {
-    ui->show_table->setColumnCount(9);
-    ui->show_table->setRowCount(products.size());
+    for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
+        ui->show_table->removeRow(i);
+    ui->show_table->clearContents();
+    unsigned int Count = 0;
+    for (unsigned int i = 0 ; i < products.size(); ++i){
+        if (products[i].get_costumer_username()==current_costumer)
+            Count++;
+    }
+    ui->show_table->setColumnCount(10);
+    int count = 0;
+    ui->show_table->setRowCount(Count);
     ui->show_table->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
     ui->show_table->setHorizontalHeaderItem(1, new QTableWidgetItem("Brand"));
     ui->show_table->setHorizontalHeaderItem(2, new QTableWidgetItem("Type"));
@@ -99,29 +108,36 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
     ui->show_table->setHorizontalHeaderItem(7, new QTableWidgetItem("Weight"));
     ui->show_table->setHorizontalHeaderItem(8, new QTableWidgetItem("Additional info"));
     for (unsigned int i = 0 ; i < products.size(); i++){
-        if (current_costumer != products[i].get_costumer_username())
-            continue;
-//        QTableWidgetItem *item = filesTable->item(row, column);
+//        for (unsigned int j = 0 ; j < )
+        if (products[i].get_costumer_username()==current_costumer){
+//            ui->show_table->insertRow(count);
 
-        ui->show_table->setItem(i , 0, new QTableWidgetItem(products[i].get_name()));
-        ui->show_table->item(i , 0)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 1, new QTableWidgetItem(products[i].get_brand()));
-        ui->show_table->item(i , 1)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 2, new QTableWidgetItem(products[i].get_type()));
-        ui->show_table->item(i , 2)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 3, new QTableWidgetItem(products[i].get_color()));
-        ui->show_table->item(i , 3)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
-        ui->show_table->item(i , 4)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 5, new QTableWidgetItem(QString::number(products[i].get_stock())));
-        ui->show_table->item(i , 5)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 6, new QTableWidgetItem(QString::number(products[i].get_size())));
-        ui->show_table->item(i , 6)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 7, new QTableWidgetItem(QString::number(products[i].get_weight())));
-        ui->show_table->item(i , 7)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
-        ui->show_table->setItem(i , 8, new QTableWidgetItem(products[i].get_additional_info()));
-        ui->show_table->item(i , 8)->setFlags(ui->show_table->item(i , 0)->flags() & ~Qt::ItemIsEditable);
+//        QTableWidgetItem *item = filesTable->item(row, column);
+        ui->show_table->setItem(count , 0, new QTableWidgetItem(products[i].get_name()));
+        ui->show_table->item(count ,  0)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 1, new QTableWidgetItem(products[i].get_brand()));
+        ui->show_table->item(count ,  1)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 2, new QTableWidgetItem(products[i].get_type()));
+        ui->show_table->item(count ,  2)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 3, new QTableWidgetItem(products[i].get_color()));
+        ui->show_table->item(count ,  3)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
+        ui->show_table->item(count ,  4)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 5, new QTableWidgetItem(QString::number(products[i].get_stock())));
+        ui->show_table->item(count ,  5)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 6, new QTableWidgetItem(QString::number(products[i].get_size())));
+        ui->show_table->item(count ,  6)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 7, new QTableWidgetItem(QString::number(products[i].get_weight())));
+        ui->show_table->item(count ,  7)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(count , 8, new QTableWidgetItem(products[i].get_additional_info()));
+        ui->show_table->item(count ,  8)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+        ++count;
+        }
     }
+//     ui->show_table->horizontalHeader()->setStretchLastSection(true);
+//    ui->show_table->setColumnWidth(8, 50);
+
+//    ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 
