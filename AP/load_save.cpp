@@ -12,7 +12,7 @@ void save_client(vector<Client>& client_user)
         users.append(client_user[i].get_user_name());
         passwords.append(client_user[i].get_password());
         QString line;
-        for (unsigned int j = 0; j<client_user[j].get_shopped_items().size(); j++)
+        for (unsigned int j = 0; j<client_user[i].get_shopped_items().size(); j++)
         {
             line = client_user[i].get_user_name();
             line.append(",");
@@ -22,7 +22,7 @@ void save_client(vector<Client>& client_user)
             line.append(",");
             shopped.append(line);
         }
-        if(shopped.size() == 0)
+        if(shopped.size() == 0 || line == "")
             shopped.append("");
     }
 
@@ -39,19 +39,19 @@ void save_client(vector<Client>& client_user)
     f.open(QIODevice::WriteOnly);
     f.write(d.toJson());
     f.close();
-    for(int i=0; i<names.count(); i++)
+    for(int i=0; i<=names.size(); i++)
         names.removeAt(0);
-    for(int i=0; i<addresses.count(); i++)
+    for(int i=0; i<=addresses.size(); i++)
         addresses.removeAt(0);
-    for(int i=0; i<emails.count(); i++)
+    for(int i=0; i<=emails.size(); i++)
         emails.removeAt(0);
-    for(int i=0; i<phones.count(); i++)
+    for(int i=0; i<=phones.size(); i++)
         phones.removeAt(0);
-    for(int i=0; i<users.count(); i++)
+    for(int i=0; i<=users.size(); i++)
         users.removeAt(0);
-    for(int i=0; i<users.count(); i++)
-        users.removeAt(0);
-    for(int i=0; i<shopped.count(); i++)
+    for(int i=0; i<=passwords.size(); i++)
+        passwords.removeAt(0);
+    for(int i=0; i<=shopped.size(); i++)
         shopped.removeAt(0);
 }
 
@@ -80,18 +80,18 @@ void save_costumer(vector<Costumer> costumer_user)
     f.open(QIODevice::WriteOnly);
     f.write(d.toJson());
     f.close();
-    for(int i=0; i<names.count(); i++)
+    for(int i=0; i<=names.size(); i++)
         names.removeAt(0);
-    for(int i=0; i<addresses.count(); i++)
+    for(int i=0; i<=addresses.size(); i++)
         addresses.removeAt(0);
-    for(int i=0; i<emails.count(); i++)
+    for(int i=0; i<=emails.size(); i++)
         emails.removeAt(0);
-    for(int i=0; i<phones.count(); i++)
+    for(int i=0; i<=phones.size(); i++)
         phones.removeAt(0);
-    for(int i=0; i<users.count(); i++)
+    for(int i=0; i<=users.size(); i++)
         users.removeAt(0);
-    for(int i=0; i<users.count(); i++)
-        users.removeAt(0);
+    for(int i=0; i<=passwords.size(); i++)
+        passwords.removeAt(0);
 }
 
 void save_product(vector<Product> products)
@@ -131,27 +131,27 @@ void save_product(vector<Product> products)
     f.write(d.toJson());
     f.close();
 
-    for(int i=0; i<names.count(); i++)
+    for(int i=0; i<=names.count(); i++)
         names.removeAt(0);
-    for(int i=0; i<brands.count(); i++)
+    for(int i=0; i<=brands.count(); i++)
         brands.removeAt(0);
-    for(int i=0; i<types.count(); i++)
+    for(int i=0; i<=types.count(); i++)
         types.removeAt(0);
-    for(int i=0; i<colors.count(); i++)
+    for(int i=0; i<=colors.count(); i++)
         colors.removeAt(0);
-    for(int i=0; i<prices.count(); i++)
+    for(int i=0; i<=prices.count(); i++)
         prices.removeAt(0);
-    for(int i=0; i<stocks.count(); i++)
+    for(int i=0; i<=stocks.count(); i++)
         stocks.removeAt(0);
-    for(int i=0; i<sizes.count(); i++)
+    for(int i=0; i<=sizes.count(); i++)
         sizes.removeAt(0);
-    for(int i=0; i<additional_info.count(); i++)
+    for(int i=0; i<=additional_info.count(); i++)
         additional_info.removeAt(0);
-    for(int i=0; i<weights.count(); i++)
+    for(int i=0; i<=weights.count(); i++)
         weights.removeAt(0);
-    for(int i=0; i<costumers.count(); i++)
+    for(int i=0; i<=costumers.count(); i++)
         costumers.removeAt(0);
-    for(int i=0; i<boughts.count(); i++)
+    for(int i=0; i<=boughts.count(); i++)
         boughts.removeAt(0);
 
 }
@@ -209,27 +209,27 @@ void save_product(Product& pro)
         f.write(d2.toJson());
         f.close();
 
-        for(int i=0; i<names.count(); i++)
+        for(int i=0; i<=names.count(); i++)
             names.removeAt(0);
-        for(int i=0; i<brands.count(); i++)
+        for(int i=0; i<=brands.count(); i++)
             brands.removeAt(0);
-        for(int i=0; i<types.count(); i++)
+        for(int i=0; i<=types.count(); i++)
             types.removeAt(0);
-        for(int i=0; i<colors.count(); i++)
+        for(int i=0; i<=colors.count(); i++)
             colors.removeAt(0);
-        for(int i=0; i<prices.count(); i++)
+        for(int i=0; i<=prices.count(); i++)
             prices.removeAt(0);
-        for(int i=0; i<stocks.count(); i++)
+        for(int i=0; i<=stocks.count(); i++)
             stocks.removeAt(0);
-        for(int i=0; i<sizes.count(); i++)
+        for(int i=0; i<=sizes.count(); i++)
             sizes.removeAt(0);
-        for(int i=0; i<additional_info.count(); i++)
+        for(int i=0; i<=additional_info.count(); i++)
             additional_info.removeAt(0);
-        for(int i=0; i<weights.count(); i++)
+        for(int i=0; i<=weights.count(); i++)
             weights.removeAt(0);
-        for(int i=0; i<costumers.count(); i++)
+        for(int i=0; i<=costumers.count(); i++)
             costumers.removeAt(0);
-        for(int i=0; i<boughts.count(); i++)
+        for(int i=0; i<=boughts.count(); i++)
             boughts.removeAt(0);
 
     }
@@ -319,75 +319,71 @@ vector<Client> load_client()
         tmp->set_user_name(users[i].toString());
         tmp->set_password(passwords[i].toString());
         vector<Product> pro_temp;
-        if(shopped[0].toString() != "")
+        for (int l = 0; l <shopped.size(); l++)
         {
-            for(int l = 0; l<users.size(); l++)
+            string dummyLine = shopped[l].toString().toStdString();
+            if(dummyLine == "")
+                continue;
+            size_t pos = 0;
+            vector<string> line_splitted;
+            string delimiter = ",";
+            while ((pos = dummyLine.find(delimiter)) != string::npos)
             {
-                for(int j = 0; j<shopped.size(); j++)
+                line_splitted.push_back(dummyLine.substr(0, pos));
+                dummyLine.erase(0, pos + delimiter.length());
+            }
+            if(line_splitted[0] == users[i].toString().toStdString())
+            {
+                Product temporary;
+                QString tempo = QString::fromStdString(line_splitted[1]); // pro name
+                temporary.set_name(tempo);
+                tempo = QString::fromStdString(line_splitted[2]); // costumer
+                temporary.set_costumer_username(tempo);
+                vector<Product> all_products = load_product();
+                for (unsigned int k = 0; k<all_products.size(); k++)
                 {
-                    string dummyLine = shopped[j].toString().toStdString();
-                    size_t pos = 0;
-                    vector<string> line_splitted;
-                    string delimiter = ",";
-                    while ((pos = dummyLine.find(delimiter)) != string::npos)
+                    if(all_products[k].get_name().toStdString() == line_splitted[1] &&
+                       all_products[k].get_costumer_username().toStdString() == line_splitted[2])
                     {
-                        line_splitted.push_back(dummyLine.substr(0, pos));
-                        dummyLine.erase(0, pos + delimiter.length());
-                    }
-                    if(line_splitted[0] == users[l].toString().toStdString())
-                    {
-                        Product temporary;
-                        QString tempo = QString::fromStdString(line_splitted[1]); // pro name
-                        temporary.set_name(tempo);
-                        tempo = QString::fromStdString(line_splitted[2]); // costumer
-                        temporary.set_costumer_username(tempo);
-                        vector<Product> all_products = load_product();
-                        for (unsigned int k = 0; k<all_products.size(); k++)
-                        {
-                            if(all_products[k].get_name().toStdString() == line_splitted[1] &&
-                               all_products[k].get_costumer_username().toStdString() == line_splitted[2])
-                            {
-                                temporary.set_additional_info(all_products[k].get_additional_info());
-                                temporary.set_bought(all_products[k].get_bought());
-                                temporary.set_brand(all_products[k].get_brand());
-                                temporary.set_color(all_products[k].get_color());
-                                temporary.set_price(all_products[k].get_price());
-                                temporary.set_size(all_products[k].get_size());
-                                temporary.set_stock(all_products[k].get_stock());
-                                temporary.set_type(all_products[k].get_type());
-                                temporary.set_weight(all_products[k].get_weight());
-                                break;
-                            }
-                        }
-                        pro_temp.push_back(temporary);
-                        all_products.clear();
-                        all_products.shrink_to_fit();
+                        temporary.set_additional_info(all_products[k].get_additional_info());
+                        temporary.set_bought(all_products[k].get_bought());
+                        temporary.set_brand(all_products[k].get_brand());
+                        temporary.set_color(all_products[k].get_color());
+                        temporary.set_price(all_products[k].get_price());
+                        temporary.set_size(all_products[k].get_size());
+                        temporary.set_stock(all_products[k].get_stock());
+                        temporary.set_type(all_products[k].get_type());
+                        temporary.set_weight(all_products[k].get_weight());
+                        break;
                     }
                 }
-                tmp->set_shopped_items(pro_temp);
-                pro_temp.clear();
-                pro_temp.shrink_to_fit();
+                pro_temp.push_back(temporary);
+                all_products.clear();
+                all_products.shrink_to_fit();
             }
+            else
+                continue;
         }
+        tmp->set_shopped_items(pro_temp);
         pro_temp.clear();
         pro_temp.shrink_to_fit();
         client_tmp.push_back(*tmp);
         delete(tmp);
     }
     f.close();
-    for(int i=0; i<names.count(); i++)
+    for(int i=0; i<=names.size(); i++)
         names.removeAt(0);
-    for(int i=0; i<addresses.count(); i++)
+    for(int i=0; i<=addresses.size(); i++)
         addresses.removeAt(0);
-    for(int i=0; i<emails.count(); i++)
+    for(int i=0; i<=emails.size(); i++)
         emails.removeAt(0);
-    for(int i=0; i<phones.count(); i++)
+    for(int i=0; i<=phones.size(); i++)
         phones.removeAt(0);
-    for(int i=0; i<users.count(); i++)
+    for(int i=0; i<=users.size(); i++)
         users.removeAt(0);
-    for(int i=0; i<users.count(); i++)
-        users.removeAt(0);
-    for(int i=0; i<shopped.count(); i++)
+    for(int i=0; i<=passwords.size(); i++)
+        passwords.removeAt(0);
+    for(int i=0; i<=shopped.size(); i++)
         shopped.removeAt(0);
     return client_tmp;
 }
@@ -421,18 +417,18 @@ vector<Costumer> load_costumer()
         delete(tmp);
     }
     f.close();
-    for(int i=0; i<names.count(); i++)
+    for(int i=0; i<=names.size(); i++)
         names.removeAt(0);
-    for(int i=0; i<addresses.count(); i++)
+    for(int i=0; i<=addresses.size(); i++)
         addresses.removeAt(0);
-    for(int i=0; i<emails.count(); i++)
+    for(int i=0; i<=emails.size(); i++)
         emails.removeAt(0);
-    for(int i=0; i<phones.count(); i++)
+    for(int i=0; i<=phones.size(); i++)
         phones.removeAt(0);
-    for(int i=0; i<users.count(); i++)
+    for(int i=0; i<=users.size(); i++)
         users.removeAt(0);
-    for(int i=0; i<users.count(); i++)
-        users.removeAt(0);
+    for(int i=0; i<=passwords.size(); i++)
+        passwords.removeAt(0);
     return costumer_tmp;
 }
 
@@ -475,27 +471,27 @@ vector<Product> load_product()
         delete(tmp);
     }
     f.close();
-    for(int i=0; i<names.count(); i++)
+    for(int i=0; i<=names.count(); i++)
         names.removeAt(0);
-    for(int i=0; i<brands.count(); i++)
+    for(int i=0; i<=brands.count(); i++)
         brands.removeAt(0);
-    for(int i=0; i<types.count(); i++)
+    for(int i=0; i<=types.count(); i++)
         types.removeAt(0);
-    for(int i=0; i<colors.count(); i++)
+    for(int i=0; i<=colors.count(); i++)
         colors.removeAt(0);
-    for(int i=0; i<prices.count(); i++)
+    for(int i=0; i<=prices.count(); i++)
         prices.removeAt(0);
-    for(int i=0; i<stocks.count(); i++)
+    for(int i=0; i<=stocks.count(); i++)
         stocks.removeAt(0);
-    for(int i=0; i<sizes.count(); i++)
+    for(int i=0; i<=sizes.count(); i++)
         sizes.removeAt(0);
-    for(int i=0; i<additional_info.count(); i++)
+    for(int i=0; i<=additional_info.count(); i++)
         additional_info.removeAt(0);
-    for(int i=0; i<weights.count(); i++)
+    for(int i=0; i<=weights.count(); i++)
         weights.removeAt(0);
-    for(int i=0; i<costumers.count(); i++)
+    for(int i=0; i<=costumers.count(); i++)
         costumers.removeAt(0);
-    for(int i=0; i<boughts.count(); i++)
+    for(int i=0; i<=boughts.count(); i++)
         boughts.removeAt(0);
 
     return product_tmp;
@@ -557,9 +553,9 @@ void save_transaction(Transaction& tmp)
         f.open(QIODevice::WriteOnly);
         f.write(d2.toJson());
         f.close();
-        for(int i=0; i<products.count(); i++)
+        for(int i=0; i<=products.count(); i++)
             products.removeAt(0);
-        for(int i=0; i<names.count(); i++)
+        for(int i=0; i<=names.count(); i++)
             names.removeAt(0);
     }
 
@@ -587,9 +583,10 @@ void save_transaction(Transaction& tmp)
         f.open(QIODevice::WriteOnly);
         f.write(d.toJson());
         f.close();
-        for(int i=0; i<products.count(); i++)
+        for(int i=0; i<=products.count(); i++)
             products.removeAt(0);
-        names.removeAt(0);
+        for(int i=0; i<=names.count(); i++)
+            names.removeAt(0);
     }
 }
 
@@ -662,9 +659,9 @@ vector<Transaction> load_transaction()
 
         pro_temp.clear();
         pro_temp.shrink_to_fit();
-        for(int i=0; i<products.count(); i++)
+        for(int i=0; i<=products.count(); i++)
             products.removeAt(0);
-        for(int i=0; i<names.count(); i++)
+        for(int i=0; i<=names.count(); i++)
             names.removeAt(0);
     }
     else
