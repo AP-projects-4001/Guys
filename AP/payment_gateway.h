@@ -1,6 +1,7 @@
 #ifndef PAYMENT_GATEWAY_H
 #define PAYMENT_GATEWAY_H
 
+#include<bits/stdc++.h>
 #include <QDialog>
 #include <QMessageBox>
 #include <QIntValidator>
@@ -15,6 +16,7 @@ class Payment_gateway : public QDialog
 public:
     explicit Payment_gateway(QWidget *parent = nullptr);
     ~Payment_gateway();
+    QString getCaptcha();
 
 private slots:
     void on_buttonBox_accepted();
