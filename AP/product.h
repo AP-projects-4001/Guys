@@ -13,14 +13,14 @@ protected:
     QString additional_info;
     long long int price;
     int stock;
-    int size;
+    QString size;
     int bought{0};
     int weight;
 
     // Add more if it's required
 public:
     Product(QString _name, QString _brand, QString _type, QString color, long long int _price, int _stock, int _weight);// Constructor for setting these variables
-    Product(QString _name, QString _brand, QString _type, QString color,QString _additional_info , long long int _price, int _stock , int _weight, int _size);
+    Product(QString _name, QString _brand, QString _type, QString color,QString _additional_info , long long int _price, int _stock , int _weight, QString _size);
     // set function for price, stock and get functions for all of them
     Product();
     void set_name(QString);
@@ -29,7 +29,7 @@ public:
     void set_color(QString);
     void set_price(long long int);
     void set_stock(int);
-    void set_size(int);
+    void set_size(QString);
     void set_additional_info(QString);
     void set_weight(int);
     void set_bought(int);
@@ -44,7 +44,7 @@ public:
     int get_weight()const;
     long long int get_price() const;
     int get_stock() const;
-    int get_size() const;
+    QString get_size() const;
 };
 
 

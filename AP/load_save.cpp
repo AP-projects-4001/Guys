@@ -461,7 +461,7 @@ vector<Product> load_product()
         tmp->set_brand(brands[i].toString());
         tmp->set_type(types[i].toString());
         tmp->set_price(prices[i].toInt());
-        tmp->set_size(sizes[i].toInt());
+        tmp->set_size(sizes[i].toString());
         tmp->set_stock(stocks[i].toInt());
         tmp->set_additional_info(additional_info[i].toString());
         tmp->set_weight(weights[i].toInt());

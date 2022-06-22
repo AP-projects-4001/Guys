@@ -14,11 +14,11 @@ Product::Product(QString _name, QString _brand, QString _type, QString _color, l
     this->price = abs(_price);
     this->stock = abs(_stock);
     this->weight = abs(_weight);
-    this->size = -1;
+    this->size = "";
     this->additional_info = "";
 }
 
-Product::Product(QString _name, QString _brand, QString _type, QString color, QString _additional_info, long long int _price, int _stock, int _weight, int _size)
+Product::Product(QString _name, QString _brand, QString _type, QString color, QString _additional_info, long long int _price, int _stock, int _weight, QString _size)
 {
     this->name = _name;
     this->color = color;
@@ -27,7 +27,7 @@ Product::Product(QString _name, QString _brand, QString _type, QString color, QS
     this->price = abs(_price);
     this->stock = abs(_stock);
     this->weight = abs(_weight);
-    this->size = abs(_size);
+    this->size = _size;
     this->additional_info = _additional_info;
 }
 
@@ -61,7 +61,7 @@ void Product::set_stock(int _stock)
     this->stock = _stock;
 }
 
-void Product::set_size(int _size)
+void Product::set_size(QString _size)
 {
     this->size = _size;
 }
@@ -126,7 +126,7 @@ QString Product::get_type() const
     return this->type;
 }
 
-int Product::get_size() const
+QString Product::get_size() const
 {
     return this->size;
 }

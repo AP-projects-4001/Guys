@@ -13,6 +13,7 @@ SOURCES += \
     client.cpp \
     client_ui.cpp \
     costumer.cpp \
+    costumer_products.cpp \
     costumer_ui.cpp \
     forgot_pass_dialog.cpp \
     load_save.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     client.h \
     client_ui.h \
     costumer.h \
+    costumer_products.h \
     costumer_ui.h \
     forgot_pass_dialog.h \
     load_save.h \
@@ -45,6 +47,7 @@ HEADERS += \
 
 FORMS += \
     client_ui.ui \
+    costumer_products.ui \
     costumer_ui.ui \
     forgot_pass_dialog.ui \
     login.ui \
@@ -57,3 +60,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Resources.qrc
