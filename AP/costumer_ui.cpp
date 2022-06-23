@@ -82,7 +82,8 @@ void costumer_Ui::on_Button_add_clicked()
         ui->lineEdit_size->setText("");
         ui->lineEdit_price->setText("");
         ui->lineEdit_weight->setText("");
-
+        ui->product_image->clear();
+        ui->hidden_lineedit->setText("");
         ui->plainTextEdit_info->setPlainText("");
     }
 }

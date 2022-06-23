@@ -66,6 +66,11 @@ void Register_Dialog::on_lineEdit_username_editingFinished()
         QMessageBox::warning(this, "Error", "Username can't contain space...");
         ui->lineEdit_username->setText("");
     }
+    else if(ui->lineEdit_username->text().length() < 4)
+    {
+        QMessageBox::warning(this, "Error", "Username can't be less than 4 characters...");
+        ui->lineEdit_username->setText("");
+    }
 
     vector<QString> user_names;
     if(check_file("All_client.json"))
@@ -101,7 +106,6 @@ void Register_Dialog::on_lineEdit_username_editingFinished()
     user_names.clear();
 }
 
-
 void Register_Dialog::on_lineEdit_phone_editingFinished()
 {
     if(!(ui->lineEdit_phone->text().toStdString().find_first_not_of("0123456789") == string::npos))
@@ -109,5 +113,14 @@ void Register_Dialog::on_lineEdit_phone_editingFinished()
         QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
         ui->lineEdit_phone->setText("");
     }
+}
+
+void Register_Dialog::on_lineEdit_password_editingFinished()
+{
+    if(ui->lineEdit_password->text().length() < 5)
+        {
+            QMessageBox::warning(this, "Error", "Password can't be less than 5 characters...");
+            ui->lineEdit_password->setText("");
+        }
 }
 

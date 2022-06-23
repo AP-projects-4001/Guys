@@ -14,12 +14,9 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
     // Check files ==>
     this->setWindowTitle("Login Menu");
-
-    if(check_file("All_client.json"))
-        client_users = load_client();
-
-    if(check_file("All_costumer.json"))
-        costumer_users = load_costumer();
+    check_and_create();
+    client_users = load_client();
+    costumer_users = load_costumer();
 }
 
 Login::~Login()
@@ -82,7 +79,7 @@ void Login::on_pushButton_clicked()
     }else{
         if(ui->radioButton_client->isChecked())
         {
-            unsigned long long int i = 0;
+            unsigned int i = 0;
             for(i; i<client_users.size(); i++)
             {
                 if(client_users[i].get_user_name() == ui->lineEdit_user->text())
@@ -110,7 +107,7 @@ void Login::on_pushButton_clicked()
         }
         else if(ui->radioButton_costumer->isChecked())
         {
-            unsigned long long int i = 0;
+            unsigned int i = 0;
             for(i; i<costumer_users.size(); i++)
             {
                 if(costumer_users[i].get_user_name() == ui->lineEdit_user->text())

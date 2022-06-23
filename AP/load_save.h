@@ -27,6 +27,6 @@ vector<Costumer> load_costumer();
 vector<Product> load_product();
 bool check_file(QString);
 vector<Product> sort_function(vector<Product>, QString,QString,QString,QString,QString,QString,QString, bool,bool,bool,bool,bool,bool,bool,bool);
-//bool incresingorder(Product,Product,QString);
-//bool decreasingorder(Product,Product,QString);
+void check_and_create();
+
 #endif // LOAD_SAVE_H

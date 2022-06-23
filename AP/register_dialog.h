@@ -36,6 +36,8 @@ private slots:
 
     void on_lineEdit_phone_editingFinished();
 
+    void on_lineEdit_password_editingFinished();
+
 private:
     Ui::Register_Dialog *ui;
 };

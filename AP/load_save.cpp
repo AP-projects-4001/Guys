@@ -813,6 +813,45 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
     return updated;
 }
 
+void check_and_create()
+{
+    if(!check_file("All_client.json"))
+    {
+        QJsonObject j;
+        QJsonDocument d(j);
+        QFile f("All_client.json");
+        f.open(QIODevice::WriteOnly);
+        f.write(d.toJson());
+        f.close();
+    }
+    if(!check_file("All_costumer.json"))
+    {
+        QJsonObject j;
+        QJsonDocument d(j);
+        QFile f("All_costumer.json");
+        f.open(QIODevice::WriteOnly);
+        f.write(d.toJson());
+        f.close();
+    }
+    if(!check_file("All_product.json"))
+    {
+        QJsonObject j;
+        QJsonDocument d(j);
+        QFile f("All_product.json");
+        f.open(QIODevice::WriteOnly);
+        f.write(d.toJson());
+        f.close();
+    }
+    if(!check_file("All_transaction.json"))
+    {
+        QJsonObject j;
+        QJsonDocument d(j);
+        QFile f("All_transaction.json");
+        f.open(QIODevice::WriteOnly);
+        f.write(d.toJson());
+        f.close();
+    }
+}
 
 //bool incresingorder(Product a, Product b, QString order)
 //{
