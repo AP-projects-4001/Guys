@@ -118,9 +118,14 @@ void Register_Dialog::on_lineEdit_phone_editingFinished()
 void Register_Dialog::on_lineEdit_password_editingFinished()
 {
     if(ui->lineEdit_password->text().length() < 5)
-        {
-            QMessageBox::warning(this, "Error", "Password can't be less than 5 characters...");
-            ui->lineEdit_password->setText("");
-        }
+    {
+        QMessageBox::warning(this, "Error", "Password can't be less than 5 characters...");
+        ui->lineEdit_password->setText("");
+    }
+    if(ui->lineEdit_password->text().contains(' '))
+    {
+        QMessageBox::warning(this, "Error", "Password can't contain space...");
+        ui->lineEdit_password->setText("");
+    }
 }
 

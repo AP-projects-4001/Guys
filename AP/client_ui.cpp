@@ -20,6 +20,12 @@ client_Ui::client_Ui(QWidget *parent) :
 client_Ui::~client_Ui()
 {
     delete ui;
+    products_2.clear();
+    products_2.shrink_to_fit();
+    products_copy.clear();
+    products_copy.shrink_to_fit();
+    global_clients.clear();
+    global_clients.shrink_to_fit();
 }
 
 void client_Ui::set_userId(QString user)

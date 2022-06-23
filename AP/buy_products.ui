@@ -206,7 +206,11 @@
           </layout>
          </item>
          <item>
-          <widget class="QPlainTextEdit" name="add_plain"/>
+          <widget class="QPlainTextEdit" name="add_plain">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

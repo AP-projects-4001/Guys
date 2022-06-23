@@ -20,6 +20,10 @@ void save_client(vector<Client>& client_user)
             line.append(",");
             line.append(client_user[i].get_shopped_items()[j].get_costumer_username());
             line.append(",");
+            line.append(QString::number(client_user[i].get_shopped_items()[j].get_added_to_cart()));
+            line.append(",");
+            line.append(QString::number(client_user[i].get_shopped_items()[j].get_price()));
+            line.append(",");
             shopped.append(line);
         }
         if(shopped.size() == 0 || line == "")
@@ -109,7 +113,7 @@ void save_costumer(vector<Costumer> costumer_user)
 
 void save_product(vector<Product> products)
 {
-    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths;
+    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths, add_cart;
     for(unsigned int i = 0; i<products.size(); i++)
     {
         names.append(products[i].get_name());
@@ -124,6 +128,7 @@ void save_product(vector<Product> products)
         costumers.append(products[i].get_costumer_username());
         boughts.append(products[i].get_bought());
         paths.append(products[i].get_path());
+        add_cart.append(products[i].get_added_to_cart());
     }
 
     QJsonObject j;
@@ -139,6 +144,7 @@ void save_product(vector<Product> products)
     j["Costumers"] = costumers;
     j["Boughts"] = boughts;
     j["Paths"] = paths;
+    j["Cart"] = add_cart;
 
     QJsonDocument d(j);
     QFile f("All_product.json");
@@ -182,6 +188,9 @@ void save_product(vector<Product> products)
     len = paths.count();
     for(int i=0; i<len; i++)
         paths.removeAt(0);
+    len = add_cart.count();
+    for(int i=0; i<len; i++)
+        add_cart.removeAt(0);
 }
 
 void save_product(Product& pro)
@@ -193,7 +202,7 @@ void save_product(Product& pro)
         QByteArray b = f.readAll();
         QJsonDocument d = QJsonDocument::fromJson(b);
         QJsonObject o = d.object();
-        QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths;
+        QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths, add_cart;
         names = o["Names"].toArray();
         brands = o["Brands"].toArray();
         types = o["Types"].toArray();
@@ -206,6 +215,7 @@ void save_product(Product& pro)
         costumers = o["Costumers"].toArray();
         boughts = o["Boughts"].toArray();
         paths = o["Paths"].toArray();
+        add_cart = o["Cart"].toArray();
         f.close();
 
         names.append(pro.get_name());
@@ -220,6 +230,7 @@ void save_product(Product& pro)
         costumers.append(pro.get_costumer_username());
         boughts.append(pro.get_bought());
         paths.append(pro.get_path());
+        add_cart.append(pro.get_added_to_cart());
 
         QJsonObject j;
         j["Names"] = names;
@@ -234,6 +245,7 @@ void save_product(Product& pro)
         j["Costumers"] = costumers;
         j["Boughts"] = boughts;
         j["Paths"] = paths;
+        j["Cart"] = add_cart;
 
         QJsonDocument d2(j);
         f.open(QIODevice::WriteOnly);
@@ -276,10 +288,13 @@ void save_product(Product& pro)
         len = paths.count();
         for(int i=0; i<len; i++)
             paths.removeAt(0);
+        len = add_cart.count();
+        for(int i=0; i<len; i++)
+            add_cart.removeAt(0);
     }
     else
     {
-        QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths;
+        QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths, add_cart;
         names.append(pro.get_name());
         brands.append(pro.get_brand());
         types.append(pro.get_type());
@@ -292,6 +307,7 @@ void save_product(Product& pro)
         costumers.append(pro.get_costumer_username());
         boughts.append(pro.get_bought());
         paths.append(pro.get_path());
+        add_cart.append(pro.get_added_to_cart());
 
         QJsonObject j;
         j["Names"] = names;
@@ -306,6 +322,7 @@ void save_product(Product& pro)
         j["Costumers"] = costumers;
         j["Boughts"] = boughts;
         j["Paths"] = paths;
+        j["Cart"] = add_cart;
 
         QJsonDocument d(j);
         QFile f("All_product.json");
@@ -349,6 +366,9 @@ void save_product(Product& pro)
         len = paths.count();
         for(int i=0; i<len; i++)
             paths.removeAt(0);
+        len = add_cart.count();
+        for(int i=0; i<len; i++)
+            add_cart.removeAt(0);
     }
 }
 
@@ -403,7 +423,8 @@ vector<Client> load_client()
                 for (unsigned int k = 0; k<all_products.size(); k++)
                 {
                     if(all_products[k].get_name().toStdString() == line_splitted[1] &&
-                       all_products[k].get_costumer_username().toStdString() == line_splitted[2])
+                       all_products[k].get_costumer_username().toStdString() == line_splitted[2]
+                       && QString::number(all_products[k].get_price()).toStdString() == line_splitted[4])
                     {
                         temporary.set_additional_info(all_products[k].get_additional_info());
                         temporary.set_bought(all_products[k].get_bought());
@@ -415,6 +436,7 @@ vector<Client> load_client()
                         temporary.set_type(all_products[k].get_type());
                         temporary.set_weight(all_products[k].get_weight());
                         temporary.set_path(all_products[k].get_path());
+                        temporary.set_added_to_cart(stoi(line_splitted[3]));
                         break;
                     }
                 }
@@ -513,7 +535,7 @@ vector<Product> load_product()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths;
+    QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths, add_cart;
     names = o["Names"].toArray();
     brands = o["Brands"].toArray();
     types = o["Types"].toArray();
@@ -526,6 +548,8 @@ vector<Product> load_product()
     costumers = o["Costumers"].toArray();
     boughts = o["Boughts"].toArray();
     paths = o["Paths"].toArray();
+    add_cart = o["Cart"].toArray();
+    f.close();
 
     vector<Product> product_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -543,10 +567,10 @@ vector<Product> load_product()
         tmp->set_costumer_username(costumers[i].toString());
         tmp->set_bought(boughts[i].toInt());
         tmp->set_path(paths[i].toString());
+        tmp->set_added_to_cart(add_cart[i].toInt());
         product_tmp.push_back(*tmp);
         delete(tmp);
     }
-    f.close();
     int len = names.count();
     for(int i=0; i<len; i++)
         names.removeAt(0);
@@ -583,6 +607,9 @@ vector<Product> load_product()
     len = paths.count();
     for(int i=0; i<len; i++)
         paths.removeAt(0);
+    len = add_cart.count();
+    for(int i=0; i<len; i++)
+        add_cart.removeAt(0);
 
     return product_tmp;
 }
@@ -634,6 +661,10 @@ void save_transaction(Transaction& tmp)
             line.append(",");
             line.append(tmp.get_bought_product()[i].get_costumer_username());
             line.append(",");
+            line.append(QString::number(tmp.get_bought_product()[i].get_added_to_cart()));
+            line.append(",");
+            line.append(QString::number(tmp.get_bought_product()[i].get_price()));
+            line.append(",");
             products.append(line);
         }
         QJsonObject j;
@@ -662,6 +693,10 @@ void save_transaction(Transaction& tmp)
             line.append(tmp.get_bought_product()[i].get_name());
             line.append(",");
             line.append(tmp.get_bought_product()[i].get_costumer_username());
+            line.append(",");
+            line.append(QString::number(tmp.get_bought_product()[i].get_added_to_cart()));
+            line.append(",");
+            line.append(QString::number(tmp.get_bought_product()[i].get_price()));
             line.append(",");
             products.append(line);
         }
@@ -722,7 +757,8 @@ vector<Transaction> load_transaction()
                     for (unsigned int k = 0; k<all_products.size(); k++)
                     {
                         if(all_products[k].get_name().toStdString() == line_splitted[1] &&
-                           all_products[k].get_costumer_username().toStdString() == line_splitted[2])
+                           all_products[k].get_costumer_username().toStdString() == line_splitted[2]
+                           && QString::number(all_products[k].get_price()).toStdString() == line_splitted[4])
                         {
                             temporary.set_additional_info(all_products[k].get_additional_info());
                             temporary.set_bought(all_products[k].get_bought());
@@ -734,6 +770,7 @@ vector<Transaction> load_transaction()
                             temporary.set_type(all_products[k].get_type());
                             temporary.set_weight(all_products[k].get_weight());
                             temporary.set_path(all_products[k].get_path());
+                            temporary.set_added_to_cart(stoi(line_splitted[3]));
                             break;
                         }
                     }

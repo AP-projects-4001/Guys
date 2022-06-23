@@ -16,6 +16,7 @@ protected:
     int stock;
     QString size;
     int bought{0};
+    int added_to_cart{0};
     int weight;
 
     // Add more if it's required
@@ -36,6 +37,7 @@ public:
     void set_weight(int);
     void set_bought(int);
     void set_costumer_username(QString);
+    void set_added_to_cart(int);
     QString get_name() const;
     QString get_brand() const;
     QString get_type() const;
@@ -48,6 +50,7 @@ public:
     int get_price() const;
     int get_stock() const;
     QString get_size() const;
+    int get_added_to_cart() const;
 };
 
 

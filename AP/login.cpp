@@ -22,6 +22,10 @@ Login::Login(QWidget *parent)
 Login::~Login()
 {
     delete ui;
+    client_users.clear();
+    client_users.shrink_to_fit();
+    costumer_users.clear();
+    costumer_users.shrink_to_fit();
 }
 
 

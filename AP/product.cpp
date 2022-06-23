@@ -91,6 +91,11 @@ void Product::set_costumer_username(QString tmp)
     this->costumer_username = tmp;
 }
 
+void Product::set_added_to_cart(int num)
+{
+    this->added_to_cart = num;
+}
+
 QString Product::get_name() const
 {
     return this->name;
@@ -139,6 +144,11 @@ QString Product::get_type() const
 QString Product::get_size() const
 {
     return this->size;
+}
+
+int Product::get_added_to_cart() const
+{
+    return this->added_to_cart;
 }
 
 int Product::get_price() const
