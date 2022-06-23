@@ -1,5 +1,6 @@
 #include "costumer_ui.h"
 #include "ui_costumer_ui.h"
+#include "login.h"
 
 // Global vectors;
 vector <Product> products;
@@ -135,7 +136,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                 ui->show_table->setCellWidget(count, 9, pWidget);
                 connect(btn_edit, &QPushButton::clicked, [=]() {
                     costumer_products *p = new costumer_products(this);
-                    connect(this, SIGNAL(send_index(int)), p, SLOT(recieve_index(int)));
+                        connect(this, SIGNAL(send_index(int)), p, SLOT(recieve_index(int)));
                     emit send_index(i);
                     p->exec();
                 });

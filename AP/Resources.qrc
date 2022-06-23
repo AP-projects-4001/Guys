@@ -5,6 +5,7 @@
         <file>zarin.png</file>
         <file>Saderat.png</file>
         <file>Pasargad.png</file>
+        <file>No-image.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

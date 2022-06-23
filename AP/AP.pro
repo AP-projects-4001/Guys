@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     admin.cpp \
+    buy_products.cpp \
     client.cpp \
     client_ui.cpp \
     costumer.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
     admin.h \
+    buy_products.h \
     client.h \
     client_ui.h \
     costumer.h \
@@ -46,6 +48,7 @@ HEADERS += \
     admin_ui.h
 
 FORMS += \
+    buy_products.ui \
     client_ui.ui \
     costumer_products.ui \
     costumer_ui.ui \

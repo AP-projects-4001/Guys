@@ -18,3 +18,9 @@ search_tools::~search_tools()
 {
     delete ui;
 }
+
+void search_tools::on_buttonBox_accepted()
+{
+
+}
+

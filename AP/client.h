@@ -15,6 +15,7 @@ public:
     Client();
     void set_balance(int &);
     void set_shopped_items(std::vector<Product> &);
+    void add_to_shopped(Product &);
     int get_balance() const;
     std::vector<Product> get_shopped_items() const;
 };

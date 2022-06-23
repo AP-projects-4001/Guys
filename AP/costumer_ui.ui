@@ -76,7 +76,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -304,22 +304,6 @@
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>778</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuinfo">
-    <property name="title">
-     <string>info</string>
-    </property>
-   </widget>
-   <addaction name="menuinfo"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

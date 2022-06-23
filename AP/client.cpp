@@ -15,6 +15,11 @@ void Client::set_shopped_items(std::vector<Product> & shopped_list)
     this->shopped_items = shopped_list;
 }
 
+void Client::add_to_shopped(Product &item)
+{
+    shopped_items.push_back(item);
+}
+
 int Client::get_balance() const
 {
     return this->balance;

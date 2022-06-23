@@ -14,6 +14,10 @@ class search_tools : public QDialog
 public:
     explicit search_tools(QWidget *parent = nullptr);
     ~search_tools();
+signals:
+  void send_searches_tools(QString,QString,QString,QString,QString,QString,QString,bool,bool,bool,bool,bool,bool,bool,bool);
+private slots:
+    void on_buttonBox_accepted();
 
 private:
     Ui::search_tools *ui;
