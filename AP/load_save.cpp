@@ -805,22 +805,118 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
     vector<unsigned long long int> list;
     for(unsigned long long int i = 0; i <updated.size() ;i++)
     {
-        bool check{false};
-        if(updated[i].get_color() != color || updated[i].get_brand() != brand || updated[i].get_type() != type)
-            check = true;
-        else if(updated[i].get_price()<from_price.toInt() || updated[i].get_price() > to_price.toInt() || updated[i].get_weight()<from_weight.toInt() || updated[i].get_weight() > to_weight.toInt())
-            check = true;
-        else if(availale)
-            if(updated[i].get_stock()==0)
-                check = true;
-        if(check)
-            list.push_back(i);
+//        bool check{false};
+//        if(updated[i].get_color() != color || updated[i].get_brand() != brand || updated[i].get_type() != type)
+//            check = true;
+//        else if(updated[i].get_price()<from_price.toInt() || updated[i].get_price() > to_price.toInt() || updated[i].get_weight()<from_weight.toInt() || updated[i].get_weight() > to_weight.toInt())
+//            check = true;
+//        else if(availale)
+//            if(updated[i].get_stock()==0)
+//                check = true;
+//        if(check)
+//            list.push_back(i);
+
+        // color || brand || type
+
+        if(color != "")
+        {    if(updated[i].get_color() != color)
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+        if(brand != "")
+        {    if(updated[i].get_brand() != brand)
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+        if(type != "")
+        {    if(updated[i].get_type() != type)
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+        if(availale)
+        {    if(updated[i].get_stock() == 0)
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+
+
+
+
+        //price
+
+        if(from_price == "" && to_price != "")
+        {
+            if(updated[i].get_price()>to_price.toInt())
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+        else if(from_price != "" && to_price == "")
+        {
+            if(updated[i].get_price()<from_price.toInt())
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+        else if(from_price != ""&& to_price != "")
+        {
+            if(updated[i].get_price()<from_price.toInt()||updated[i].get_price()>to_price.toInt())
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+
+        //weight
+
+        if(from_weight == "" && to_weight != "")
+        {
+            if(updated[i].get_weight()>to_weight.toInt())
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+        else if(from_weight != "" && to_weight == "")
+        {
+            if(updated[i].get_weight()<from_weight.toInt())
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
+        else if(from_weight != ""&& to_weight != "")
+        {
+            if(updated[i].get_weight()<from_weight.toInt()||updated[i].get_weight()>to_weight.toInt())
+            {
+                list.push_back(i);
+                continue;
+            }
+        }
     }
+
+
+    //erase
+
+
     sort(list.begin(), list.end(), greater<int>());
     for(unsigned long long int i = 0; i<list.size(); i++)
     {
         updated.erase(updated.begin()+i);
     }
+
+    //sort
+
     if(min)
     {
         sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
@@ -849,6 +945,7 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
         return updated;
     return updated;
 }
+
 
 void check_and_create()
 {
