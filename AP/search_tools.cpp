@@ -21,6 +21,8 @@ search_tools::~search_tools()
 
 void search_tools::on_buttonBox_accepted()
 {
-
+    emit send_searches_tools(ui->from_price->text(),ui->to_price->text(),ui->from_weight->text(),ui->to_weight->text(),ui->color_lineedit->text(),ui->brand_line->text(),
+                             ui->type_line->text(),ui->min_to_max->isChecked(),ui->max_to_min->isChecked(),ui->newest_Button->isChecked(),ui->oldest_Button->isChecked(),
+                             ui->mostshopped_button->isChecked(),ui->mostviewed_button->isChecked(),ui->none_button->isChecked(),ui->available_checkBox->isChecked());
 }
 

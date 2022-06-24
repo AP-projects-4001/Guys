@@ -44,7 +44,8 @@ void client_Ui::sorter(QString from_price, QString to_price, QString from_weight
 void client_Ui::on_toolButton_clicked()
 {
     search_tools *s = new search_tools(this);
-    // connect
+     connect(s, SIGNAL(send_searches_tools(QString,QString,QString,QString,QString,QString,QString,bool,bool,bool,bool,bool,bool,bool,bool)), this,
+             SLOT(sorter(QString,QString,QString,QString,QString,QString,QString,bool,bool,bool,bool,bool,bool,bool,bool)));
     s->exec();
 
 }
@@ -117,5 +118,34 @@ void client_Ui::show_products(vector<Product> &products)
 void client_Ui::on_tabWidget_currentChanged(int index)
 {
         show_products(products_2);
+}
+
+
+void client_Ui::on_refresh_button_clicked()
+{
+    products_2 = load_product();
+    products_copy = products_2;
+    ui->lineEdit->clear();
+    ui->lineEdit_2->clear();
+    show_products(products_copy);
+}
+
+
+void client_Ui::on_pushButton_clicked()
+{
+    vector <Product> tmp;
+    if (ui->lineEdit->text()==""){}
+    else{
+        string searched = ui->lineEdit->text().toLower().toStdString();
+        for (unsigned int i = 0 ; i < products_copy.size(); ++i){
+            if (products_copy[i].get_name().toLower().toStdString().find(searched) != std::string::npos)
+                tmp.push_back(products_copy[i]);
+        }
+        products_copy = tmp;
+        tmp.clear();
+        tmp.shrink_to_fit();
+        show_products(products_copy);
+    }
+
 }
 
