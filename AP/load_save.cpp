@@ -912,7 +912,7 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
     sort(list.begin(), list.end(), greater<int>());
     for(unsigned long long int i = 0; i<list.size(); i++)
     {
-        updated.erase(updated.begin()+i);
+        updated.erase(updated.begin()+list[i]);
     }
 
     //sort
@@ -927,7 +927,7 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
         sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
             return a.get_price() > b.get_price();});
     }
-    else if(oldest)
+    else if(newest)
     {
         reverse(updated.begin(),updated.end());
     }
@@ -941,7 +941,7 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
 //        sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
 //            return a.get_view() > b.get_view();});
     }
-    else if(newest||none)
+    else if(oldest||none)
         return updated;
     return updated;
 }
