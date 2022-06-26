@@ -7,7 +7,6 @@
 class Costumer : public Person
 {
 private:
-    int balance{0};
     QVector <Product> Stock ; // All products from this costumer
 public:
     Costumer();

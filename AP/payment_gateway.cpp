@@ -28,7 +28,7 @@ QString Payment_gateway::getCaptcha()
     srand((unsigned)time(&t));
     char const *required_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     QString captcha = "";
-    for(int i=0;i<4;i++)
+    for(int i=0;i<5;i++)
         captcha.push_back(required_chars[rand()%62]);
     return captcha;
 }

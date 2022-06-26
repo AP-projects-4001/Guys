@@ -7,6 +7,9 @@
         <file>Pasargad.png</file>
         <file>No-image.png</file>
         <file>logo.png</file>
+        <file>logo-removebg-preview.png</file>
+        <file>store_logo.png</file>
+        <file>Screenshot 2022-06-26 155139.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

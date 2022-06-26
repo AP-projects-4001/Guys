@@ -40,7 +40,7 @@ private slots:
 
 private:
     Ui::client_Ui *ui;
-    void show_products(vector <Product> &);
+    void show_products(vector <Product>);
     void show_products(unsigned int);
 
 };

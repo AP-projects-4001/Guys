@@ -96,6 +96,11 @@ void Product::set_added_to_cart(int num)
     this->added_to_cart = num;
 }
 
+void Product::set_viewed(int _viewed)
+{
+    viewed = _viewed ;
+}
+
 QString Product::get_name() const
 {
     return this->name;
@@ -119,6 +124,11 @@ QString Product::get_path() const
 QString Product::get_costumer_username() const
 {
     return this->costumer_username;
+}
+
+int Product::get_viewed()
+{
+    return viewed;
 }
 
 int Product::get_bought() const

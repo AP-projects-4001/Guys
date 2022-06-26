@@ -14,11 +14,12 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
     // Check files ==>
     this->setWindowTitle("Login Menu");
-    QPixmap picture(":/included_images/logo.png");
+    QPixmap picture(":/included_images/store_logo.png");
 //    int h = ui->label_3->height();
 //    int w = ui->label_3->width();
+
     ui->label_3->setPixmap(picture);
-    ui->label_3->setPixmap(picture.scaled(451, 141, Qt::KeepAspectRatio));
+    ui->label_3->setPixmap(picture.scaled(654, 381, Qt::KeepAspectRatio));//451 , 141
     ui->label_3->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     check_and_create();

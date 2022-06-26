@@ -65,7 +65,7 @@ void client_Ui::add_to_cart(Product item)
     show_products(1);
 }
 
-void client_Ui::show_products(vector<Product> &products)
+void client_Ui::show_products(vector<Product> products)
 {
         for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
             ui->show_table->removeRow(i);
@@ -102,10 +102,12 @@ void client_Ui::show_products(vector<Product> &products)
             pWidget->setLayout(pLayout);
             ui->show_table->setCellWidget(i, 8, pWidget);
             connect(btn_edit, &QPushButton::clicked, [=]() {
+//                products[i].set
                 buy_products *p = new buy_products(this);
                 connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
                 connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
                 emit send_index(products[i]);
+
                 p->exec();
             });
 
@@ -129,7 +131,7 @@ void client_Ui::show_products(unsigned int index)
                 break;
             }
         }
-
+        unsigned int total = 0;
         int count = 0;
         ui->cart_table->setRowCount(global_clients[Index].get_shopped_items().size());
         for (unsigned int i = 0 ; i < global_clients[Index].get_shopped_items().size(); i++){
@@ -139,6 +141,7 @@ void client_Ui::show_products(unsigned int index)
             ui->cart_table->item(count ,  1)->setFlags(ui->cart_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
             ui->cart_table->setItem(count , 2, new QTableWidgetItem(QString::number(global_clients[Index].get_shopped_items()[i].get_price()*
                                                                                     (global_clients[Index].get_shopped_items()[i].get_added_to_cart()))));// !
+            total += (global_clients[Index].get_shopped_items()[i].get_price()*(global_clients[Index].get_shopped_items()[i].get_added_to_cart()));
             ui->cart_table->item(count , 2)->setFlags(ui->cart_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
@@ -189,7 +192,8 @@ void client_Ui::show_products(unsigned int index)
             ++count;
         }
 
-        //    else if(index==1)
+        //  else if(index==1)
+        ui->total_lineedit->setText(QString::number(total));
         ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     }

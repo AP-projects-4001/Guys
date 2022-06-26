@@ -2,7 +2,7 @@
 
 void save_client(vector<Client>& client_user)
 {
-    QJsonArray names, addresses, emails, phones, users, passwords, shopped;
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances;
     for(unsigned int i = 0; i<client_user.size(); i++)
     {
         names.append(client_user[i].get_name());
@@ -11,6 +11,7 @@ void save_client(vector<Client>& client_user)
         phones.append(client_user[i].get_phone_number());
         users.append(client_user[i].get_user_name());
         passwords.append(client_user[i].get_password());
+        balances.append(QString::number(client_user[i].get_balance()));
         QString line;
         for (unsigned int j = 0; j<client_user[i].get_shopped_items().size(); j++)
         {
@@ -38,6 +39,8 @@ void save_client(vector<Client>& client_user)
     j["Users"] = users;
     j["Passwords"] = passwords;
     j["Shopped"] = shopped;
+    j["Balance"] = balances;
+
     QJsonDocument d(j);
     QFile f("All_client.json");
     f.open(QIODevice::WriteOnly);
@@ -64,11 +67,14 @@ void save_client(vector<Client>& client_user)
     len = shopped.count();
     for(int i=0; i<len; i++)
         shopped.removeAt(0);
+    len = balances.count();
+    for(int i=0; i<len; i++)
+        balances.removeAt(0);
 }
 
 void save_costumer(vector<Costumer> costumer_user)
 {
-    QJsonArray names, addresses, emails, phones, users, passwords;
+    QJsonArray names, addresses, emails, phones, users, passwords, balances;
     for(unsigned int i = 0; i<costumer_user.size(); i++)
     {
         names.append(costumer_user[i].get_name());
@@ -77,6 +83,7 @@ void save_costumer(vector<Costumer> costumer_user)
         phones.append(costumer_user[i].get_phone_number());
         users.append(costumer_user[i].get_user_name());
         passwords.append(costumer_user[i].get_password());
+        balances.append(QString::number(costumer_user[i].get_balance()));
     }
 
     QJsonObject j;
@@ -86,6 +93,8 @@ void save_costumer(vector<Costumer> costumer_user)
     j["Phones"] = phones;
     j["Users"] = users;
     j["Passwords"] = passwords;
+    j["Balance"] = balances;
+
     QJsonDocument d(j);
     QFile f("All_costumer.json");
     f.open(QIODevice::WriteOnly);
@@ -109,6 +118,10 @@ void save_costumer(vector<Costumer> costumer_user)
     len = passwords.count();
     for(int i=0; i<len; i++)
         passwords.removeAt(0);
+    len = balances.count();
+    for(int i=0; i<len; i++)
+        balances.removeAt(0);
+
 }
 
 void save_client(Client & user)
@@ -118,7 +131,7 @@ void save_client(Client & user)
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords, old_shopped, new_shopped;
+    QJsonArray names, addresses, emails, phones, users, passwords, old_shopped, new_shopped, balances;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -126,6 +139,7 @@ void save_client(Client & user)
     users = o["Users"].toArray();
     old_shopped = o["Shopped"].toArray();
     passwords = o["Passwords"].toArray();
+    balances = o["Balance"].toArray();
     f.close();
 
     for (int l = 0; l <old_shopped.size(); l++)
@@ -171,6 +185,8 @@ void save_client(Client & user)
     j["Users"] = users;
     j["Passwords"] = passwords;
     j["Shopped"] = new_shopped;
+    j["Balance"] = balances;
+
     QJsonDocument d2(j);
     f.open(QIODevice::WriteOnly);
     f.write(d2.toJson());
@@ -200,6 +216,10 @@ void save_client(Client & user)
     len = new_shopped.count();
     for(int i=0; i<len; i++)
         new_shopped.removeAt(0);
+    len = balances.count();
+    for(int i=0; i<len; i++)
+        balances.removeAt(0);
+
 }
 
 void save_product(vector<Product> products)

@@ -45,6 +45,11 @@ void Person::set_password(QString _password)
     this->password = _password;
 }
 
+void Person::set_balance(unsigned int _balance)
+{
+    this->balance = _balance;
+}
+
 QString Person::get_name() const
 {
     return this->name;
@@ -73,4 +78,9 @@ QString Person::get_phone_number() const
 QString Person::get_password() const
 {
     return this->password;
+}
+
+unsigned int Person::get_balance() const
+{
+    return this->balance;
 }
