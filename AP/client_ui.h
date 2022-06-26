@@ -7,6 +7,7 @@
 #include "transaction.h"
 #include "load_save.h"
 #include "buy_products.h"
+#include "payment_gateway.h"
 inline QString current_client;
 
 namespace Ui {
@@ -24,6 +25,7 @@ public:
 signals:
     void send_index(Product);
     void send_product_cart(Product, unsigned int);
+    void send_to_gateway(QString);
 
 private slots:
     void set_userId(QString user);
@@ -33,6 +35,8 @@ private slots:
     void on_refresh_button_clicked();
     void on_pushButton_clicked();
     void on_tabWidget_tabBarClicked(int index);
+
+    void on_Purchase_Button_clicked();
 
 private:
     Ui::client_Ui *ui;

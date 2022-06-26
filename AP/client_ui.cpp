@@ -228,3 +228,15 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
         show_products(1);
     }
 }
+
+void client_Ui::on_Purchase_Button_clicked()
+{
+    if(ui->radioButton_credit->isChecked())
+    {
+        Payment_gateway* p1 = new Payment_gateway(this);
+        connect(this,SIGNAL(send_to_gateway(QString)),p1,SLOT(recieve_bank(QString)));
+        emit send_to_gateway(ui->comboBox->currentText());
+        p1->exec();
+    }
+}
+

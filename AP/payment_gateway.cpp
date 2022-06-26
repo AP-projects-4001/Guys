@@ -59,3 +59,52 @@ void Payment_gateway::on_buttonBox_accepted()
     }
 }
 
+void Payment_gateway::recieve_bank(QString bank)
+{
+    if(bank == "Melat")
+    {
+        QPixmap picture(":/included_images/Beh-Pardakht.png");
+        int h = ui->Bank_label->height();
+        int w = ui->Bank_label->width();
+        ui->Bank_label->setPixmap(picture);
+        ui->Bank_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+        ui->Bank_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    }
+    else if (bank == "Parsian")
+    {
+        QPixmap picture(":/included_images/Parsian-Bank.png");
+        int h = ui->Bank_label->height();
+        int w = ui->Bank_label->width();
+        ui->Bank_label->setPixmap(picture);
+        ui->Bank_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+        ui->Bank_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    }
+    else if(bank == "ZarinPal")
+    {
+        QPixmap picture(":/included_images/zarin.png");
+        int h = ui->Bank_label->height();
+        int w = ui->Bank_label->width();
+        ui->Bank_label->setPixmap(picture);
+        ui->Bank_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+        ui->Bank_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    }
+    else if(bank == "Saderat")
+    {
+        QPixmap picture(":/included_images/Saderat.png");
+        int h = ui->Bank_label->height();
+        int w = ui->Bank_label->width();
+        ui->Bank_label->setPixmap(picture);
+        ui->Bank_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+        ui->Bank_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    }
+    else if(bank == "Pasargad")
+    {
+        QPixmap picture(":/included_images/Pasargad.png");
+        int h = ui->Bank_label->height();
+        int w = ui->Bank_label->width();
+        ui->Bank_label->setPixmap(picture);
+        ui->Bank_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+        ui->Bank_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    }
+}
+

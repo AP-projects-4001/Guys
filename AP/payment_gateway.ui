@@ -29,17 +29,17 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="Bank_label">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>50</y>
+     <x>60</x>
+     <y>40</y>
      <width>451</width>
      <height>121</height>
     </rect>
    </property>
    <property name="text">
-    <string>Bank</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">

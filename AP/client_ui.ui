@@ -192,7 +192,7 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout">
               <item>
-               <widget class="QRadioButton" name="radioButton">
+               <widget class="QRadioButton" name="radioButton_credit">
                 <property name="text">
                  <string>Credit card</string>
                 </property>
@@ -202,7 +202,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QRadioButton" name="radioButton_2">
+               <widget class="QRadioButton" name="radioButton_Balance">
                 <property name="text">
                  <string>Balance</string>
                 </property>
@@ -213,7 +213,7 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <widget class="QPushButton" name="pushButton_3">
+               <widget class="QPushButton" name="Purchase_Button">
                 <property name="cursor">
                  <cursorShape>PointingHandCursor</cursorShape>
                 </property>

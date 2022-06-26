@@ -20,6 +20,7 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
+    void recieve_bank(QString);
 
 private:
     Ui::Payment_gateway *ui;
