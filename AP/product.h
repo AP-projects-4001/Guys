@@ -18,9 +18,7 @@ protected:
     int bought{0};
     int added_to_cart{0};
     int weight;
-    // Add viewed
     int viewed{0};
-    // Add more if it's required
 public:
     Product(QString _name, QString _brand, QString _type, QString color, int _price, int _stock, int _weight);// Constructor for setting these variables
     Product(QString _name, QString _brand, QString _type, QString color,QString _additional_info , int _price, int _stock , int _weight, QString _size);
@@ -39,7 +37,7 @@ public:
     void set_bought(int);
     void set_costumer_username(QString);
     void set_added_to_cart(int);
-    void set_viewed(int);
+    void set_viewed(int num);
     QString get_name() const;
     QString get_brand() const;
     QString get_type() const;
@@ -47,7 +45,7 @@ public:
     QString get_additional_info() const;
     QString get_path() const;
     QString get_costumer_username() const;
-    int get_viewed();
+    int get_viewed() const;
     int get_bought() const;
     int get_weight()const;
     int get_price() const;

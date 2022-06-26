@@ -8,6 +8,7 @@
 #include "load_save.h"
 #include "buy_products.h"
 #include "payment_gateway.h"
+#include "new_password_dialog.h"
 inline QString current_client;
 
 namespace Ui {
@@ -38,11 +39,15 @@ private slots:
 
     void on_Purchase_Button_clicked();
 
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::client_Ui *ui;
-    void show_products(vector <Product>);
+    void show_products(vector <Product> &);
     void show_products(unsigned int);
-
+    void show_setting();
 };
 
 #endif // CLIENT_UI_H

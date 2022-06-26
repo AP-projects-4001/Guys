@@ -490,7 +490,7 @@ vector<Client> load_client()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords, shopped;
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -498,6 +498,7 @@ vector<Client> load_client()
     users = o["Users"].toArray();
     shopped = o["Shopped"].toArray();
     passwords = o["Passwords"].toArray();
+    balances = o["Balance"].toArray();
 
     vector<Client> client_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -509,6 +510,7 @@ vector<Client> load_client()
         tmp->set_phone_number(phones[i].toString());
         tmp->set_user_name(users[i].toString());
         tmp->set_password(passwords[i].toString());
+        tmp->set_balance(balances[i].toInt());
         vector<Product> pro_temp;
         for (int l = 0; l <shopped.size(); l++)
         {
@@ -586,6 +588,9 @@ vector<Client> load_client()
     len = shopped.count();
     for(int i=0; i<len; i++)
         shopped.removeAt(0);
+    len = balances.count();
+    for(int i=0; i<len; i++)
+        balances.removeAt(0);
     return client_tmp;
 }
 
@@ -596,13 +601,14 @@ vector<Costumer> load_costumer()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords;
+    QJsonArray names, addresses, emails, phones, users, passwords, balances;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
     phones = o["Phones"].toArray();
     users = o["Users"].toArray();
     passwords = o["Passwords"].toArray();
+    balances = o["Balance"].toArray();
 
     vector<Costumer> costumer_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -614,6 +620,7 @@ vector<Costumer> load_costumer()
         tmp->set_phone_number(phones[i].toString());
         tmp->set_user_name(users[i].toString());
         tmp->set_password(passwords[i].toString());
+        tmp->set_balance(balances[i].toInt());
         costumer_tmp.push_back(*tmp);
         delete(tmp);
     }
@@ -636,6 +643,9 @@ vector<Costumer> load_costumer()
     len = passwords.count();
     for(int i=0; i<len; i++)
         passwords.removeAt(0);
+    len = balances.count();
+    for(int i=0; i<len; i++)
+        balances.removeAt(0);
     return costumer_tmp;
 }
 

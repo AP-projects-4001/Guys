@@ -65,7 +65,7 @@ void client_Ui::add_to_cart(Product item)
     show_products(1);
 }
 
-void client_Ui::show_products(vector<Product> products)
+void client_Ui::show_products(vector<Product> &products)
 {
         for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
             ui->show_table->removeRow(i);
@@ -101,17 +101,13 @@ void client_Ui::show_products(vector<Product> products)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->show_table->setCellWidget(i, 8, pWidget);
-            connect(btn_edit, &QPushButton::clicked, [=]() {
-//                products[i].set
+            connect(btn_edit, &QPushButton::clicked, [=]()mutable {
                 buy_products *p = new buy_products(this);
                 connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
                 connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
                 emit send_index(products[i]);
-
                 p->exec();
             });
-
-
         }
         ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -145,7 +141,7 @@ void client_Ui::show_products(unsigned int index)
             ui->cart_table->item(count , 2)->setFlags(ui->cart_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
-            btn_edit->setText("EDIT");
+            btn_edit->setText("Edit");
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);
@@ -164,7 +160,7 @@ void client_Ui::show_products(unsigned int index)
 
             QWidget* pwidget = new QWidget();
             QPushButton* btn_delete = new QPushButton();
-            btn_delete->setText("DELETE");
+            btn_delete->setText("Delete");
             QHBoxLayout* playout = new QHBoxLayout(pwidget);
             playout->addWidget(btn_delete);
             playout->setAlignment(Qt::AlignCenter);
@@ -197,6 +193,16 @@ void client_Ui::show_products(unsigned int index)
         ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     }
+}
+
+void client_Ui::show_setting()
+{
+    int index = current_client_index(current_client);
+    ui->lineEdit_name->setText(global_clients[index].get_name());
+    ui->lineEdit_username->setText(global_clients[index].get_user_name());
+    ui->lineEdit_address->setText(global_clients[index].get_address());
+    ui->lineEdit_phone_num->setText(global_clients[index].get_phone_number());
+    ui->lineEdit_email->setText(global_clients[index].get_email());
 }
 
 
@@ -238,6 +244,14 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
     {
         show_products(1);
     }
+    else if(index == 2)
+    {
+
+    }
+    else
+    {
+        show_setting();
+    }
 }
 
 void client_Ui::on_Purchase_Button_clicked()
@@ -249,5 +263,39 @@ void client_Ui::on_Purchase_Button_clicked()
         emit send_to_gateway(ui->comboBox->currentText());
         p1->exec();
     }
+}
+
+
+void client_Ui::on_pushButton_3_clicked()
+{
+    if(ui->lineEdit_name->text().isEmpty() || ui->lineEdit_address->text().isEmpty() ||
+       ui->lineEdit_email->text().isEmpty() || ui->lineEdit_phone_num->text().isEmpty())
+    {
+        QMessageBox::warning(this, "Error", "Fields can't be empty...");
+    }
+
+    else if(!(ui->lineEdit_phone_num->text().toStdString().find_first_not_of("0123456789") == string::npos))
+    {
+        QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
+        ui->lineEdit_phone_num->setText("");
+    }
+
+    else
+    {
+        int index = current_client_index(current_client);
+        global_clients[index].set_name(ui->lineEdit_name->text());
+        global_clients[index].set_address(ui->lineEdit_address->text());
+        global_clients[index].set_phone_number(ui->lineEdit_phone_num->text());
+        global_clients[index].set_email(ui->lineEdit_email->text());
+        save_client(global_clients);
+        QMessageBox::warning(this, "Save Changes", "Saved Successfully!");
+    }
+}
+
+
+void client_Ui::on_pushButton_4_clicked()
+{
+    New_Password_Dialog * new_pass = new New_Password_Dialog(this);
+    new_pass->exec();
 }
 
