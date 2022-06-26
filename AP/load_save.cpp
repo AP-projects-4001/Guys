@@ -111,6 +111,97 @@ void save_costumer(vector<Costumer> costumer_user)
         passwords.removeAt(0);
 }
 
+void save_client(Client & user)
+{
+    QFile f("All_client.json");
+    f.open(QIODevice::ReadOnly);
+    QByteArray b = f.readAll();
+    QJsonDocument d = QJsonDocument::fromJson(b);
+    QJsonObject o = d.object();
+    QJsonArray names, addresses, emails, phones, users, passwords, old_shopped, new_shopped;
+    names = o["Names"].toArray();
+    addresses = o["Addresses"].toArray();
+    emails = o["Emails"].toArray();
+    phones = o["Phones"].toArray();
+    users = o["Users"].toArray();
+    old_shopped = o["Shopped"].toArray();
+    passwords = o["Passwords"].toArray();
+    f.close();
+
+    for (int l = 0; l <old_shopped.size(); l++)
+    {
+        string dummyLine = old_shopped[l].toString().toStdString();
+        if(dummyLine == "")
+            continue;
+        size_t pos = 0;
+        vector<string> line_splitted;
+        string delimiter = ",";
+        while ((pos = dummyLine.find(delimiter)) != string::npos)
+        {
+            line_splitted.push_back(dummyLine.substr(0, pos));
+            dummyLine.erase(0, pos + delimiter.length());
+        }
+        if(line_splitted[0] != user.get_user_name().toStdString())
+        {
+            new_shopped.append(old_shopped[l]);
+        }
+    }
+
+    QString line = "";
+    for (unsigned int j = 0; j<user.get_shopped_items().size(); j++)
+    {
+        line = user.get_user_name();
+        line.append(",");
+        line.append(user.get_shopped_items()[j].get_name());
+        line.append(",");
+        line.append(user.get_shopped_items()[j].get_costumer_username());
+        line.append(",");
+        line.append(QString::number(user.get_shopped_items()[j].get_added_to_cart()));
+        line.append(",");
+        line.append(QString::number(user.get_shopped_items()[j].get_price()));
+        line.append(",");
+        new_shopped.append(line);
+    }
+
+    QJsonObject j;
+    j["Names"] = names;
+    j["Addresses"] = addresses;
+    j["Emails"] = emails;
+    j["Phones"] = phones;
+    j["Users"] = users;
+    j["Passwords"] = passwords;
+    j["Shopped"] = new_shopped;
+    QJsonDocument d2(j);
+    f.open(QIODevice::WriteOnly);
+    f.write(d2.toJson());
+    f.close();
+
+    int len = names.count();
+    for(int i=0; i<len; i++)
+        names.removeAt(0);
+    len = addresses.count();
+    for(int i=0; i<len; i++)
+        addresses.removeAt(0);
+    len = emails.count();
+    for(int i=0; i<len; i++)
+        emails.removeAt(0);
+    len = phones.count();
+    for(int i=0; i<len; i++)
+        phones.removeAt(0);
+    len = users.count();
+    for(int i=0; i<len; i++)
+        users.removeAt(0);
+    len = passwords.count();
+    for(int i=0; i<len; i++)
+        passwords.removeAt(0);
+    len = old_shopped.count();
+    for(int i=0; i<len; i++)
+        old_shopped.removeAt(0);
+    len = new_shopped.count();
+    for(int i=0; i<len; i++)
+        new_shopped.removeAt(0);
+}
+
 void save_product(vector<Product> products)
 {
     QJsonArray names, brands, types, colors, prices, stocks, sizes, additional_info, weights, costumers, boughts, paths, add_cart;

@@ -19,6 +19,7 @@ using namespace std;
 
 void save_client(vector<Client>&);
 void save_costumer(vector<Costumer>);
+void save_client(Client &);
 void save_product(vector<Product>);
 void save_product(Product &);
 void save_transaction(Transaction &a);

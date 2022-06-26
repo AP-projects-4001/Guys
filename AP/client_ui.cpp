@@ -175,7 +175,14 @@ void client_Ui::show_products(unsigned int index)
                 {
                     global_clients[Index].add_to_shopped(global_clients[Index].get_shopped_items()[i], false);
                     show_products(1);
-                    // Save to clients
+                    vector<Product> tmp;
+                    for(unsigned int k = 0; k < global_clients[Index].get_shopped_items().size(); k++)
+                    {
+                        if(global_clients[Index].get_shopped_items()[k].get_name() != global_clients[Index].get_shopped_items()[i].get_name())
+                            tmp.push_back(global_clients[Index].get_shopped_items()[k]);
+                    }
+                    global_clients[Index].set_shopped_items(tmp);
+                    save_client(global_clients[Index]);
                 }
             });
 
