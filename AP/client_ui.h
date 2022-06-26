@@ -20,23 +20,25 @@ class client_Ui : public QMainWindow
 public:
     explicit client_Ui(QWidget *parent = nullptr);
     ~client_Ui();
+
 signals:
     void send_index(Product);
+    void send_product_cart(Product, unsigned int);
+
 private slots:
     void set_userId(QString user);
     void sorter(QString,QString,QString,QString,QString,QString,QString,bool,bool,bool,bool,bool,bool,bool,bool);
     void on_toolButton_clicked();
     void add_to_cart(Product);
-
-    void on_tabWidget_currentChanged(int index);
-
     void on_refresh_button_clicked();
-
     void on_pushButton_clicked();
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     Ui::client_Ui *ui;
     void show_products(vector <Product> &);
+    void show_products(unsigned int);
+
 };
 
 #endif // CLIENT_UI_H

@@ -18,7 +18,7 @@ protected:
     int bought{0};
     int added_to_cart{0};
     int weight;
-
+    // Add viewed
     // Add more if it's required
 public:
     Product(QString _name, QString _brand, QString _type, QString color, int _price, int _stock, int _weight);// Constructor for setting these variables

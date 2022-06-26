@@ -998,3 +998,29 @@ void check_and_create()
 //    else if(order == )
 //    return true;
 //}
+
+int current_client_index(QString username)
+{
+    vector <Client> _client = load_client();
+    for (unsigned int i = 0 ; i < _client.size() ; i++ ){
+        if (_client[i].get_user_name() == username){
+            _client.clear();
+            _client.shrink_to_fit();
+            return i ;
+        }
+    }
+    return -1;
+}
+
+int current_costumer_index(QString username)
+{
+    vector <Costumer> _costumer = load_costumer();
+    for (unsigned int i = 0 ; i < _costumer.size() ; i++ ){
+        if (_costumer[i].get_user_name() == username){
+            _costumer.clear();
+            _costumer.shrink_to_fit();
+            return i ;
+        }
+    }
+    return -1;
+}

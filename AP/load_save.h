@@ -8,6 +8,7 @@
 #include <QJsonObject>
 #include <QFile>
 #include <QFileInfo>
+#include <QMessageBox>
 #include "client.h"
 #include "costumer.h"
 #include "process.h"
@@ -28,5 +29,7 @@ vector<Product> load_product();
 bool check_file(QString);
 vector<Product> sort_function(vector<Product>, QString,QString,QString,QString,QString,QString,QString, bool,bool,bool,bool,bool,bool,bool,bool);
 void check_and_create();
+int current_client_index(QString);
+int current_costumer_index(QString);
 
 #endif // LOAD_SAVE_H

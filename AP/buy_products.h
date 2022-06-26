@@ -14,10 +14,12 @@ class buy_products : public QDialog
 public:
     explicit buy_products(QWidget *parent = nullptr);
     ~buy_products();
+    void edit_button();
 private slots:
     void recieve_index(Product);
     void on_Discard_button_clicked();
     void on_Add_button_clicked();
+    void recieve_product(Product , unsigned int);
 signals:
     void send_ITEM(Product);
 private:
