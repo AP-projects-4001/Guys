@@ -296,6 +296,8 @@ void client_Ui::on_pushButton_3_clicked()
 void client_Ui::on_pushButton_4_clicked()
 {
     New_Password_Dialog * new_pass = new New_Password_Dialog(this);
+    connect(this,SIGNAL(change_password(QString)),new_pass,SLOT(set_client(QString)));
+    emit change_password(current_client);
     new_pass->exec();
 }
 

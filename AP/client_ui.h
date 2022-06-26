@@ -27,6 +27,7 @@ signals:
     void send_index(Product);
     void send_product_cart(Product, unsigned int);
     void send_to_gateway(QString);
+    void change_password(QString);
 
 private slots:
     void set_userId(QString user);
