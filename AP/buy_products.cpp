@@ -24,6 +24,11 @@ void buy_products::recieve_index(Product item)
 {
     *Item = item;
     ui->spinBox->setMaximum(item.get_stock());
+    if (Item->get_stock() == 0)
+        ui->Add_button->setEnabled(false);
+    else
+        ui->Add_button->setEnabled(true);
+
     ui->name_lineEdit->setText(item.get_name());
     ui->brand_lineEdit->setText(item.get_brand());
     ui->size_lineEdit->setText(item.get_size());

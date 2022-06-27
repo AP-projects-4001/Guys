@@ -38,9 +38,10 @@ void client_Ui::set_userId(QString user)
     ui->statusbar->addPermanentWidget(leftButton);
     QLabel *spacer = new QLabel(); // fake spacer
     ui->statusbar->addPermanentWidget(spacer, 1);
-//    connect(btn_edit, &QPushButton::clicked, [=](){
-
-//    });
+    connect(leftButton, &QPushButton::clicked, [=](){
+        increase_balance *p = new increase_balance(this);
+        p->exec();
+    });
     //  ***
 }
 
@@ -202,6 +203,20 @@ void client_Ui::show_products(unsigned int index)
         ui->total_lineedit->setText(QString::number(total));
         ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+        if ( ui->total_lineedit->text() == "0" ){
+            ui->Purchase_Button->setEnabled(false);
+            ui->comboBox->setEnabled(false);
+            ui->radioButton_Balance->setEnabled(false);
+            ui->radioButton_credit->setEnabled(false);
+        }
+        else{
+            ui->Purchase_Button->setEnabled(true);
+            ui->comboBox->setEnabled(true);
+            ui->radioButton_Balance->setEnabled(true);
+            ui->radioButton_credit->setEnabled(true);
+        }
+
+
     }
 }
 
@@ -269,10 +284,29 @@ void client_Ui::on_Purchase_Button_clicked()
     if(ui->radioButton_credit->isChecked())
     {
         Payment_gateway* p1 = new Payment_gateway(this);
-        connect(this,SIGNAL(send_to_gateway(QString)),p1,SLOT(recieve_bank(QString)));
-        connect(p1, SIGNAL(send_purchase(uint, bool)), this, SLOT(confirm_purchase(unsigned int, bool)));
-        emit send_to_gateway(ui->comboBox->currentText());
+        connect(this,SIGNAL(send_to_gateway(QString, int)),p1,SLOT(recieve_bank(QString, int)));
+        connect(p1, SIGNAL(send_purchase()), this, SLOT(confirm_purchase()));
+        p1->set_flag(false);
+        emit send_to_gateway(ui->comboBox->currentText(), ui->total_lineedit->text().toInt());
         p1->exec();
+    }
+    else if (ui->radioButton_Balance->isChecked())
+    {
+        for (unsigned int i = 0; i < global_clients.size() ; ++i)
+        {
+            if (global_clients[i].get_user_name() == current_client){
+                if (global_clients[i].get_balance() < ui->total_lineedit->text().toUInt()){
+                    QMessageBox::warning(this, "Not enough money !", "Your balance isn't enough...");
+                    break;
+                }else{
+                    global_clients[i].set_balance(global_clients[i].get_balance() - ui->total_lineedit->text().toInt());
+                    save_client(global_clients);
+                    confirm_payment(current_client);
+//                        leftButton->setText(show_balance(global_clients, current_client));
+
+                }
+            }
+        }
     }
 }
 
@@ -312,23 +346,15 @@ void client_Ui::on_pushButton_4_clicked()
     new_pass->exec();
 }
 
-void client_Ui::confirm_purchase(unsigned int price, bool flag)
+void client_Ui::confirm_purchase()
 {
-    if (!flag)
-    {
-        confirm_payment(current_client);
-    }
-    else
-    {
-        global_clients = load_client();
-        global_clients[current_client_index(current_client)].set_balance(global_clients[current_client_index(current_client)].get_balance()+price);
-        leftButton->setText(show_balance(global_clients, current_client));
-        save_client(global_clients);
-    }
-
+    confirm_payment(current_client);
     global_clients = load_client();
     products_2 = load_product();
     products_copy = products_2;
-    show_products(products_2);
+    for (int i = 0 ; i < ui->cart_table->rowCount() ; ++i)
+        ui->cart_table->removeRow(i);
+    ui->cart_table->clearContents();
 }
+
 

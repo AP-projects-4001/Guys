@@ -1,6 +1,6 @@
 #include "payment_gateway.h"
 #include "ui_payment_gateway.h"
-bool flag = true; // true for increase && false for buy
+bool flag; // true for increase && false for buy
 Payment_gateway::Payment_gateway(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Payment_gateway)
@@ -15,6 +15,7 @@ Payment_gateway::Payment_gateway(QWidget *parent) :
     ui->lineEdit_cvv2->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_password->setValidator(new QIntValidator(0,2147483646, this));
     ui->lineEdit_captcha->setText(getCaptcha());
+
 }
 
 Payment_gateway::~Payment_gateway()
@@ -33,35 +34,19 @@ QString Payment_gateway::getCaptcha()
     return captcha;
 }
 
-void Payment_gateway::on_buttonBox_accepted()
+void Payment_gateway::set_user(QString _username)
 {
-    if(ui->lineEdit_first4->text().isEmpty()||ui->lineEdit_second4->text().isEmpty()||
-    ui->lineEdit_third4->text().isEmpty()||ui->lineEdit_fourth4->text().isEmpty()||
-    ui->lineEdit_year->text().isEmpty()||ui->lineEdit_month->text().isEmpty()||
-    ui->lineEdit_cvv2->text().isEmpty()||ui->lineEdit_password->text().isEmpty())
-        QMessageBox::warning(this,"Error","Fields can't be empty...");
-    else if(ui->lineEdit_first4->text().length()!=4||ui->lineEdit_second4->text().length()!=4||
-    ui->lineEdit_third4->text().length()!=4||ui->lineEdit_fourth4->text().length()!=4)
-        QMessageBox::warning(this,"Payment Error","The card number must be entered correctly");
-    else if(ui->lineEdit_year->text().toInt()<0||ui->lineEdit_month->text().toInt()<0||
-            ui->lineEdit_month->text().toInt()>12)
-        QMessageBox::warning(this,"Error","Expiry Date is invalid");
-    else if(ui->lineEdit_cvv2->text().length()<3||ui->lineEdit_cvv2->text().length()<4)
-        QMessageBox::warning(this,"Error","The CVV2 must be entered correctly");
-    else if(ui->lineEdit_captcha->text() != ui->lineEdit_check->text())
-    {
-        QMessageBox::warning(this,"Captcha faild","Try again...");
-        ui->lineEdit_captcha->setText(getCaptcha());
-    }
-    else
-    {
-        // thread ==> emit
-        emit send_purchase(123, false);
-    }
+    Username_client = _username ;
 }
 
-void Payment_gateway::recieve_bank(QString bank)
+void Payment_gateway::set_flag(bool _flag)
 {
+    flag = _flag;
+}
+
+void Payment_gateway::recieve_bank(QString bank, int total)
+{
+    ui->total_lineEdit->setText(QString::number(total));
     if(bank == "Melat")
     {
         QPixmap picture(":/included_images/Beh-Pardakht.png");
@@ -107,5 +92,51 @@ void Payment_gateway::recieve_bank(QString bank)
         ui->Bank_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
         ui->Bank_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     }
+}
+
+
+void Payment_gateway::on_purchase_button_clicked()
+{
+    if(ui->lineEdit_first4->text().isEmpty()||ui->lineEdit_second4->text().isEmpty()||
+            ui->lineEdit_third4->text().isEmpty()||ui->lineEdit_fourth4->text().isEmpty()||
+            ui->lineEdit_year->text().isEmpty()||ui->lineEdit_month->text().isEmpty()||
+            ui->lineEdit_cvv2->text().isEmpty()||ui->lineEdit_password->text().isEmpty())
+        QMessageBox::warning(this,"Error","Fields can't be empty...");
+    else if(ui->lineEdit_first4->text().length()!=4||ui->lineEdit_second4->text().length()!=4||
+            ui->lineEdit_third4->text().length()!=4||ui->lineEdit_fourth4->text().length()!=4)
+        QMessageBox::warning(this,"Payment Error","The card number must be entered correctly");
+    else if(ui->lineEdit_year->text().toInt()<0||ui->lineEdit_month->text().toInt()<0||
+            ui->lineEdit_month->text().toInt()>12)
+        QMessageBox::warning(this,"Error","Expiry Date is invalid");
+    else if(ui->lineEdit_cvv2->text().length()<3||ui->lineEdit_cvv2->text().length()<4)
+        QMessageBox::warning(this,"Error","The CVV2 must be entered correctly");
+    else if(ui->lineEdit_captcha->text() != ui->lineEdit_check->text())
+    {
+        QMessageBox::warning(this,"Captcha faild","Try again...");
+        ui->lineEdit_captcha->setText(getCaptcha());
+    }
+    else
+    {
+        // thread ==> emit
+        if(!flag){
+            emit send_purchase();
+            close();
+        }
+        else
+        {
+            vector <Client> global_clients = load_client();
+            global_clients[current_client_index(Username_client)].set_balance(global_clients[current_client_index(Username_client)].get_balance()+
+                    ui->total_lineEdit->text().toInt());
+            save_client(global_clients);
+            global_clients.clear();
+            global_clients.shrink_to_fit();
+        }
+    }
+}
+
+
+void Payment_gateway::on_cancel_button_clicked()
+{
+    close();
 }
 

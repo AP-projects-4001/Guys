@@ -10,6 +10,7 @@
 #include "payment_gateway.h"
 #include "new_password_dialog.h"
 #include <QWidget>
+#include "increase_balance.h"
 inline QString current_client;
 
 namespace Ui {
@@ -27,7 +28,7 @@ public:
 signals:
     void send_index(Product);
     void send_product_cart(Product, unsigned int);
-    void send_to_gateway(QString);
+    void send_to_gateway(QString, int);
     void change_password(QString);
 
 private slots:
@@ -44,8 +45,7 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
-
-    void confirm_purchase(unsigned int, bool);
+    void confirm_purchase();
 
 private:
     Ui::client_Ui *ui;

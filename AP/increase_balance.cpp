@@ -13,3 +13,14 @@ increase_balance::~increase_balance()
 {
     delete ui;
 }
+
+void increase_balance::on_pushButton_clicked()
+{
+    if (ui->lineEdit->text().toInt() <= 49999)
+        QMessageBox::warning(this, "Invalid input !" ,"The amount should be greater than 50000");
+    else
+    {
+
+    }
+}
+
