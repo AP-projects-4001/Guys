@@ -5,6 +5,7 @@
 std::vector <Product> products_2;
 std::vector <Product> products_copy;
 std::vector <Client> global_clients; // Change password
+QPushButton *leftButton;
 client_Ui::client_Ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::client_Ui)
@@ -14,6 +15,7 @@ client_Ui::client_Ui(QWidget *parent) :
     products_2 = load_product();
     products_copy = products_2;
     show_products(products_2);
+
 //    current_client.add
 
 }
@@ -32,6 +34,13 @@ client_Ui::~client_Ui()
 void client_Ui::set_userId(QString user)
 {
     current_client = user;
+    QPushButton *leftButton = new QPushButton(show_balance(global_clients, current_client));
+    ui->statusbar->addPermanentWidget(leftButton);
+    QLabel *spacer = new QLabel(); // fake spacer
+    ui->statusbar->addPermanentWidget(spacer, 1);
+//    connect(btn_edit, &QPushButton::clicked, [=](){
+
+//    });
     //  ***
 }
 
@@ -101,8 +110,9 @@ void client_Ui::show_products(vector<Product> &products)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->show_table->setCellWidget(i, 8, pWidget);
-            connect(btn_edit, &QPushButton::clicked, [=]()mutable {
+            connect(btn_edit, &QPushButton::clicked, [=](){
                 buy_products *p = new buy_products(this);
+//                add_viewed(products, i);
                 connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
                 connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
                 emit send_index(products[i]);
@@ -299,5 +309,20 @@ void client_Ui::on_pushButton_4_clicked()
     connect(this,SIGNAL(change_password(QString)),new_pass,SLOT(set_client(QString)));
     emit change_password(current_client);
     new_pass->exec();
+}
+
+void client_Ui::confirm_purchase(unsigned int price, bool flag)
+{
+    if (!flag)
+    {
+
+    }
+    else
+    {
+        global_clients = load_client();
+        global_clients[current_client_index(current_client)].set_balance(global_clients[current_client_index(current_client)].get_balance()+price);
+        leftButton->setText(show_balance(global_clients, current_client));
+        save_client(global_clients);
+    }
 }
 

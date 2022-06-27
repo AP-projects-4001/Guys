@@ -9,6 +9,7 @@
 #include "buy_products.h"
 #include "payment_gateway.h"
 #include "new_password_dialog.h"
+#include <QWidget>
 inline QString current_client;
 
 namespace Ui {
@@ -43,6 +44,8 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
+
+    void confirm_purchase(unsigned int, bool);
 
 private:
     Ui::client_Ui *ui;
