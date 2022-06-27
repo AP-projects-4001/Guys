@@ -22,6 +22,9 @@ private slots:
     void on_buttonBox_accepted();
     void recieve_bank(QString);
 
+signals:
+    void send_purchase(unsigned int, bool);
+
 private:
     Ui::Payment_gateway *ui;
 };

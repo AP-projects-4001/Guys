@@ -1,6 +1,7 @@
 #include "new_password_dialog.h"
 #include "ui_new_password_dialog.h"
-vector<Client> global_clients2;
+vector<Client> global_users;
+
 New_Password_Dialog::New_Password_Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::New_Password_Dialog)
@@ -11,20 +12,23 @@ New_Password_Dialog::New_Password_Dialog(QWidget *parent) :
 New_Password_Dialog::~New_Password_Dialog()
 {
     delete ui;
+    global_users.clear();
+    global_users.shrink_to_fit();
 }
 
 void New_Password_Dialog::set_client(QString username)
 {
     c_client = username;
-    global_clients2 = load_client();
+    global_users = load_client();
 }
 
 void New_Password_Dialog::on_buttonBox_accepted()
 {
     int index = current_client_index(c_client);
-    if(ui->lineEdit_current->text() != global_clients2[index].get_password())
+    if(ui->lineEdit_current->text() != global_users[index].get_password())
     {
         QMessageBox::warning(this,"Error","Your current Password is incorrect.");
+        ui->lineEdit_current->setText("");
     }
     else if(ui->lineEdit_new->text().length()<5)
     {
@@ -40,8 +44,8 @@ void New_Password_Dialog::on_buttonBox_accepted()
     }
     else
     {
-        global_clients2[index].set_password(ui->lineEdit_new->text());
-        save_client(global_clients2);
+        global_users[index].set_password(ui->lineEdit_new->text());
+        save_client(global_users);
         QMessageBox::information(this,"Change Password","Your Password successfully changed.");
     }
 }
@@ -50,14 +54,11 @@ void New_Password_Dialog::on_buttonBox_accepted()
 void New_Password_Dialog::on_lineEdit_current_editingFinished()
 {
     int index = current_client_index(c_client);
-    if(ui->lineEdit_current->text() != global_clients2[index].get_password())
+    if(ui->lineEdit_current->text() != global_users[index].get_password())
     {
         QMessageBox::warning(this,"Error","Your current Password is incorrect.");
     }
 }
-
-
-
 
 
 void New_Password_Dialog::on_lineEdit_new_editingFinished()

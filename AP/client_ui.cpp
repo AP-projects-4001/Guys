@@ -256,6 +256,7 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
     }
     else if(index == 2)
     {
+        vector<Transaction> all_transactions = load_transaction();
 
     }
     else
@@ -270,6 +271,7 @@ void client_Ui::on_Purchase_Button_clicked()
     {
         Payment_gateway* p1 = new Payment_gateway(this);
         connect(this,SIGNAL(send_to_gateway(QString)),p1,SLOT(recieve_bank(QString)));
+        connect(p1, SIGNAL(send_purchase(uint, bool)), this, SLOT(confirm_purchase(unsigned int, bool)));
         emit send_to_gateway(ui->comboBox->currentText());
         p1->exec();
     }
@@ -315,7 +317,7 @@ void client_Ui::confirm_purchase(unsigned int price, bool flag)
 {
     if (!flag)
     {
-
+        confirm_payment(current_client);
     }
     else
     {
@@ -324,5 +326,10 @@ void client_Ui::confirm_purchase(unsigned int price, bool flag)
         leftButton->setText(show_balance(global_clients, current_client));
         save_client(global_clients);
     }
+
+    global_clients = load_client();
+    products_2 = load_product();
+    products_copy = products_2;
+    show_products(products_2);
 }
 

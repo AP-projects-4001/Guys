@@ -34,7 +34,7 @@ int current_client_index(QString);
 int current_costumer_index(QString);
 void add_viewed(vector <Product> &, int);
 QString show_balance(vector <Client>& , QString);
-void confirm_payment(QString , unsigned int);
+void confirm_payment(QString);
 //QString show_balance(vector <Costumer>& , QString);
 
 #endif // LOAD_SAVE_H

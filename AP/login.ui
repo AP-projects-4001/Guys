@@ -86,6 +86,11 @@ QRadioButton::indicator:checked
         stop: 0.3 #323232
     );
 }
+
+QStatusBar
+{
+	color: #ffffff;
+}
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -102,7 +107,7 @@ QRadioButton::indicator:checked
      <string/>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -252,7 +257,7 @@ QRadioButton::indicator:checked
      <x>0</x>
      <y>0</y>
      <width>540</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

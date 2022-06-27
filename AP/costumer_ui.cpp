@@ -17,6 +17,8 @@ costumer_Ui::costumer_Ui(QWidget *parent) :
 costumer_Ui::~costumer_Ui()
 {
     delete ui;
+    products.clear();
+    products.shrink_to_fit();
 }
 
 void costumer_Ui::set_userID(QString user)
@@ -92,39 +94,40 @@ void costumer_Ui::on_Button_add_clicked()
 
 void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 {
-    products = load_product();
-    for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
-        ui->show_table->removeRow(i);
-    ui->show_table->clearContents();
-    unsigned int Count = 0;
-    for (unsigned int i = 0 ; i < products.size(); ++i){
-        if (products[i].get_costumer_username()==current_costumer)
-            Count++;
-    }
-//    ui->show_table->setColumnCount(10);
-    int count = 0;
-    ui->show_table->setRowCount(Count);
-    for (unsigned int i = 0 ; i < products.size(); i++){
-        if (products[i].get_costumer_username()==current_costumer){
-            ui->show_table->setItem(count , 0, new QTableWidgetItem(products[i].get_name()));
-            ui->show_table->item(count ,  0)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 1, new QTableWidgetItem(products[i].get_brand()));
-            ui->show_table->item(count ,  1)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 2, new QTableWidgetItem(products[i].get_type()));
-            ui->show_table->item(count ,  2)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 3, new QTableWidgetItem(products[i].get_color()));
-            ui->show_table->item(count ,  3)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
-            ui->show_table->item(count ,  4)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 5, new QTableWidgetItem(QString::number(products[i].get_stock())));
-            ui->show_table->item(count ,  5)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 6, new QTableWidgetItem(products[i].get_size()));
-            ui->show_table->item(count ,  6)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 7, new QTableWidgetItem(QString::number(products[i].get_weight())));
-            ui->show_table->item(count ,  7)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(count , 8, new QTableWidgetItem(products[i].get_additional_info()));
-            ui->show_table->item(count ,  8)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
-//            if (i == 9){
+    if(index == 1)
+    {
+        products = load_product();
+        for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
+            ui->show_table->removeRow(i);
+        ui->show_table->clearContents();
+        unsigned int Count = 0;
+        for (unsigned int i = 0 ; i < products.size(); ++i){
+            if (products[i].get_costumer_username()==current_costumer)
+                Count++;
+        }
+    //    ui->show_table->setColumnCount(10);
+        int count = 0;
+        ui->show_table->setRowCount(Count);
+        for (unsigned int i = 0 ; i < products.size(); i++){
+            if (products[i].get_costumer_username()==current_costumer){
+                ui->show_table->setItem(count , 0, new QTableWidgetItem(products[i].get_name()));
+                ui->show_table->item(count ,  0)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 1, new QTableWidgetItem(products[i].get_brand()));
+                ui->show_table->item(count ,  1)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 2, new QTableWidgetItem(products[i].get_type()));
+                ui->show_table->item(count ,  2)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 3, new QTableWidgetItem(products[i].get_color()));
+                ui->show_table->item(count ,  3)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
+                ui->show_table->item(count ,  4)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 5, new QTableWidgetItem(QString::number(products[i].get_stock())));
+                ui->show_table->item(count ,  5)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 6, new QTableWidgetItem(products[i].get_size()));
+                ui->show_table->item(count ,  6)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 7, new QTableWidgetItem(QString::number(products[i].get_weight())));
+                ui->show_table->item(count ,  7)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+                ui->show_table->setItem(count , 8, new QTableWidgetItem(products[i].get_additional_info()));
+                ui->show_table->item(count ,  8)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
                 QWidget* pWidget = new QWidget();
                 QPushButton* btn_edit = new QPushButton();
                 btn_edit->setText("Edit");
@@ -140,18 +143,27 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                     emit send_index(i);
                     p->exec();
                 });
-//            }
-            ++count;
+                ++count;
 
+            }
         }
+
+        ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }
-//}
-//     ui->show_table->horizontalHeader()->setStretchLastSection(true);
-//    ui->show_table->setColumnWidth(8, 50);
 
-    ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    else if(index == 2)
+    {
+        int user_index = current_costumer_index(current_costumer);
+        vector<Costumer> tmp = load_costumer();
+        ui->lineEdit_user_name->setText(tmp[user_index].get_user_name());
+        ui->lineEdit_new_name->setText(tmp[user_index].get_name());
+        ui->lineEdit_email->setText(tmp[user_index].get_email());
+        ui->lineEdit_address->setText(tmp[user_index].get_address());
+        ui->lineEdit_phone->setText(tmp[user_index].get_phone_number());
+        tmp.clear();
+        tmp.shrink_to_fit();
+    }
 }
-
 
 
 void costumer_Ui::on_pushButton_clicked()
@@ -176,5 +188,34 @@ void costumer_Ui::on_pushButton_clicked()
 
 
 //    ui->product_image->set
+}
+
+
+void costumer_Ui::on_pushButton_save_change_clicked()
+{
+    if(ui->lineEdit_new_name->text().isEmpty() || ui->lineEdit_address->text().isEmpty() ||
+       ui->lineEdit_email->text().isEmpty() || ui->lineEdit_phone->text().isEmpty())
+    {
+        QMessageBox::warning(this, "Error", "Fields can't be empty...");
+    }
+
+    else if(!(ui->lineEdit_phone->text().toStdString().find_first_not_of("0123456789") == string::npos))
+    {
+        QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
+        ui->lineEdit_phone->setText("");
+    }
+    else
+    {
+        int index = current_costumer_index(current_costumer);
+        vector<Costumer> tmp = load_costumer();
+        tmp[index].set_name(ui->lineEdit_new_name->text());
+        tmp[index].set_email(ui->lineEdit_email->text());
+        tmp[index].set_phone_number(ui->lineEdit_phone->text());
+        tmp[index].set_address(ui->lineEdit_address->text());
+        save_costumer(tmp);
+        tmp.clear();
+        tmp.shrink_to_fit();
+        QMessageBox::warning(this, "Save Changes", "Saved Successfully!");
+    }
 }
 

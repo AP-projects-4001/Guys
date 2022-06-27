@@ -33,12 +33,24 @@ void costumer_products::recieve_index(int index)
       ui->price_lineEdit->setText(QString::number(global_product[index].get_price()));
       ui->stock_lineEdit->setText(QString::number(global_product[index].get_stock()));
       // if path is not available
-      QPixmap picture(global_product[index].get_path());
-      int h = ui->image_label->height();
-      int w = ui->image_label->width();
-      ui->image_label->setPixmap(picture);
-      ui->image_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
-      ui->image_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      if(global_product[index].get_path() != "")
+      {
+          QPixmap picture(global_product[index].get_path());
+          int h = ui->image_label->height();
+          int w = ui->image_label->width();
+          ui->image_label->setPixmap(picture);
+          ui->image_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+          ui->image_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      }
+      else
+      {
+          QPixmap picture(":/included_images/No-image.png");
+          int h = ui->image_label->height();
+          int w = ui->image_label->width();
+          ui->image_label->setPixmap(picture);
+          ui->image_label->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+          ui->image_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+      }
 }
 
 void costumer_products::on_buttonBox_accepted()

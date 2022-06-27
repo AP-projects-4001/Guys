@@ -105,12 +105,12 @@ QRadioButton::indicator:checked
     <string/>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>129</x>
      <y>226</y>
-     <width>341</width>
+     <width>349</width>
      <height>31</height>
     </rect>
    </property>
@@ -170,12 +170,12 @@ QRadioButton::indicator:checked
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>129</x>
      <y>259</y>
-     <width>211</width>
+     <width>241</width>
      <height>31</height>
     </rect>
    </property>
@@ -222,7 +222,7 @@ QRadioButton::indicator:checked
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -260,13 +260,13 @@ QRadioButton::indicator:checked
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>130</x>
      <y>330</y>
-     <width>151</width>
-     <height>27</height>
+     <width>153</width>
+     <height>30</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -298,13 +298,13 @@ QRadioButton::indicator:checked
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>130</x>
      <y>360</y>
      <width>218</width>
-     <height>58</height>
+     <height>67</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">

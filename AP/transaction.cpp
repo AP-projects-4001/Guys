@@ -5,7 +5,7 @@ Transaction::Transaction()
 
 }
 
-void Transaction::set_client_user_name(QString & user)
+void Transaction::set_client_user_name(QString user)
 {
     this->client_username = user;
 }

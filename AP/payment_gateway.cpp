@@ -48,7 +48,7 @@ void Payment_gateway::on_buttonBox_accepted()
         QMessageBox::warning(this,"Error","Expiry Date is invalid");
     else if(ui->lineEdit_cvv2->text().length()<3||ui->lineEdit_cvv2->text().length()<4)
         QMessageBox::warning(this,"Error","The CVV2 must be entered correctly");
-    else if(ui->lineEdit_captcha!=ui->lineEdit_check)
+    else if(ui->lineEdit_captcha->text() != ui->lineEdit_check->text())
     {
         QMessageBox::warning(this,"Captcha faild","Try again...");
         ui->lineEdit_captcha->setText(getCaptcha());
@@ -56,7 +56,7 @@ void Payment_gateway::on_buttonBox_accepted()
     else
     {
         // thread ==> emit
-
+        emit send_purchase(123, false);
     }
 }
 

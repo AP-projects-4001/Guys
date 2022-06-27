@@ -29,3 +29,9 @@ std::vector<Product> Client::get_shopped_items() const
 {
     return this->shopped_items;
 }
+
+void Client::clear_shopped_items()
+{
+    shopped_items.clear();
+    shopped_items.shrink_to_fit();
+}

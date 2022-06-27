@@ -30,6 +30,8 @@ private slots:
     void on_tabWidget_tabBarClicked(int index);
     void on_pushButton_clicked();
 
+    void on_pushButton_save_change_clicked();
+
 signals:
     void send_index(int);
 private:

@@ -753,6 +753,7 @@ void save_transaction(Transaction& tmp)
 {
     if(check_file("All_transaction.json"))
     {
+        // client user, product_name, costumer_user, brand, type, color, addinfo, path, count, total price, weight
         QFile f("All_transaction.json");
         f.open(QIODevice::ReadOnly);
         QByteArray b = f.readAll();
@@ -763,9 +764,9 @@ void save_transaction(Transaction& tmp)
         names = o["Names"].toArray();
         f.close();
         bool flag = false;
-        for(int i = 0; i<names.size(); i++)
+        for(int i = 0; i < names.size(); i++)
         {
-            if (names[i].toString() == tmp.get_client_user_name())
+            if(names[i] == tmp.get_client_user_name())
             {
                 flag = true;
                 break;
@@ -773,149 +774,99 @@ void save_transaction(Transaction& tmp)
         }
         if(!flag)
             names.append(tmp.get_client_user_name());
-        QString line;
-        for (unsigned int i = 0; i<tmp.get_bought_product().size(); i++)
-        {
-            line = tmp.get_client_user_name();
-            line.append(",");
-            line.append(tmp.get_bought_product()[i].get_name());
-            line.append(",");
-            line.append(tmp.get_bought_product()[i].get_costumer_username());
-            line.append(",");
-            line.append(QString::number(tmp.get_bought_product()[i].get_added_to_cart()));
-            line.append(",");
-            line.append(QString::number(tmp.get_bought_product()[i].get_price()));
-            line.append(",");
-            products.append(line);
-        }
+
+        QString line = "";
+        line.append(tmp.get_client_user_name());
+        line.append(",");
+        line.append(tmp.get_bought_product()[0].get_name());
+        line.append(",");
+        line.append(tmp.get_bought_product()[0].get_costumer_username());
+        line.append(",");
+        line.append(tmp.get_bought_product()[0].get_brand());
+        line.append(",");
+        line.append(tmp.get_bought_product()[0].get_type());
+        line.append(",");
+        line.append(tmp.get_bought_product()[0].get_color());
+        line.append(",");
+        line.append(tmp.get_bought_product()[0].get_additional_info());
+        line.append(",");
+        line.append(tmp.get_bought_product()[0].get_path());
+        line.append(",");
+        line.append(QString::number(tmp.get_bought_product()[0].get_added_to_cart()));
+        line.append(",");
+        line.append(QString::number(tmp.get_bought_product()[0].get_price() * tmp.get_bought_product()[0].get_added_to_cart()));
+        line.append(",");
+        line.append(QString::number(tmp.get_bought_product()[0].get_stock()));
+        line.append(",");
+        line.append(QString::number(tmp.get_bought_product()[0].get_weight()));
+        line.append(",");
+        products.append(line);
         QJsonObject j;
-        j["Products"] = products;
         j["Names"] = names;
+        j["Products"] = products;
         QJsonDocument d2(j);
         f.open(QIODevice::WriteOnly);
         f.write(d2.toJson());
         f.close();
-        for(int i=0; i<=products.count(); i++)
-            products.removeAt(0);
-        for(int i=0; i<=names.count(); i++)
+        int len = names.count();
+        for(int i=0; i<len; i++)
             names.removeAt(0);
-    }
-
-    else
-    {
-        //vector product, client user name
-        QJsonArray products, names;
-        names.append(tmp.get_client_user_name());
-        QString line;
-        for (unsigned int i = 0; i<tmp.get_bought_product().size(); i++)
-        {
-            line = tmp.get_client_user_name();
-            line.append(",");
-            line.append(tmp.get_bought_product()[i].get_name());
-            line.append(",");
-            line.append(tmp.get_bought_product()[i].get_costumer_username());
-            line.append(",");
-            line.append(QString::number(tmp.get_bought_product()[i].get_added_to_cart()));
-            line.append(",");
-            line.append(QString::number(tmp.get_bought_product()[i].get_price()));
-            line.append(",");
-            products.append(line);
-        }
-        QJsonObject j;
-        j["Names"] = names;
-        j["Products"] = products;
-        QJsonDocument d(j);
-        QFile f("All_transaction.json");
-        f.open(QIODevice::WriteOnly);
-        f.write(d.toJson());
-        f.close();
-        for(int i=0; i<=products.count(); i++)
+        len = products.count();
+        for(int i=0; i<len; i++)
             products.removeAt(0);
-        for(int i=0; i<=names.count(); i++)
-            names.removeAt(0);
+        line.clear();
     }
 }
 
 vector<Transaction> load_transaction()
 {
     vector<Transaction> trans;
-    if(check_file("All_transaction.json"))
+    // client user, product_name, costumer_user, brand, type, color, addinfo, path, count, total price, weight
+    QFile f("All_transaction.json");
+    f.open(QIODevice::ReadOnly);
+    QByteArray b = f.readAll();
+    QJsonDocument d = QJsonDocument::fromJson(b);
+    QJsonObject o = d.object();
+    QJsonArray products, names;
+    products = o["Products"].toArray();
+    names = o["Names"].toArray();
+    f.close();
+    Transaction tmp;
+    for(int i = 0; i <names.size(); i++)
     {
-        QFile f("All_transaction.json");
-        f.open(QIODevice::ReadOnly);
-        QByteArray b = f.readAll();
-        QJsonDocument d = QJsonDocument::fromJson(b);
-        QJsonObject o = d.object();
-        QJsonArray products, names;
-        products = o["Products"].toArray();
-        names = o["Names"].toArray();
-        f.close();
-        Transaction tmp;
-        vector<Product> pro_temp;
-        for(int i = 0; i<names.size(); i++)
+        tmp.set_client_user_name(names[i].toString());
+        vector<Product> bought_products;
+        for(int j = 0; j < products.size(); j++)
         {
-            for(int j = 0; j<products.size(); j++)
+            string dummyLine = products[j].toString().toStdString();
+            size_t pos = 0;
+            string token;
+            string delimiter = ",";
+            vector<string> splitted_line;
+            while ((pos = dummyLine.find(delimiter)) != string::npos) // getting data from the file
             {
-                string dummyLine = products[j].toString().toStdString();
-                size_t pos = 0;
-                vector<string> line_splitted;
-                string delimiter = ",";
-                while ((pos = dummyLine.find(delimiter)) != string::npos)
-                {
-                    line_splitted.push_back(dummyLine.substr(0, pos));
-                    dummyLine.erase(0, pos + delimiter.length());
-                }
-                if(line_splitted[0] == names[i].toString().toStdString())
-                {
-                    QString tempo = QString::fromStdString(line_splitted[0]);
-                    tmp.set_client_user_name(tempo);
-                    Product temporary;
-                    tempo = QString::fromStdString(line_splitted[1]);
-                    temporary.set_name(tempo);
-                    tempo = QString::fromStdString(line_splitted[2]);
-                    temporary.set_costumer_username(tempo);
-                    vector<Product> all_products = load_product();
-                    for (unsigned int k = 0; k<all_products.size(); k++)
-                    {
-                        if(all_products[k].get_name().toStdString() == line_splitted[1] &&
-                           all_products[k].get_costumer_username().toStdString() == line_splitted[2]
-                           && QString::number(all_products[k].get_price()).toStdString() == line_splitted[4])
-                        {
-                            temporary.set_additional_info(all_products[k].get_additional_info());
-                            temporary.set_bought(all_products[k].get_bought());
-                            temporary.set_brand(all_products[k].get_brand());
-                            temporary.set_color(all_products[k].get_color());
-                            temporary.set_price(all_products[k].get_price());
-                            temporary.set_size(all_products[k].get_size());
-                            temporary.set_stock(all_products[k].get_stock());
-                            temporary.set_type(all_products[k].get_type());
-                            temporary.set_weight(all_products[k].get_weight());
-                            temporary.set_path(all_products[k].get_path());
-                            temporary.set_added_to_cart(stoi(line_splitted[3]));
-                            break;
-                        }
-                    }
-                    pro_temp.push_back(temporary);
-                    all_products.clear();
-                    all_products.shrink_to_fit();
-                }
+                token = dummyLine.substr(0, pos);
+                splitted_line.push_back(token);
+                dummyLine.erase(0, pos + delimiter.length());
             }
-            tmp.set_bought_product(pro_temp);
-            trans.push_back(tmp);
-            pro_temp.clear();
-            pro_temp.shrink_to_fit();
+            if(names[i].toString().toStdString() == splitted_line[0])
+            {
+                Product temp;
+                temp.set_name(QString::fromStdString(splitted_line[1]));
+                temp.set_costumer_username(QString::fromStdString(splitted_line[2]));
+                temp.set_brand(QString::fromStdString(splitted_line[3]));
+                temp.set_type(QString::fromStdString(splitted_line[4]));
+                temp.set_color(QString::fromStdString(splitted_line[5]));
+                temp.set_additional_info(QString::fromStdString(splitted_line[6]));
+                temp.set_path(QString::fromStdString(splitted_line[7]));
+                temp.set_bought(stoi(splitted_line[8]));
+                temp.set_price(stoi(splitted_line[9]));
+                temp.set_weight(stoi(splitted_line[10]));
+                bought_products.push_back(temp);
+            }
         }
-
-        pro_temp.clear();
-        pro_temp.shrink_to_fit();
-        for(int i=0; i<=products.count(); i++)
-            products.removeAt(0);
-        for(int i=0; i<=names.count(); i++)
-            names.removeAt(0);
-    }
-    else
-    {
-        //hey
+        tmp.set_bought_product(bought_products);
+        trans.push_back(tmp);
     }
     return trans;
 }
@@ -1067,7 +1018,6 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
     return updated;
 }
 
-
 void check_and_create()
 {
     if(!check_file("All_client.json"))
@@ -1107,18 +1057,6 @@ void check_and_create()
         f.close();
     }
 }
-
-//bool incresingorder(Product a, Product b, QString order)
-//{
-//    if(order == "MintoMax")
-//        return a.get_price() < b.get_price();
-//    else if(order == "MaxtoMin")
-//        return a.get_price() > b.get_price();
-//    else if(order == "Mostshopped")
-//        return a.get_bought() < b.get_bought();
-//    else if(order == )
-//    return true;
-//}
 
 int current_client_index(QString username)
 {
@@ -1161,11 +1099,12 @@ QString show_balance(vector<Client> &clients, QString current)
     return "";
 }
 
-void confirm_payment(QString client_id, unsigned int)
+void confirm_payment(QString client_id)
 {
     int Index = current_client_index(client_id);
-    vector <Product> all_products = load_product();
-    vector <Client> all_clients = load_client();
+    vector<Product> all_products = load_product();
+    vector<Client> all_clients = load_client();
+    vector<Costumer> all_costumers = load_costumer();
     Transaction tmp;
     for (unsigned int i = 0  ; i < all_clients[Index].get_shopped_items().size() ; ++i)
     {
@@ -1179,9 +1118,28 @@ void confirm_payment(QString client_id, unsigned int)
 
                  all_products[j].set_stock(all_products[j].get_stock() -
                  all_clients[Index].get_shopped_items()[i].get_added_to_cart());
+
+                 all_costumers[current_costumer_index(all_products[j].get_costumer_username())].set_balance(
+                 all_costumers[current_costumer_index(all_products[j].get_costumer_username())].get_balance()
+                 + (all_clients[Index].get_shopped_items()[i].get_price()*(all_clients[Index].get_shopped_items()[i].get_added_to_cart())));
             }
         }
-//        tmp.set_bought_product()
+        tmp.set_client_user_name(client_id);
+        vector<Product> temp;
+        temp.push_back(all_clients[Index].get_shopped_items()[i]);
+        tmp.set_bought_product(temp);
+        save_transaction(tmp);
+        temp.clear();
+        temp.shrink_to_fit();
     }
-
+    all_clients[Index].clear_shopped_items();
+    save_product(all_products);
+    save_client(all_clients);
+    save_costumer(all_costumers);
+    all_clients.clear();
+    all_clients.shrink_to_fit();
+    all_products.clear();
+    all_products.shrink_to_fit();
+    all_costumers.clear();
+    all_costumers.shrink_to_fit();
 }

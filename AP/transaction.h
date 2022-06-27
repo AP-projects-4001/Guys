@@ -11,7 +11,7 @@ private:
     QString client_username;
 public:
     Transaction();
-    void set_client_user_name(QString &);
+    void set_client_user_name(QString);
     void set_bought_product(std::vector<Product>&);
     QString get_client_user_name() const;
     std::vector<Product> get_bought_product() const;
