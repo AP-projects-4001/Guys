@@ -1,6 +1,6 @@
 #include "payment_gateway.h"
 #include "ui_payment_gateway.h"
-
+bool flag = true; // true for increase && false for buy
 Payment_gateway::Payment_gateway(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Payment_gateway)
@@ -55,7 +55,8 @@ void Payment_gateway::on_buttonBox_accepted()
     }
     else
     {
-        //
+        // thread ==> emit
+
     }
 }
 

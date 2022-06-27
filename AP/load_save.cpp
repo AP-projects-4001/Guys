@@ -1145,3 +1145,43 @@ int current_costumer_index(QString username)
     }
     return -1;
 }
+
+void add_viewed(vector<Product> &products, int index)
+{
+    products[index].set_viewed(products[index].get_viewed()+1);
+}
+
+QString show_balance(vector<Client> &clients, QString current)
+{
+    for (unsigned int i = 0 ; i < clients.size(); i++)
+    {
+        if (clients[i].get_user_name() == current)
+            return "balance : "+QString::number(clients[i].get_balance());
+    }
+    return "";
+}
+
+void confirm_payment(QString client_id, unsigned int)
+{
+    int Index = current_client_index(client_id);
+    vector <Product> all_products = load_product();
+    vector <Client> all_clients = load_client();
+    Transaction tmp;
+    for (unsigned int i = 0  ; i < all_clients[Index].get_shopped_items().size() ; ++i)
+    {
+        for (unsigned int j = 0 ; j < all_products.size() ; ++j)
+        {
+            if (all_clients[Index].get_shopped_items()[i].get_name() == all_products[j].get_name()
+                    && all_clients[Index].get_shopped_items()[i].get_costumer_username() == all_products[j].get_costumer_username())
+            {
+                 all_products[j].set_bought(all_products[j].get_bought() +
+                 all_clients[Index].get_shopped_items()[i].get_added_to_cart());
+
+                 all_products[j].set_stock(all_products[j].get_stock() -
+                 all_clients[Index].get_shopped_items()[i].get_added_to_cart());
+            }
+        }
+//        tmp.set_bought_product()
+    }
+
+}

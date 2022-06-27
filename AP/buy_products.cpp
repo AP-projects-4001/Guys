@@ -40,7 +40,6 @@ void buy_products::recieve_index(Product item)
         ui->product_image->setPixmap(picture);
         ui->product_image->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
         ui->product_image->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
     }
     else{
         QPixmap picture(item.get_path());
@@ -49,7 +48,6 @@ void buy_products::recieve_index(Product item)
         ui->product_image->setPixmap(picture);
         ui->product_image->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
         ui->product_image->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
     }
 }
 

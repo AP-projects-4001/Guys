@@ -98,7 +98,7 @@ void Product::set_added_to_cart(int num)
 
 void Product::set_viewed(int num)
 {
-    this->viewed = num;
+    viewed = num;
 }
 
 QString Product::get_name() const

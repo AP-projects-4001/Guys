@@ -17,6 +17,7 @@ SOURCES += \
     costumer_products.cpp \
     costumer_ui.cpp \
     forgot_pass_dialog.cpp \
+    increase_balance.cpp \
     load_save.cpp \
     main.cpp \
     login.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     costumer_products.h \
     costumer_ui.h \
     forgot_pass_dialog.h \
+    increase_balance.h \
     load_save.h \
     login.h \
     new_password_dialog.h \
@@ -55,6 +57,7 @@ FORMS += \
     costumer_products.ui \
     costumer_ui.ui \
     forgot_pass_dialog.ui \
+    increase_balance.ui \
     login.ui \
     new_password_dialog.ui \
     payment_gateway.ui \
