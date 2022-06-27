@@ -753,7 +753,7 @@ void save_transaction(Transaction& tmp)
 {
     if(check_file("All_transaction.json"))
     {
-        // client user, product_name, costumer_user, brand, type, color, addinfo, path, count, total price, weight
+        // client user, product_name, costumer_user, brand, type, color, addinfo, path, count, total price, weight, date_time, address
         QFile f("All_transaction.json");
         f.open(QIODevice::ReadOnly);
         QByteArray b = f.readAll();

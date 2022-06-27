@@ -173,21 +173,21 @@ void costumer_Ui::on_pushButton_clicked()
     QString filename = dir_filename.fileName();
     QDir("product_images").exists();
     QDir().mkdir("product_images");
-    QFile::copy(dirfilename, "product_images/"+filename);
-    ui->hidden_lineedit->setText("product_images/"+filename);
+    if (filename == nullptr){
+        ui->hidden_lineedit->setText("");
 
-    QPixmap picture("product_images/"+filename);
-    int h = ui->product_image->height();
-    int w = ui->product_image->width();
-    ui->product_image->setPixmap(picture);
-    ui->product_image->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
-    ui->product_image->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    }
+    else{
+        QFile::copy(dirfilename, "product_images/"+filename);
+        ui->hidden_lineedit->setText("product_images/"+filename);
 
-    //            products[i].set_path("product_images/"+filename);
-
-
-
-//    ui->product_image->set
+        QPixmap picture("product_images/"+filename);
+        int h = ui->product_image->height();
+        int w = ui->product_image->width();
+        ui->product_image->setPixmap(picture);
+        ui->product_image->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
+        ui->product_image->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    }
 }
 
 

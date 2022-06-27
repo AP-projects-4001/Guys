@@ -9,6 +9,8 @@ class Transaction
 private:
     std::vector<Product> bouhgt_product;
     QString client_username;
+    QString date_time;
+    QString address;
 public:
     Transaction();
     void set_client_user_name(QString);
