@@ -796,9 +796,11 @@ void save_transaction(Transaction& tmp)
         line.append(",");
         line.append(QString::number(tmp.get_bought_product()[0].get_price() * tmp.get_bought_product()[0].get_added_to_cart()));
         line.append(",");
-        line.append(QString::number(tmp.get_bought_product()[0].get_stock()));
-        line.append(",");
         line.append(QString::number(tmp.get_bought_product()[0].get_weight()));
+        line.append(",");
+        line.append(tmp.get_date_time());
+        line.append(",");
+        line.append(tmp.get_address());
         line.append(",");
         products.append(line);
         QJsonObject j;
@@ -821,7 +823,7 @@ void save_transaction(Transaction& tmp)
 vector<Transaction> load_transaction()
 {
     vector<Transaction> trans;
-    // client user, product_name, costumer_user, brand, type, color, addinfo, path, count, total price, weight
+    // client user, product_name, costumer_user, brand, type, color, addinfo, path, count, total price, weight, date_time, address
     QFile f("All_transaction.json");
     f.open(QIODevice::ReadOnly);
     QByteArray b = f.readAll();
@@ -832,39 +834,36 @@ vector<Transaction> load_transaction()
     names = o["Names"].toArray();
     f.close();
     Transaction tmp;
-    for(int i = 0; i <names.size(); i++)
+    for(int j = 0; j < products.size(); j++)
     {
-        tmp.set_client_user_name(names[i].toString());
         vector<Product> bought_products;
-        for(int j = 0; j < products.size(); j++)
+        string dummyLine = products[j].toString().toStdString();
+        size_t pos = 0;
+        string token;
+        string delimiter = ",";
+        vector<string> splitted_line;
+        while ((pos = dummyLine.find(delimiter)) != string::npos) // getting data from the file
         {
-            string dummyLine = products[j].toString().toStdString();
-            size_t pos = 0;
-            string token;
-            string delimiter = ",";
-            vector<string> splitted_line;
-            while ((pos = dummyLine.find(delimiter)) != string::npos) // getting data from the file
-            {
-                token = dummyLine.substr(0, pos);
-                splitted_line.push_back(token);
-                dummyLine.erase(0, pos + delimiter.length());
-            }
-            if(names[i].toString().toStdString() == splitted_line[0])
-            {
-                Product temp;
-                temp.set_name(QString::fromStdString(splitted_line[1]));
-                temp.set_costumer_username(QString::fromStdString(splitted_line[2]));
-                temp.set_brand(QString::fromStdString(splitted_line[3]));
-                temp.set_type(QString::fromStdString(splitted_line[4]));
-                temp.set_color(QString::fromStdString(splitted_line[5]));
-                temp.set_additional_info(QString::fromStdString(splitted_line[6]));
-                temp.set_path(QString::fromStdString(splitted_line[7]));
-                temp.set_bought(stoi(splitted_line[8]));
-                temp.set_price(stoi(splitted_line[9]));
-                temp.set_weight(stoi(splitted_line[10]));
-                bought_products.push_back(temp);
-            }
+            token = dummyLine.substr(0, pos);
+            splitted_line.push_back(token);
+            dummyLine.erase(0, pos + delimiter.length());
         }
+
+        tmp.set_client_user_name(QString::fromStdString(splitted_line[0]));
+        Product temp;
+        temp.set_name(QString::fromStdString(splitted_line[1]));
+        temp.set_costumer_username(QString::fromStdString(splitted_line[2]));
+        temp.set_brand(QString::fromStdString(splitted_line[3]));
+        temp.set_type(QString::fromStdString(splitted_line[4]));
+        temp.set_color(QString::fromStdString(splitted_line[5]));
+        temp.set_additional_info(QString::fromStdString(splitted_line[6]));
+        temp.set_path(QString::fromStdString(splitted_line[7]));
+        temp.set_bought(stoi(splitted_line[8]));
+        temp.set_price(stoi(splitted_line[9]));
+        temp.set_weight(stoi(splitted_line[10]));
+        tmp.set_date_time(QString::fromStdString(splitted_line[11]));
+        tmp.set_address(QString::fromStdString(splitted_line[12]));
+        bought_products.push_back(temp);
         tmp.set_bought_product(bought_products);
         trans.push_back(tmp);
     }
@@ -1125,6 +1124,8 @@ void confirm_payment(QString client_id)
             }
         }
         tmp.set_client_user_name(client_id);
+        tmp.set_date_time();
+        tmp.set_address(all_clients[Index].get_address());
         vector<Product> temp;
         temp.push_back(all_clients[Index].get_shopped_items()[i]);
         tmp.set_bought_product(temp);

@@ -257,7 +257,6 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
     else if(index == 2)
     {
         vector<Transaction> all_transactions = load_transaction();
-
     }
     else
     {
