@@ -177,7 +177,23 @@ void Login::on_pushButton_clicked()
 
         else
         {
-            // For admin panels
+            if(ui->lineEdit_user->text() == "Admin")
+            {
+                if(ui->lineEdit_password->text() == "Admin")
+                {
+                    admin_ui * admin = new admin_ui(this);
+                    close();
+                    admin->show();
+                }
+                else
+                {
+                    ui->statusbar->showMessage("Invalid Password!", 5000);
+                }
+            }
+            else
+            {
+                ui->statusbar->showMessage("Invalid Username!", 5000);
+            }
         }
     }
 }

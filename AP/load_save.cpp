@@ -2,7 +2,7 @@
 
 void save_client(vector<Client>& client_user)
 {
-    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances;
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances, deleted_times;
     for(unsigned int i = 0; i<client_user.size(); i++)
     {
         names.append(client_user[i].get_name());
@@ -12,6 +12,7 @@ void save_client(vector<Client>& client_user)
         users.append(client_user[i].get_user_name());
         passwords.append(client_user[i].get_password());
         balances.append(QString::number(client_user[i].get_balance()));
+        deleted_times.append(client_user[i].get_delete_time());
         QString line;
         for (unsigned int j = 0; j<client_user[i].get_shopped_items().size(); j++)
         {
@@ -40,6 +41,7 @@ void save_client(vector<Client>& client_user)
     j["Passwords"] = passwords;
     j["Shopped"] = shopped;
     j["Balance"] = balances;
+    j["Delete_Time"] = deleted_times;
 
     QJsonDocument d(j);
     QFile f("All_client.json");
@@ -70,11 +72,14 @@ void save_client(vector<Client>& client_user)
     len = balances.count();
     for(int i=0; i<len; i++)
         balances.removeAt(0);
+    len = deleted_times.count();
+    for(int i=0; i<len; i++)
+        deleted_times.removeAt(0);
 }
 
 void save_costumer(vector<Costumer> costumer_user)
 {
-    QJsonArray names, addresses, emails, phones, users, passwords, balances;
+    QJsonArray names, addresses, emails, phones, users, passwords, balances, deleted_times;
     for(unsigned int i = 0; i<costumer_user.size(); i++)
     {
         names.append(costumer_user[i].get_name());
@@ -84,6 +89,7 @@ void save_costumer(vector<Costumer> costumer_user)
         users.append(costumer_user[i].get_user_name());
         passwords.append(costumer_user[i].get_password());
         balances.append(QString::number(costumer_user[i].get_balance()));
+        deleted_times.append(costumer_user[i].get_delete_time());
     }
 
     QJsonObject j;
@@ -94,6 +100,7 @@ void save_costumer(vector<Costumer> costumer_user)
     j["Users"] = users;
     j["Passwords"] = passwords;
     j["Balance"] = balances;
+    j["Delete_Time"] = deleted_times;
 
     QJsonDocument d(j);
     QFile f("All_costumer.json");
@@ -121,7 +128,9 @@ void save_costumer(vector<Costumer> costumer_user)
     len = balances.count();
     for(int i=0; i<len; i++)
         balances.removeAt(0);
-
+    len = deleted_times.count();
+    for(int i=0; i<len; i++)
+        deleted_times.removeAt(0);
 }
 
 void save_client(Client & user)
@@ -131,7 +140,7 @@ void save_client(Client & user)
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords, old_shopped, new_shopped, balances;
+    QJsonArray names, addresses, emails, phones, users, passwords, old_shopped, new_shopped, balances, deleted_times;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -140,6 +149,7 @@ void save_client(Client & user)
     old_shopped = o["Shopped"].toArray();
     passwords = o["Passwords"].toArray();
     balances = o["Balance"].toArray();
+    deleted_times = o["Delete_Time"].toArray();
     f.close();
 
     for (int l = 0; l <old_shopped.size(); l++)
@@ -186,6 +196,7 @@ void save_client(Client & user)
     j["Passwords"] = passwords;
     j["Shopped"] = new_shopped;
     j["Balance"] = balances;
+    j["Delete_Time"] = deleted_times;
 
     QJsonDocument d2(j);
     f.open(QIODevice::WriteOnly);
@@ -219,7 +230,9 @@ void save_client(Client & user)
     len = balances.count();
     for(int i=0; i<len; i++)
         balances.removeAt(0);
-
+    len = deleted_times.count();
+    for(int i=0; i<len; i++)
+        deleted_times.removeAt(0);
 }
 
 void save_product(vector<Product> products)
@@ -490,7 +503,7 @@ vector<Client> load_client()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances;
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances, deleted_times;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -499,6 +512,7 @@ vector<Client> load_client()
     shopped = o["Shopped"].toArray();
     passwords = o["Passwords"].toArray();
     balances = o["Balance"].toArray();
+    deleted_times = o["Delete_Time"].toArray();
 
     vector<Client> client_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -511,6 +525,9 @@ vector<Client> load_client()
         tmp->set_user_name(users[i].toString());
         tmp->set_password(passwords[i].toString());
         tmp->set_balance(stoi(balances[i].toString().toStdString()));
+        tmp->set_time_delete(deleted_times[i].toInt());
+        if((deleted_times[i].toInt()) != -1)
+            tmp->set_deleted_status(true);
         vector<Product> pro_temp;
         for (int l = 0; l <shopped.size(); l++)
         {
@@ -591,6 +608,9 @@ vector<Client> load_client()
     len = balances.count();
     for(int i=0; i<len; i++)
         balances.removeAt(0);
+    len = deleted_times.count();
+    for(int i=0; i<len; i++)
+        deleted_times.removeAt(0);
     return client_tmp;
 }
 
@@ -601,7 +621,7 @@ vector<Costumer> load_costumer()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords, balances;
+    QJsonArray names, addresses, emails, phones, users, passwords, balances, deleted_times;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -609,6 +629,7 @@ vector<Costumer> load_costumer()
     users = o["Users"].toArray();
     passwords = o["Passwords"].toArray();
     balances = o["Balance"].toArray();
+    deleted_times = o["Delete_Time"].toArray();
 
     vector<Costumer> costumer_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -620,7 +641,10 @@ vector<Costumer> load_costumer()
         tmp->set_phone_number(phones[i].toString());
         tmp->set_user_name(users[i].toString());
         tmp->set_password(passwords[i].toString());
-        tmp->set_balance(balances[i].toInt());
+        tmp->set_balance(stoi(balances[i].toString().toStdString()));
+        tmp->set_time_delete(deleted_times[i].toInt());
+        if((deleted_times[i].toInt()) != -1)
+            tmp->set_deleted_status(true);
         costumer_tmp.push_back(*tmp);
         delete(tmp);
     }
@@ -646,6 +670,9 @@ vector<Costumer> load_costumer()
     len = balances.count();
     for(int i=0; i<len; i++)
         balances.removeAt(0);
+    len = deleted_times.count();
+    for(int i=0; i<len; i++)
+        deleted_times.removeAt(0);
     return costumer_tmp;
 }
 
