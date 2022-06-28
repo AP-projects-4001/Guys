@@ -50,6 +50,22 @@ void Person::set_balance(unsigned int _balance)
     this->balance = _balance;
 }
 
+void Person::set_deleted_status(bool state)
+{
+    this->deleted = state;
+}
+
+void Person::set_time_delete()
+{
+    const auto p1 = std::chrono::system_clock::now();
+    this->time_since_delete = std::chrono::duration_cast<std::chrono::seconds>(p1.time_since_epoch()).count();
+}
+
+void Person::set_time_delete(int _time)
+{
+    this->time_since_delete = _time;
+}
+
 QString Person::get_name() const
 {
     return this->name;
@@ -78,6 +94,16 @@ QString Person::get_phone_number() const
 QString Person::get_password() const
 {
     return this->password;
+}
+
+int Person::get_delete_time() const
+{
+    return this->time_since_delete;
+}
+
+bool Person::get_deleted_status() const
+{
+    return this->deleted;
 }
 
 unsigned int Person::get_balance() const
