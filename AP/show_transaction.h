@@ -19,6 +19,8 @@ public:
 private slots:
     void recieve_date(QString);
 
+    void recieve_date_admin(QString);
+
 private:
     Ui::show_transaction *ui;
 };

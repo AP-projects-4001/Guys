@@ -10,6 +10,7 @@
 #include "forgot_pass_dialog.h"
 #include "costumer_ui.h"
 #include "client_ui.h"
+#include "admin_ui.h"
 using namespace std;
 
 QT_BEGIN_NAMESPACE

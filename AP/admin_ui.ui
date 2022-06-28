@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>863</width>
-    <height>610</height>
+    <width>944</width>
+    <height>688</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,17 @@
    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;This UI helps the admin change all data stored in JSON files like All Clients, All Customers with their products, see all transactions, and so on... &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget
+{
+	background-color:  696969;
+}</string>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="movable">
        <bool>false</bool>
@@ -32,7 +38,38 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget"/>
+         <widget class="QTableWidget" name="costumer_table">
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Address</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Email</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Phone Number</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Username</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>INFO</string>
+           </property>
+          </column>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -40,21 +77,129 @@
        <attribute name="title">
         <string>Clients</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="client_table">
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Address</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Email</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Phone Number</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Username</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>INFO</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="product_tab">
        <attribute name="title">
         <string>Products</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="product_table">
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Brand</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Type</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Color</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Stock</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Size</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Weight</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Additional info</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>INFO</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="transactions_tab">
        <attribute name="title">
         <string>Transactions and factors</string>
        </attribute>
-      </widget>
-      <widget class="QWidget" name="setting_tab">
-       <attribute name="title">
-        <string>Setting</string>
-       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="transaction_table">
+          <column>
+           <property name="text">
+            <string>Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Total price</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>INFO</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -65,8 +210,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>863</width>
-     <height>23</height>
+     <width>944</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
