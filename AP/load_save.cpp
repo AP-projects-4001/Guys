@@ -510,7 +510,7 @@ vector<Client> load_client()
         tmp->set_phone_number(phones[i].toString());
         tmp->set_user_name(users[i].toString());
         tmp->set_password(passwords[i].toString());
-        tmp->set_balance(balances[i].toInt());
+        tmp->set_balance(stoi(balances[i].toString().toStdString()));
         vector<Product> pro_temp;
         for (int l = 0; l <shopped.size(); l++)
         {

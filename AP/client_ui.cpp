@@ -15,9 +15,6 @@ client_Ui::client_Ui(QWidget *parent) :
     products_2 = load_product();
     products_copy = products_2;
     show_products(products_2);
-
-//    current_client.add
-
 }
 
 client_Ui::~client_Ui()
