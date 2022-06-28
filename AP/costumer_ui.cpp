@@ -5,6 +5,8 @@
 // Global vectors;
 vector <Product> products;
 // Transactions JSON
+QPushButton *leftButton2;
+
 costumer_Ui::costumer_Ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::costumer_Ui)
@@ -24,7 +26,25 @@ costumer_Ui::~costumer_Ui()
 void costumer_Ui::set_userID(QString user)
 {
    current_costumer = user;
-   // ***
+   vector<Costumer> global_costumers = load_costumer();
+   leftButton2 = new QPushButton(show_balance2(global_costumers, current_costumer));
+   ui->statusbar->addPermanentWidget(leftButton2);
+   QLabel *spacer = new QLabel(); // fake spacer
+   ui->statusbar->addPermanentWidget(spacer, 1);
+   connect(leftButton2, &QPushButton::clicked, [=](){
+       Costumer_Withdraw *p = new Costumer_Withdraw(this);
+       connect(this,SIGNAL(send_amount(int)),p,SLOT(recieve_amount(int)));
+       connect(p,SIGNAL(to_withdraw(int)),this,SLOT(withdraw(int)));
+       int index = current_costumer_index(current_costumer);
+       emit send_amount(global_costumers[index].get_balance());
+//       connect(this,SIGNAL(send_to_increase_balance(QString)),p,SLOT(recieve_client(QString)));
+//       emit send_to_increase_balance(current_client);
+       p->exec();
+//       vector<Costumer> global_costumers = load_costumer();
+//       leftButton2->setText(show_balance2(global_costumers, current_costumer));
+   });
+   global_costumers.clear();
+   global_costumers.shrink_to_fit();
 
 }
 
@@ -281,5 +301,26 @@ void costumer_Ui::on_pushButton_save_change_clicked()
         tmp.shrink_to_fit();
         QMessageBox::warning(this, "Save Changes", "Saved Successfully!");
     }
+}
+
+
+void costumer_Ui::on_pushButton_change_pass_clicked()
+{
+    New_Password_Dialog * new_pass = new New_Password_Dialog(this);
+    connect(this,SIGNAL(change_password2(QString)),new_pass,SLOT(set_costumer(QString)));
+    emit change_password2(current_costumer);
+    new_pass->exec();
+}
+
+void costumer_Ui::withdraw(int amount)
+{
+    vector<Costumer> tmp = load_costumer();
+    int index = current_costumer_index(current_costumer);
+    tmp[index].set_balance(tmp[index].get_balance()-amount);
+    leftButton2->setText(show_balance2(tmp, current_costumer));
+    save_costumer(tmp);
+    tmp.clear();
+    tmp.shrink_to_fit();
+
 }
 

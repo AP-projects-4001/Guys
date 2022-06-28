@@ -1171,3 +1171,13 @@ void confirm_payment(QString client_id)
     all_costumers.clear();
     all_costumers.shrink_to_fit();
 }
+
+QString show_balance2(vector<Costumer> &costumers, QString current)
+{
+    for (unsigned int i = 0 ; i < costumers.size(); i++)
+    {
+        if (costumers[i].get_user_name() == current)
+            return "balance : "+QString::number(costumers[i].get_balance());
+    }
+    return "";
+}

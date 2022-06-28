@@ -16,6 +16,7 @@ SOURCES += \
     costumer.cpp \
     costumer_products.cpp \
     costumer_ui.cpp \
+    costumer_withdraw.cpp \
     edit_client_dialog.cpp \
     edit_costumer_dialog.cpp \
     forgot_pass_dialog.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     costumer.h \
     costumer_products.h \
     costumer_ui.h \
+    costumer_withdraw.h \
     edit_client_dialog.h \
     edit_costumer_dialog.h \
     forgot_pass_dialog.h \
@@ -64,6 +66,7 @@ FORMS += \
     client_ui.ui \
     costumer_products.ui \
     costumer_ui.ui \
+    costumer_withdraw.ui \
     edit_client_dialog.ui \
     edit_costumer_dialog.ui \
     forgot_pass_dialog.ui \

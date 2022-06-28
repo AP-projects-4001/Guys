@@ -12,6 +12,7 @@
 #include <QPixmap>
 #include <QDir>
 #include "show_transactions_customer.h"
+#include "costumer_withdraw.h"
 inline QString current_costumer ;
 namespace Ui {
 class costumer_Ui;
@@ -33,9 +34,14 @@ private slots:
 
     void on_pushButton_save_change_clicked();
 
+    void on_pushButton_change_pass_clicked();
+
+    void withdraw(int);
 signals:
     void send_index(int);
     void send_transaction(QString);
+    void change_password2(QString);
+    void send_amount(int);
 private:
     Ui::costumer_Ui *ui;
 };
