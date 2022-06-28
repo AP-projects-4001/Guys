@@ -28,6 +28,7 @@ SOURCES += \
     register_dialog.cpp \
     search_tools.cpp \
     show_transaction.cpp \
+    show_transactions_customer.cpp \
     transaction.cpp \
     admin_ui.cpp
 
@@ -50,6 +51,7 @@ HEADERS += \
     register_dialog.h \
     search_tools.h \
     show_transaction.h \
+    show_transactions_customer.h \
     transaction.h \
     admin_ui.h
 
@@ -66,7 +68,8 @@ FORMS += \
     register_dialog.ui \
     search_tools.ui \
     admin_ui.ui \
-    show_transaction.ui
+    show_transaction.ui \
+    show_transactions_customer.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

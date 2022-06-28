@@ -239,7 +239,6 @@ void client_Ui::show_products(unsigned int index)
                     }
                     if (!flag)
                         dates.push_back(all_transactions[i].get_date_time());
-
                 }
                 else
                     dates.push_back(all_transactions[i].get_date_time());
@@ -251,7 +250,7 @@ void client_Ui::show_products(unsigned int index)
             ui->transaction_table->item(i ,  0)->setFlags(ui->transaction_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
             int Price = 0 ;
             for(unsigned int j = 0 ; j < all_transactions.size() ; ++j)
-                if (all_transactions[j].get_date_time() == dates[i])
+                if (all_transactions[j].get_date_time() == dates[i] && all_transactions[j].get_client_user_name() == current_client)
                     Price += all_transactions[j].get_bought_product()[0].get_price();
             ui->transaction_table->setItem(i , 1, new QTableWidgetItem(QString::number(Price)));
             ui->transaction_table->item(i ,  1)->setFlags(ui->transaction_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
@@ -267,6 +266,7 @@ void client_Ui::show_products(unsigned int index)
             ui->transaction_table->setCellWidget(i, 2, pWidget);
             connect(btn_edit, &QPushButton::clicked, [=]() {
                 show_transaction *t = new show_transaction(this);
+                t->set_Userid(current_client);
                 connect(this, SIGNAL(send_transaction(QString)), t, SLOT(recieve_date(QString)));
                 emit send_transaction(dates[i]);
                 t->exec();
