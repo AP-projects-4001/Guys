@@ -59,7 +59,7 @@ QLineEdit
     padding: 1px;
     border-style: solid;
     border: 1px solid #1e1e1e;
-    border-radius: 5;
+    border-radius: 10px;
 }
 QRadioButton
 {
@@ -276,7 +276,7 @@ QStatusBar
      <x>0</x>
      <y>0</y>
      <width>540</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

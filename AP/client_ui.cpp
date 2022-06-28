@@ -110,6 +110,7 @@ void client_Ui::show_products(vector<Product> &products)
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Show");
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+            pWidget->setAutoFillBackground(true);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);
             pLayout->setContentsMargins(0, 0, 0, 0);
@@ -117,7 +118,6 @@ void client_Ui::show_products(vector<Product> &products)
             ui->show_table->setCellWidget(i, 8, pWidget);
             connect(btn_edit, &QPushButton::clicked, [=](){
                 buy_products *p = new buy_products(this);
-//                add_viewed(products, i);
                 connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
                 connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
                 emit send_index(products[i]);
