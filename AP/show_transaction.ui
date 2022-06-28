@@ -67,6 +67,58 @@
      </item>
      <item>
       <widget class="QTableWidget" name="tableWidget">
+       <property name="styleSheet">
+        <string notr="true">QWidget
+{
+	background-color : #242526;
+}
+
+QPushButton
+{
+	background-color: #565656;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	border-color: #051a39;
+	padding: 5px;
+
+}
+
+
+QPushButton::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: #8399ff;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	border-color: #051a39;
+	padding: 5px;
+}
+
+
+QPushButton::pressed
+{
+	background-color: #4969ff;
+	color: #ffffff;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	border-color: #051a39;
+	padding: 5px;
+
+}</string>
+       </property>
        <column>
         <property name="text">
          <string>Name</string>
