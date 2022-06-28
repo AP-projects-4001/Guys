@@ -22,7 +22,8 @@ void New_Password_Dialog::set_client(QString username)
     global_users = load_client();
 }
 
-void New_Password_Dialog::on_buttonBox_accepted()
+
+void New_Password_Dialog::on_pushButton_2_clicked()
 {
     int index = current_client_index(c_client);
     if(ui->lineEdit_current->text() != global_users[index].get_password())
@@ -47,38 +48,13 @@ void New_Password_Dialog::on_buttonBox_accepted()
         global_users[index].set_password(ui->lineEdit_new->text());
         save_client(global_users);
         QMessageBox::information(this,"Change Password","Your Password successfully changed.");
+        close();
     }
 }
 
 
-void New_Password_Dialog::on_lineEdit_current_editingFinished()
+void New_Password_Dialog::on_pushButton_clicked()
 {
-    int index = current_client_index(c_client);
-    if(ui->lineEdit_current->text() != global_users[index].get_password())
-    {
-        QMessageBox::warning(this,"Error","Your current Password is incorrect.");
-    }
-}
-
-
-void New_Password_Dialog::on_lineEdit_new_editingFinished()
-{
-    if(ui->lineEdit_new->text().length()<5)
-    {
-        QMessageBox::warning(this, "Error", "Password can't be less than 5 characters...");
-        ui->lineEdit_new->clear();
-        ui->lineEdit_confirm->clear();
-    }
-}
-
-
-void New_Password_Dialog::on_lineEdit_confirm_editingFinished()
-{
-    if(ui->lineEdit_new->text() != ui->lineEdit_confirm->text())
-    {
-        QMessageBox::warning(this, "Error", "New Passwords don't match");
-        ui->lineEdit_new->clear();
-        ui->lineEdit_confirm->clear();
-    }
+    close();
 }
 

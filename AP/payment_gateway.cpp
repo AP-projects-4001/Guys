@@ -11,7 +11,7 @@ Payment_gateway::Payment_gateway(QWidget *parent) :
     ui->lineEdit_third4->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_fourth4->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_month->setValidator(new QIntValidator(0,12, this));
-    ui->lineEdit_year->setValidator(new QIntValidator(0,9999, this));
+    ui->lineEdit_year->setValidator(new QIntValidator(0,99, this));
     ui->lineEdit_cvv2->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_password->setValidator(new QIntValidator(0,2147483646, this));
     ui->lineEdit_captcha->setText(getCaptcha());
@@ -109,7 +109,7 @@ void Payment_gateway::on_purchase_button_clicked()
     else if(ui->lineEdit_year->text().toInt()<0||ui->lineEdit_month->text().toInt()<0||
             ui->lineEdit_month->text().toInt()>12)
         QMessageBox::warning(this,"Error","Expiry Date is invalid");
-    else if(ui->lineEdit_cvv2->text().length()<3||ui->lineEdit_cvv2->text().length()<4)
+    else if(ui->lineEdit_cvv2->text().length()<4)
         QMessageBox::warning(this,"Error","The CVV2 must be entered correctly");
     else if(ui->lineEdit_captcha->text() != ui->lineEdit_check->text())
     {

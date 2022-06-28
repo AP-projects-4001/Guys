@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
+//#include <QAbstractItemView>
 #include "payment_gateway.h"
 
 namespace Ui {
@@ -23,7 +24,7 @@ private slots:
     void on_pushButton_2_clicked();
 
 signals:
-    void send_client_to_gateway(QString);
+    void send_bank_to_gateway(QString,int);
 private:
     Ui::increase_balance *ui;
 };

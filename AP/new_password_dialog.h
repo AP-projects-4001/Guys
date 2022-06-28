@@ -17,15 +17,10 @@ public:
     ~New_Password_Dialog();
 private slots:
     void set_client(QString);
-    void on_buttonBox_accepted();
 
-    void on_lineEdit_current_editingFinished();
+    void on_pushButton_2_clicked();
 
-
-
-    void on_lineEdit_new_editingFinished();
-
-    void on_lineEdit_confirm_editingFinished();
+    void on_pushButton_clicked();
 
 private:
     Ui::New_Password_Dialog *ui;

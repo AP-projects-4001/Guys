@@ -7,6 +7,8 @@ increase_balance::increase_balance(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEdit->setValidator(new QIntValidator(50000,100000000, this));
+    //ui->comboBox->view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
+
 }
 
 increase_balance::~increase_balance()
@@ -21,8 +23,11 @@ void increase_balance::on_pushButton_clicked()
     else
     {
         Payment_gateway *p = new Payment_gateway(this);
+
         p->set_user(c_client22,ui->lineEdit->text().toInt());
         p->set_flag(true);
+        connect(this,SIGNAL(send_bank_to_gateway(QString,int)),p,SLOT(recieve_bank(QString, int)));
+        emit send_bank_to_gateway(ui->comboBox->currentText(),ui->lineEdit->text().toInt());
         p->exec();
         close();
     }
