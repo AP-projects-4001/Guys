@@ -28,6 +28,8 @@ private slots:
     void on_cancel_button_clicked();
 
 
+    void on_lineEdit_captcha_clicked();
+
 signals:
     void send_purchase();
 

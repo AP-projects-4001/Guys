@@ -142,3 +142,9 @@ void Payment_gateway::on_cancel_button_clicked()
     close();
 }
 
+
+void Payment_gateway::on_lineEdit_captcha_clicked()
+{
+    ui->lineEdit_captcha->setText(getCaptcha());
+}
+

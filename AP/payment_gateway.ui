@@ -282,7 +282,7 @@ QRadioButton::indicator:checked
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>500</x>
@@ -308,7 +308,7 @@ QRadioButton::indicator:checked
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -321,7 +321,7 @@ QRadioButton::indicator:checked
     <item>
      <widget class="QPushButton" name="lineEdit_captcha">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton
@@ -363,7 +363,7 @@ QRadioButton::indicator:checked
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>420</x>

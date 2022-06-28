@@ -30,6 +30,11 @@
        <attribute name="title">
         <string>Costumers</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="clinet_tab">
        <attribute name="title">
