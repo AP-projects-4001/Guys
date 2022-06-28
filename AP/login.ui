@@ -250,6 +250,25 @@ QStatusBar
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="login_confirm">
+    <property name="geometry">
+     <rect>
+      <x>122</x>
+      <y>30</y>
+      <width>291</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel
+{
+	background-color : none;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -257,7 +276,7 @@ QStatusBar
      <x>0</x>
      <y>0</y>
      <width>540</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

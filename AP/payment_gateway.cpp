@@ -1,6 +1,13 @@
 #include "payment_gateway.h"
 #include "ui_payment_gateway.h"
 bool flag ; // true for increase && false for buy
+QMovie *movie;
+void delay(int n)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 Payment_gateway::Payment_gateway(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Payment_gateway)
@@ -15,7 +22,9 @@ Payment_gateway::Payment_gateway(QWidget *parent) :
     ui->lineEdit_cvv2->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_password->setValidator(new QIntValidator(0,2147483646, this));
     ui->lineEdit_captcha->setText(getCaptcha());
-
+    movie = new QMovie(":/included_images/0-100Loading.gif");
+    ui->label_9->setMovie(movie);
+    ui->label_9->movie()->setScaledSize(QSize(170, 170));
 }
 
 Payment_gateway::~Payment_gateway()
@@ -109,7 +118,7 @@ void Payment_gateway::on_purchase_button_clicked()
     else if(ui->lineEdit_year->text().toInt()<0||ui->lineEdit_month->text().toInt()<0||
             ui->lineEdit_month->text().toInt()>12)
         QMessageBox::warning(this,"Error","Expiry Date is invalid");
-    else if(ui->lineEdit_cvv2->text().length()<4)
+    else if(ui->lineEdit_cvv2->text().length()<3)
         QMessageBox::warning(this,"Error","The CVV2 must be entered correctly");
     else if(ui->lineEdit_captcha->text() != ui->lineEdit_check->text())
     {
@@ -119,6 +128,8 @@ void Payment_gateway::on_purchase_button_clicked()
     else
     {
         // thread ==> emit
+        movie->start();
+        delay(5200);
         if(!flag){
             emit send_purchase();
             close();

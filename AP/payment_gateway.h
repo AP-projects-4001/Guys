@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QIntValidator>
 #include "load_save.h"
+#include <QMovie>
+#include <QLabel>
 namespace Ui {
 class Payment_gateway;
 }

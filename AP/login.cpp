@@ -4,22 +4,25 @@
 vector <Client> client_users;
 vector <Costumer> costumer_users;
 QString user ;
-
-
+QMovie *Movie ;
+void Delay(int n)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 Login::Login(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Login)
 {
 
     ui->setupUi(this);
+    ui->login_confirm->hide();
     // Check files ==>
     this->setWindowTitle("Login Menu");
     QPixmap picture(":/included_images/store_logo.png");
-//    int h = ui->label_3->height();
-//    int w = ui->label_3->width();
-
     ui->label_3->setPixmap(picture);
-    ui->label_3->setPixmap(picture.scaled(654, 381, Qt::KeepAspectRatio));//451 , 141
+    ui->label_3->setPixmap(picture.scaled(654, 381, Qt::KeepAspectRatio));
     ui->label_3->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     check_and_create();
@@ -98,7 +101,12 @@ void Login::on_pushButton_clicked()
                 {
                     if(client_users[i].get_password() == ui->lineEdit_password->text())
                     {
-                        ui->statusbar->showMessage("Login successful!", 5000);
+                        Movie = new QMovie(":/included_images/Confirm-login.gif");
+                        ui->login_confirm->setMovie(Movie);
+                        ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                        ui->login_confirm->show();
+                        Movie->start();
+                        Delay(2300);
                         client_Ui *ClientUi = new client_Ui();
                         connect(this, SIGNAL(send_clientID(QString)), ClientUi, SLOT(set_userId(QString)));
                         emit send_clientID(client_users[i].get_user_name());
@@ -107,7 +115,16 @@ void Login::on_pushButton_clicked()
                     }
                     else
                     {
+                        Movie = new QMovie(":/included_images/wrong_gif.gif");
+                        ui->login_confirm->setMovie(Movie);
+                        ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                        ui->login_confirm->show();
+                        Movie->start();
                         ui->statusbar->showMessage("Wrong Password!", 5000);
+                        Delay(3300);
+                        Movie->stop();
+                        ui->login_confirm->hide();
+
                     }
                     break;
                 }
@@ -126,7 +143,12 @@ void Login::on_pushButton_clicked()
                 {
                     if(costumer_users[i].get_password() == ui->lineEdit_password->text())
                     {
-                        ui->statusbar->showMessage("Login successful!", 5000);
+                        Movie = new QMovie(":/included_images/Confirm-login.gif");
+                        ui->login_confirm->setMovie(Movie);
+                        ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                        ui->login_confirm->show();
+                        Movie->start();
+                        Delay(2300);
                         costumer_Ui *CostumerUi = new costumer_Ui();
                         connect(this, SIGNAL(send_costumerID(QString)), CostumerUi, SLOT(set_userID(QString)));
                         emit send_costumerID(costumer_users[i].get_user_name());
@@ -135,8 +157,15 @@ void Login::on_pushButton_clicked()
                     }
                     else
                     {
+                        Movie = new QMovie(":/included_images/wrong_gif.gif");
+                        ui->login_confirm->setMovie(Movie);
+                        ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                        ui->login_confirm->show();
+                        Movie->start();
                         ui->statusbar->showMessage("Wrong Password!", 5000);
-                    }
+                        Delay(3300);
+                        Movie->stop();
+                        ui->login_confirm->hide();                    }
                     break;
                 }
             }

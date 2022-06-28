@@ -15,6 +15,8 @@
 #include "admin.h"
 #include "transaction.h"
 #include "product.h"
+//#include <QThread>
+#include <QEventLoop>
 using namespace std;
 
 void save_client(vector<Client>&);
@@ -35,6 +37,7 @@ int current_costumer_index(QString);
 void add_viewed(vector <Product> &, int);
 QString show_balance(vector <Client>& , QString);
 void confirm_payment(QString);
+
 //QString show_balance(vector <Costumer>& , QString);
 
 #endif // LOAD_SAVE_H

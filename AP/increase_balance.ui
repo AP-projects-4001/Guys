@@ -80,6 +80,11 @@ QRadioButton::indicator:checked
         stop: 0.3 #323232
     );
 }
+
+QStatusBar
+{
+	color: #ffffff;
+}
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">

@@ -8,6 +8,9 @@
         <file>No-image.png</file>
         <file>logo.png</file>
         <file>store_logo.png</file>
+        <file>Confirm-login.gif</file>
+        <file>0-100Loading.gif</file>
+        <file>wrong_gif.gif</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>
