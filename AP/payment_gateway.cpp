@@ -1,6 +1,6 @@
 #include "payment_gateway.h"
 #include "ui_payment_gateway.h"
-bool flag; // true for increase && false for buy
+bool flag ; // true for increase && false for buy
 Payment_gateway::Payment_gateway(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Payment_gateway)
@@ -34,9 +34,10 @@ QString Payment_gateway::getCaptcha()
     return captcha;
 }
 
-void Payment_gateway::set_user(QString _username)
+void Payment_gateway::set_user(QString _username,int add)
 {
     Username_client = _username ;
+    ui->total_lineEdit->setText(QString::number(add));
 }
 
 void Payment_gateway::set_flag(bool _flag)
@@ -130,6 +131,7 @@ void Payment_gateway::on_purchase_button_clicked()
             save_client(global_clients);
             global_clients.clear();
             global_clients.shrink_to_fit();
+            close();
         }
     }
 }

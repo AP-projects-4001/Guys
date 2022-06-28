@@ -15,6 +15,9 @@ client_Ui::client_Ui(QWidget *parent) :
     products_2 = load_product();
     products_copy = products_2;
     show_products(products_2);
+
+//    current_client.add
+
 }
 
 client_Ui::~client_Ui()
@@ -37,7 +40,10 @@ void client_Ui::set_userId(QString user)
     ui->statusbar->addPermanentWidget(spacer, 1);
     connect(leftButton, &QPushButton::clicked, [=](){
         increase_balance *p = new increase_balance(this);
+        connect(this,SIGNAL(send_to_increase_balance(QString)),p,SLOT(recieve_client(QString)));
+        emit send_to_increase_balance(current_client);
         p->exec();
+
     });
     //  ***
 }
@@ -228,6 +234,7 @@ void client_Ui::show_setting()
 }
 
 
+
 void client_Ui::on_refresh_button_clicked()
 {
     products_2 = load_product();
@@ -259,6 +266,7 @@ void client_Ui::on_pushButton_clicked()
 
 void client_Ui::on_tabWidget_tabBarClicked(int index)
 {
+
     if (index==0){
         show_products(products_copy);
     }

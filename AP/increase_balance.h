@@ -4,10 +4,11 @@
 #include <QDialog>
 #include <QMessageBox>
 #include "payment_gateway.h"
+
 namespace Ui {
 class increase_balance;
 }
-
+inline QString c_client22;
 class increase_balance : public QDialog
 {
     Q_OBJECT
@@ -18,7 +19,11 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void recieve_client(QString);
+    void on_pushButton_2_clicked();
 
+signals:
+    void send_client_to_gateway(QString);
 private:
     Ui::increase_balance *ui;
 };

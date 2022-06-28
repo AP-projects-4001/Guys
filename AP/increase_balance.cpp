@@ -20,7 +20,22 @@ void increase_balance::on_pushButton_clicked()
         QMessageBox::warning(this, "Invalid input !" ,"The amount should be greater than 50000");
     else
     {
-
+        Payment_gateway *p = new Payment_gateway(this);
+        p->set_user(c_client22,ui->lineEdit->text().toInt());
+        p->set_flag(true);
+        p->exec();
+        close();
     }
+}
+
+void increase_balance::recieve_client(QString username)
+{
+    c_client22 = username;
+}
+
+
+void increase_balance::on_pushButton_2_clicked()
+{
+    close();
 }
 

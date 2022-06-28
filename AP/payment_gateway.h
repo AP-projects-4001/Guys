@@ -18,7 +18,7 @@ public:
     explicit Payment_gateway(QWidget *parent = nullptr);
     ~Payment_gateway();
     QString getCaptcha();
-    void set_user(QString);
+    void set_user(QString,int);
     void set_flag(bool);
 private slots:
     void recieve_bank(QString, int);// Bank , total amount

@@ -30,7 +30,7 @@ signals:
     void send_product_cart(Product, unsigned int);
     void send_to_gateway(QString, int);
     void change_password(QString);
-
+    void send_to_increase_balance(QString);
 private slots:
     void set_userId(QString user);
     void sorter(QString,QString,QString,QString,QString,QString,QString,bool,bool,bool,bool,bool,bool,bool,bool);
