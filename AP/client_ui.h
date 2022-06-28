@@ -11,6 +11,7 @@
 #include "new_password_dialog.h"
 #include <QWidget>
 #include "increase_balance.h"
+#include "show_transaction.h"
 inline QString current_client;
 
 namespace Ui {
@@ -31,6 +32,7 @@ signals:
     void send_to_gateway(QString, int);
     void change_password(QString);
     void send_to_increase_balance(QString);
+    void send_transaction(QString);
 private slots:
     void set_userId(QString user);
     void sorter(QString,QString,QString,QString,QString,QString,QString,bool,bool,bool,bool,bool,bool,bool,bool);

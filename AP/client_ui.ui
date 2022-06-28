@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -321,7 +321,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="transaction_table">
           <column>
            <property name="text">
             <string>Date</string>
@@ -329,7 +329,7 @@
           </column>
           <column>
            <property name="text">
-            <string>New Column</string>
+            <string>Total price</string>
            </property>
           </column>
           <column>

@@ -34,7 +34,7 @@ client_Ui::~client_Ui()
 void client_Ui::set_userId(QString user)
 {
     current_client = user;
-    QPushButton *leftButton = new QPushButton(show_balance(global_clients, current_client));
+    leftButton = new QPushButton(show_balance(global_clients, current_client));
     ui->statusbar->addPermanentWidget(leftButton);
     QLabel *spacer = new QLabel(); // fake spacer
     ui->statusbar->addPermanentWidget(spacer, 1);
@@ -43,7 +43,8 @@ void client_Ui::set_userId(QString user)
         connect(this,SIGNAL(send_to_increase_balance(QString)),p,SLOT(recieve_client(QString)));
         emit send_to_increase_balance(current_client);
         p->exec();
-
+        global_clients = load_client();
+        leftButton->setText(show_balance(global_clients, current_client));
     });
     //  ***
 }
@@ -221,6 +222,60 @@ void client_Ui::show_products(unsigned int index)
 
 
     }
+    else if(index == 2)
+    {
+        vector <Transaction> all_transactions = load_transaction();
+        vector <QString> dates;
+        for (unsigned int i = 0 ; i < all_transactions.size() ; ++i){
+            if (all_transactions[i].get_client_user_name() == current_client)
+            {
+                if (dates.size() != 0){
+                    bool flag = false;
+                    for (unsigned int j = 0 ; j < dates.size() ; ++j){
+                        if (all_transactions[i].get_date_time() == dates[j]){
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag)
+                        dates.push_back(all_transactions[i].get_date_time());
+
+                }
+                else
+                    dates.push_back(all_transactions[i].get_date_time());
+            }
+        }
+        ui->transaction_table->setRowCount(dates.size());
+        for (unsigned int i = 0 ; i < dates.size() ; ++i){
+            ui->transaction_table->setItem(i , 0, new QTableWidgetItem(dates[i]));
+            ui->transaction_table->item(i ,  0)->setFlags(ui->transaction_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+            int Price = 0 ;
+            for(unsigned int j = 0 ; j < all_transactions.size() ; ++j)
+                if (all_transactions[j].get_date_time() == dates[i])
+                    Price += all_transactions[j].get_bought_product()[0].get_price();
+            ui->transaction_table->setItem(i , 1, new QTableWidgetItem(QString::number(Price)));
+            ui->transaction_table->item(i ,  1)->setFlags(ui->transaction_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+
+            QWidget* pWidget = new QWidget();
+            QPushButton* btn_edit = new QPushButton();
+            btn_edit->setText("SHOW");
+            QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+            pLayout->addWidget(btn_edit);
+            pLayout->setAlignment(Qt::AlignCenter);
+            pLayout->setContentsMargins(0, 0, 0, 0);
+            pWidget->setLayout(pLayout);
+            ui->transaction_table->setCellWidget(i, 2, pWidget);
+            connect(btn_edit, &QPushButton::clicked, [=]() {
+                show_transaction *t = new show_transaction(this);
+                connect(this, SIGNAL(send_transaction(QString)), t, SLOT(recieve_date(QString)));
+                emit send_transaction(dates[i]);
+                t->exec();
+            });
+            ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+        }
+
+    }
 }
 
 void client_Ui::show_setting()
@@ -242,6 +297,8 @@ void client_Ui::on_refresh_button_clicked()
     ui->lineEdit->clear();
     ui->lineEdit_2->clear();
     show_products(products_copy);
+    global_clients = load_client();
+    leftButton->setText(show_balance(global_clients, current_client));
 }
 
 
@@ -276,7 +333,7 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
     }
     else if(index == 2)
     {
-        vector<Transaction> all_transactions = load_transaction();
+        show_products(2);
     }
     else
     {
@@ -307,8 +364,13 @@ void client_Ui::on_Purchase_Button_clicked()
                     global_clients[i].set_balance(global_clients[i].get_balance() - ui->total_lineedit->text().toInt());
                     save_client(global_clients);
                     confirm_payment(current_client);
-//                        leftButton->setText(show_balance(global_clients, current_client));
-
+                    leftButton->setText(show_balance(global_clients, current_client));
+                    global_clients = load_client();
+                    products_2 = load_product();
+                    products_copy = products_2;
+                    for (int i = 0 ; i < ui->cart_table->rowCount() ; ++i)
+                        ui->cart_table->removeRow(i);
+                    ui->cart_table->clearContents();
                 }
             }
         }
