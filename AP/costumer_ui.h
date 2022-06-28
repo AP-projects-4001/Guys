@@ -11,6 +11,7 @@
 #include <QFileInfo>
 #include <QPixmap>
 #include <QDir>
+#include "show_transactions_customer.h"
 inline QString current_costumer ;
 namespace Ui {
 class costumer_Ui;
@@ -34,6 +35,7 @@ private slots:
 
 signals:
     void send_index(int);
+    void send_transaction(QString);
 private:
     Ui::costumer_Ui *ui;
 };

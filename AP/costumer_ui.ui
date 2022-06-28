@@ -21,7 +21,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -290,6 +290,37 @@
           <column>
            <property name="text">
             <string>Additional info</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>INFO</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Transactions</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="transactions_table">
+          <column>
+           <property name="text">
+            <string>Date and TIme</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Total products</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Total Price</string>
            </property>
           </column>
           <column>

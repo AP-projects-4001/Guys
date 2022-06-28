@@ -7,7 +7,7 @@
 namespace Ui {
 class show_transaction;
 }
-
+inline QString Userid;
 class show_transaction : public QDialog
 {
     Q_OBJECT
@@ -15,6 +15,7 @@ class show_transaction : public QDialog
 public:
     explicit show_transaction(QWidget *parent = nullptr);
     ~show_transaction();
+    void set_Userid(QString);
 private slots:
     void recieve_date(QString);
 

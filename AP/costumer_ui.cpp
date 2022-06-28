@@ -105,7 +105,6 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
             if (products[i].get_costumer_username()==current_costumer)
                 Count++;
         }
-    //    ui->show_table->setColumnCount(10);
         int count = 0;
         ui->show_table->setRowCount(Count);
         for (unsigned int i = 0 ; i < products.size(); i++){
@@ -150,8 +149,73 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 
         ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }
-
     else if(index == 2)
+    {
+        vector <Transaction> all_transactions = load_transaction();
+        vector <QString> dates;
+        for (unsigned int i = 0 ; i < all_transactions.size() ; ++i){
+            if (all_transactions[i].get_bought_product()[0].get_costumer_username() == current_costumer)
+            {
+                if (dates.size() != 0){
+                    bool flag = false;
+                    for (unsigned int j = 0 ; j < dates.size() ; ++j){
+                        if (all_transactions[i].get_date_time() == dates[j]){
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag)
+                        dates.push_back(all_transactions[i].get_date_time());
+
+                }
+                else
+                    dates.push_back(all_transactions[i].get_date_time());
+            }
+            ui->transactions_table->setRowCount(dates.size());
+            for (unsigned int i = 0 ; i < dates.size() ; ++i){
+                ui->transactions_table->setItem(i , 0, new QTableWidgetItem(dates[i]));
+                ui->transactions_table->item(i ,  0)->setFlags(ui->transactions_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+
+                int Total = 0;
+                for(unsigned int j = 0 ; j < all_transactions.size() ; ++j)
+                    if (all_transactions[j].get_date_time() == dates[i])
+                        if ( all_transactions[j].get_bought_product()[0].get_costumer_username() == current_costumer)
+                            Total += all_transactions[j].get_bought_product()[0].get_bought();
+
+                ui->transactions_table->setItem(i , 1, new QTableWidgetItem(QString::number(Total)));
+                ui->transactions_table->item(i ,  1)->setFlags(ui->transactions_table->item(i ,  1)->flags() & ~Qt::ItemIsEditable);
+
+                int Price = 0 ;
+                for(unsigned int j = 0 ; j < all_transactions.size() ; ++j)
+                    if (all_transactions[j].get_date_time() == dates[i])
+                        if ( all_transactions[j].get_bought_product()[0].get_costumer_username() == current_costumer)
+                            Price += all_transactions[j].get_bought_product()[0].get_price();
+                ui->transactions_table->setItem(i , 2, new QTableWidgetItem(QString::number(Price)));
+                ui->transactions_table->item(i ,  2)->setFlags(ui->transactions_table->item(i ,  2)->flags() & ~Qt::ItemIsEditable);
+
+                QWidget* pWidget = new QWidget();
+                QPushButton* btn_edit = new QPushButton();
+                btn_edit->setText("SHOW");
+                QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+                pLayout->addWidget(btn_edit);
+                pLayout->setAlignment(Qt::AlignCenter);
+                pLayout->setContentsMargins(0, 0, 0, 0);
+                pWidget->setLayout(pLayout);
+                ui->transactions_table->setCellWidget(i, 3, pWidget);
+                connect(btn_edit, &QPushButton::clicked, [=]() {
+                    show_transactions_customer *t = new show_transactions_customer(this);
+                    t->set_USERID(current_costumer);
+                    connect(this, SIGNAL(send_transaction(QString)), t, SLOT(recieve_date(QString)));
+                    emit send_transaction(dates[i]);
+                    t->exec();
+                });
+                ui->transactions_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+            }
+
+        }
+    }
+    else if(index == 3)
     {
         int user_index = current_costumer_index(current_costumer);
         vector<Costumer> tmp = load_costumer();
