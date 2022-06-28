@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <load_save.h>
 inline QString c_client;
+inline QString c_costumer;
 namespace Ui {
 class New_Password_Dialog;
 }
@@ -22,6 +23,7 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void set_costumer(QString);
 private:
     Ui::New_Password_Dialog *ui;
 };
