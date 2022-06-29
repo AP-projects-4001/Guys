@@ -2,6 +2,7 @@
 #define CLIENT_UI_H
 
 #include <QMainWindow>
+#include <bits/stdc++.h>
 #include "search_tools.h"
 #include <QMessageBox>
 #include "transaction.h"
@@ -48,6 +49,8 @@ private slots:
 
     void on_pushButton_4_clicked();
     void confirm_purchase();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::client_Ui *ui;

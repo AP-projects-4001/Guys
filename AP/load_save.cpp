@@ -1112,8 +1112,8 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
     }
     else if(M_viewed)
     {
-//        sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
-//            return a.get_view() > b.get_view();});
+        sort(updated.begin(),updated.end(),[](const Product& a, const Product& b) {
+            return a.get_viewed() > b.get_viewed();});
     }
     else if(oldest||none)
         return updated;

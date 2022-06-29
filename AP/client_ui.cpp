@@ -144,8 +144,8 @@ void client_Ui::show_products(vector<Product> &products)
             }
             else
                 btn_edit->setEnabled(true);
-
-            connect(btn_edit, &QPushButton::clicked, [=](){
+            connect(btn_edit, &QPushButton::clicked, [=,&products](){
+                products[i].set_viewed(products[i].get_viewed()+1);
                 buy_products *p = new buy_products(this);
                 connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
                 connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
@@ -250,18 +250,7 @@ void client_Ui::show_products(unsigned int index)
         ui->total_lineedit->setText(QString::number(total));
         ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-        if ( ui->total_lineedit->text() == "0" ){
-            ui->Purchase_Button->setEnabled(false);
-            ui->comboBox->setEnabled(false);
-            ui->radioButton_Balance->setEnabled(false);
-            ui->radioButton_credit->setEnabled(false);
-        }
-        else{
-            ui->Purchase_Button->setEnabled(true);
-            ui->comboBox->setEnabled(true);
-            ui->radioButton_Balance->setEnabled(true);
-            ui->radioButton_credit->setEnabled(true);
-        }
+
 
 
     }
@@ -400,10 +389,23 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
     else if(index == 2)
     {
         show_products(2);
+
     }
     else
     {
         show_setting();
+    }
+    if ( ui->total_lineedit->text() == "0" ){
+        ui->Purchase_Button->setEnabled(false);
+        ui->comboBox->setEnabled(false);
+        ui->radioButton_Balance->setEnabled(false);
+        ui->radioButton_credit->setEnabled(false);
+    }
+    else{
+        ui->Purchase_Button->setEnabled(true);
+        ui->comboBox->setEnabled(true);
+        ui->radioButton_Balance->setEnabled(true);
+        ui->radioButton_credit->setEnabled(true);
     }
 }
 
@@ -496,4 +498,37 @@ void client_Ui::confirm_purchase()
     ui->cart_table->clearContents();
 }
 
+
+
+void client_Ui::on_pushButton_2_clicked()
+{
+    if(ui->lineEdit_2->text()!="")
+    {
+        vector<string> words;
+        string searched = ui->lineEdit_2->text().toLower().toStdString();
+        istringstream str(searched);
+        string w;
+        while (str >> w)
+            words.push_back(w);
+        vector <Product> tmp2;
+        for (unsigned int i = 0 ; i < products_copy.size(); ++i)
+        {
+            bool t{true};
+            for (unsigned int j = 0; j<words.size() ; j++ )
+            {
+                if(products_copy[i].get_additional_info().toLower().toStdString().find(words[j]) == std::string::npos)
+                {
+                    t = false;
+                    break;
+                };
+            }
+            if (t)
+                tmp2.push_back(products_copy[i]);
+        }
+        products_copy = tmp2;
+        tmp2.clear();
+        tmp2.shrink_to_fit();
+        show_products(products_copy);
+    }
+}
 
