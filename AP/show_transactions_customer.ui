@@ -683,7 +683,39 @@ QStatusBar
 
 }
 
+QCheckBox:disabled
+{
+color: #414141;
+}
 
+QCheckBox::indicator{
+    color: #b1b1b1;
+    background-color: #323232;
+    border: 1px solid #b1b1b1;
+    width:  12px;
+    height:  12px;
+}
+
+QRadioButton::indicator
+{
+    border-radius: 6px;
+}
+
+QCheckBox::indicator:hover
+{
+    border: 1px solid #8399ff;
+}
+
+QCheckBox::indicator:checked
+{
+	border-image: url(:/included_images/Check_mark.png) 0 0 0 0 stretch stretch;
+	background-color: #ffffff;
+}
+
+QCheckBox::indicator:disabled
+{
+    border: 1px solid #444;
+}
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
