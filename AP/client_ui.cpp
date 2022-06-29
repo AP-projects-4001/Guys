@@ -15,9 +15,6 @@ client_Ui::client_Ui(QWidget *parent) :
     products_2 = load_product();
     products_copy = products_2;
     show_products(products_2);
-
-//    current_client.add
-
 }
 
 client_Ui::~client_Ui()
@@ -38,6 +35,30 @@ void client_Ui::set_userId(QString user)
     ui->statusbar->addPermanentWidget(leftButton);
     QLabel *spacer = new QLabel(); // fake spacer
     ui->statusbar->addPermanentWidget(spacer, 1);
+    if(global_clients[current_client_index(current_client)].get_change_balance_restriction())
+    {
+        leftButton->setEnabled(false);
+        leftButton->setToolTip("You cannot increase you balance because admin has banned you!");
+    }
+    else
+        leftButton->setEnabled(true);
+
+    if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
+    {
+        ui->Purchase_Button->setEnabled(false);
+        ui->Purchase_Button->setToolTip("You cannot buy anything because admin has banned you!");
+        ui->comboBox->setEnabled(false);
+        ui->radioButton_Balance->setEnabled(false);
+        ui->radioButton_credit->setEnabled(false);
+    }
+    else
+    {
+        ui->Purchase_Button->setEnabled(true);
+        ui->comboBox->setEnabled(true);
+        ui->radioButton_Balance->setEnabled(true);
+        ui->radioButton_credit->setEnabled(true);
+    }
+
     connect(leftButton, &QPushButton::clicked, [=](){
         increase_balance *p = new increase_balance(this);
         connect(this,SIGNAL(send_to_increase_balance(QString)),p,SLOT(recieve_client(QString)));
@@ -116,6 +137,14 @@ void client_Ui::show_products(vector<Product> &products)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->show_table->setCellWidget(i, 8, pWidget);
+            if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
+            {
+                btn_edit->setEnabled(false);
+                btn_edit->setToolTip("You cannot buy anything because admin has banned you!");
+            }
+            else
+                btn_edit->setEnabled(true);
+
             connect(btn_edit, &QPushButton::clicked, [=](){
                 buy_products *p = new buy_products(this);
                 connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
@@ -163,6 +192,13 @@ void client_Ui::show_products(unsigned int index)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->cart_table->setCellWidget(count, 3, pWidget);
+            if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
+            {
+                btn_edit->setEnabled(false);
+                btn_edit->setToolTip("You cannot change your cart because admin has banned you!");
+            }
+            else
+                btn_edit->setEnabled(true);
             connect(btn_edit, &QPushButton::clicked, [=]() {
                 buy_products *p = new buy_products(this);
                 p->edit_button();
@@ -182,6 +218,13 @@ void client_Ui::show_products(unsigned int index)
             playout->setContentsMargins(0, 0, 0, 0);
             pwidget->setLayout(playout);
             ui->cart_table->setCellWidget(count, 4, pwidget);
+            if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
+            {
+                btn_delete->setEnabled(false);
+                btn_delete->setToolTip("You cannot change your cart because admin has banned you!");
+            }
+            else
+                btn_delete->setEnabled(true);
             connect(btn_delete, &QPushButton::clicked, [=]() {
                 QMessageBox::StandardButton reply;
                 reply = QMessageBox::question(this, "Delete item", "Are you sure you want to delete this item ?",  QMessageBox::Yes|QMessageBox::No);
@@ -222,6 +265,7 @@ void client_Ui::show_products(unsigned int index)
 
 
     }
+
     else if(index == 2)
     {
         vector <Transaction> all_transactions = load_transaction();
@@ -278,6 +322,7 @@ void client_Ui::show_products(unsigned int index)
     }
 }
 
+
 void client_Ui::show_setting()
 {
     int index = current_client_index(current_client);
@@ -288,8 +333,6 @@ void client_Ui::show_setting()
     ui->lineEdit_email->setText(global_clients[index].get_email());
 }
 
-
-
 void client_Ui::on_refresh_button_clicked()
 {
     products_2 = load_product();
@@ -299,8 +342,14 @@ void client_Ui::on_refresh_button_clicked()
     show_products(products_copy);
     global_clients = load_client();
     leftButton->setText(show_balance(global_clients, current_client));
+    if(global_clients[current_client_index(current_client)].get_change_balance_restriction())
+    {
+        leftButton->setEnabled(false);
+        leftButton->setToolTip("You cannot increase you balance because admin has banned you!");
+    }
+    else
+        leftButton->setEnabled(true);
 }
-
 
 void client_Ui::on_pushButton_clicked()
 {
@@ -327,10 +376,27 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
     if (index==0){
         show_products(products_copy);
     }
+
     else if(index==1)
     {
         show_products(1);
+        if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
+        {
+            ui->Purchase_Button->setEnabled(false);
+            ui->Purchase_Button->setToolTip("You cannot buy anything because admin has banned you!");
+            ui->comboBox->setEnabled(false);
+            ui->radioButton_Balance->setEnabled(false);
+            ui->radioButton_credit->setEnabled(false);
+        }
+        else
+        {
+            ui->Purchase_Button->setEnabled(true);
+            ui->comboBox->setEnabled(true);
+            ui->radioButton_Balance->setEnabled(true);
+            ui->radioButton_credit->setEnabled(true);
+        }
     }
+
     else if(index == 2)
     {
         show_products(2);

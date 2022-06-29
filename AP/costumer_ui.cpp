@@ -31,6 +31,45 @@ void costumer_Ui::set_userID(QString user)
    ui->statusbar->addPermanentWidget(leftButton2);
    QLabel *spacer = new QLabel(); // fake spacer
    ui->statusbar->addPermanentWidget(spacer, 1);
+   if(global_costumers[current_costumer_index(current_costumer)].get_change_balance_restriction())
+   {
+       leftButton2->setEnabled(false);
+       leftButton2->setToolTip("You cannot change your balance because admin has banned you!");
+   }
+   else
+       leftButton2->setEnabled(true);
+
+   if(global_costumers[current_costumer_index(current_costumer)].get_buy_add_restriction())
+   {
+        ui->Button_add->setEnabled(false);
+        ui->Button_add->setToolTip("You cannot add anything because admin has banned you!");
+        ui->pushButton->setEnabled(false);
+        ui->pushButton->setToolTip("You cannot add anything because admin has banned you!");
+        ui->lineEdit_name->setEnabled(false);
+        ui->lineEdit_brand->setEnabled(false);
+        ui->lineEdit_type->setEnabled(false);
+        ui->lineEdit_color->setEnabled(false);
+        ui->lineEdit_size->setEnabled(false);
+        ui->lineEdit_stock->setEnabled(false);
+        ui->lineEdit_weight->setEnabled(false);
+        ui->lineEdit_price->setEnabled(false);
+        ui->plainTextEdit_info->setEnabled(false);
+   }
+   else
+   {
+        ui->Button_add->setEnabled(true);
+        ui->pushButton->setEnabled(true);
+        ui->lineEdit_name->setEnabled(true);
+        ui->lineEdit_brand->setEnabled(true);
+        ui->lineEdit_type->setEnabled(true);
+        ui->lineEdit_color->setEnabled(true);
+        ui->lineEdit_size->setEnabled(true);
+        ui->lineEdit_stock->setEnabled(true);
+        ui->lineEdit_weight->setEnabled(true);
+        ui->lineEdit_price->setEnabled(true);
+        ui->plainTextEdit_info->setEnabled(true);
+   }
+
    connect(leftButton2, &QPushButton::clicked, [=](){
        vector<Costumer> global_costumers = load_costumer();
        Costumer_Withdraw *p = new Costumer_Withdraw(this);
@@ -153,6 +192,16 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                 pLayout->setContentsMargins(0, 0, 0, 0);
                 pWidget->setLayout(pLayout);
                 ui->show_table->setCellWidget(count, 9, pWidget);
+                vector<Costumer> global_costumers = load_costumer();
+                if(global_costumers[current_costumer_index(current_costumer)].get_buy_add_restriction())
+                {
+                    btn_edit->setEnabled(false);
+                    btn_edit->setToolTip("You cannot add or change anything because admin has banned you!");
+                }
+                else
+                    btn_edit->setEnabled(true);
+                global_costumers.clear();
+                global_costumers.shrink_to_fit();
                 connect(btn_edit, &QPushButton::clicked, [=]() {
                     costumer_products *p = new costumer_products(this);
                         connect(this, SIGNAL(send_index(int)), p, SLOT(recieve_index(int)));
@@ -167,6 +216,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 
         ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     }
+
     else if(index == 2)
     {
         vector <Transaction> all_transactions = load_transaction();
@@ -233,6 +283,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 
         }
     }
+
     else if(index == 3)
     {
         int user_index = current_costumer_index(current_costumer);

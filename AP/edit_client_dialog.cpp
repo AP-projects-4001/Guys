@@ -22,6 +22,9 @@ void Edit_Client_Dialog::recieve_client_index(int _client_index)
     ui->lineEdit_email->setText(tmp[client_index].get_email());
     ui->lineEdit_phone->setText(tmp[client_index].get_phone_number());
     ui->lineEdit_user->setText(tmp[client_index].get_user_name());
+    ui->checkBox_enter_limit->setChecked(tmp[client_index].get_login_restriction());
+    ui->checkBox_balance_limit->setChecked(tmp[client_index].get_change_balance_restriction());
+    ui->checkBox_buy_product->setChecked(tmp[client_index].get_buy_add_restriction());
     tmp.clear();
     tmp.shrink_to_fit();
 }
@@ -51,6 +54,16 @@ void Edit_Client_Dialog::on_pushButton_save_clicked()
         tmp[client_index].set_address(ui->lineEdit_address->text());
         tmp[client_index].set_email(ui->lineEdit_email->text());
         tmp[client_index].set_phone_number(ui->lineEdit_phone->text());
+        if(ui->checkBox_buy_product->isChecked())
+            tmp[client_index].set_buy_add_restriction(true);
+        else
+            tmp[client_index].set_buy_add_restriction(false);
+        if(ui->checkBox_enter_limit->isChecked())
+            tmp[client_index].set_login_restriction(true);
+        else
+            tmp[client_index].set_login_restriction(false);
+        if(ui->checkBox_balance_limit->isChecked())
+            tmp[client_index].set_change_balance_restriction(true);
         QMessageBox::warning(this, "Save Changes", "Saved Successfully!");
         save_client(tmp);
         tmp.clear();

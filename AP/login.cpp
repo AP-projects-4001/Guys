@@ -89,9 +89,12 @@ void Login::on_pushButton_clicked()
     if (ui->lineEdit_user->text().isEmpty()){
         QMessageBox::warning(this, "Error", "Username can't be empty...");
     }
+
     else if (ui->lineEdit_password->text().isEmpty()){
         QMessageBox::warning(this, "Error", "Password can't be empty...");
-    }else{
+    }
+
+    else{
         if(ui->radioButton_client->isChecked())
         {
             unsigned int i = 0;
@@ -101,18 +104,33 @@ void Login::on_pushButton_clicked()
                 {
                     if(client_users[i].get_password() == ui->lineEdit_password->text())
                     {
-                        Movie = new QMovie(":/included_images/Confirm-login.gif");
-                        ui->login_confirm->setMovie(Movie);
-                        ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
-                        ui->login_confirm->show();
-                        ui->pushButton->setEnabled(false);
-                        Movie->start();
-                        Delay(2300);
-                        client_Ui *ClientUi = new client_Ui();
-                        connect(this, SIGNAL(send_clientID(QString)), ClientUi, SLOT(set_userId(QString)));
-                        emit send_clientID(client_users[i].get_user_name());
-                        close();
-                        ClientUi->show();
+                        if(client_users[i].get_login_restriction() || client_users[i].get_deleted_status())
+                        {
+                            Movie = new QMovie(":/included_images/wrong_gif.gif");
+                            ui->login_confirm->setMovie(Movie);
+                            ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                            ui->login_confirm->show();
+                            Movie->start();
+                            ui->statusbar->showMessage("Cannot login you are either banned or removed by admin", 5000);
+                            Delay(3300);
+                            Movie->stop();
+                            ui->login_confirm->hide();
+                        }
+                        else
+                        {
+                            Movie = new QMovie(":/included_images/Confirm-login.gif");
+                            ui->login_confirm->setMovie(Movie);
+                            ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                            ui->login_confirm->show();
+                            ui->pushButton->setEnabled(false);
+                            Movie->start();
+                            Delay(2300);
+                            client_Ui *ClientUi = new client_Ui();
+                            connect(this, SIGNAL(send_clientID(QString)), ClientUi, SLOT(set_userId(QString)));
+                            emit send_clientID(client_users[i].get_user_name());
+                            close();
+                            ClientUi->show();
+                        }
                     }
                     else
                     {
@@ -144,6 +162,7 @@ void Login::on_pushButton_clicked()
                 ui->login_confirm->hide();
             }
         }
+
         else if(ui->radioButton_costumer->isChecked())
         {
             unsigned int i = 0;
@@ -153,18 +172,33 @@ void Login::on_pushButton_clicked()
                 {
                     if(costumer_users[i].get_password() == ui->lineEdit_password->text())
                     {
-                        Movie = new QMovie(":/included_images/Confirm-login.gif");
-                        ui->login_confirm->setMovie(Movie);
-                        ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
-                        ui->login_confirm->show();
-                        ui->pushButton->setEnabled(false);
-                        Movie->start();
-                        Delay(2300);
-                        costumer_Ui *CostumerUi = new costumer_Ui();
-                        connect(this, SIGNAL(send_costumerID(QString)), CostumerUi, SLOT(set_userID(QString)));
-                        emit send_costumerID(costumer_users[i].get_user_name());
-                        close();
-                        CostumerUi->show();
+                        if(costumer_users[i].get_login_restriction() || costumer_users[i].get_deleted_status())
+                        {
+                            Movie = new QMovie(":/included_images/wrong_gif.gif");
+                            ui->login_confirm->setMovie(Movie);
+                            ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                            ui->login_confirm->show();
+                            Movie->start();
+                            ui->statusbar->showMessage("Cannot login you are either banned or removed by admin", 5000);
+                            Delay(3300);
+                            Movie->stop();
+                            ui->login_confirm->hide();
+                        }
+                        else
+                        {
+                            Movie = new QMovie(":/included_images/Confirm-login.gif");
+                            ui->login_confirm->setMovie(Movie);
+                            ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                            ui->login_confirm->show();
+                            ui->pushButton->setEnabled(false);
+                            Movie->start();
+                            Delay(2300);
+                            costumer_Ui *CostumerUi = new costumer_Ui();
+                            connect(this, SIGNAL(send_costumerID(QString)), CostumerUi, SLOT(set_userID(QString)));
+                            emit send_costumerID(costumer_users[i].get_user_name());
+                            close();
+                            CostumerUi->show();
+                        }
                     }
                     else
                     {

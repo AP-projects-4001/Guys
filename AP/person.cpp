@@ -66,6 +66,21 @@ void Person::set_time_delete(int _time)
     this->time_since_delete = _time;
 }
 
+void Person::set_login_restriction(bool state)
+{
+    this->login_restriction = state;
+}
+
+void Person::set_change_balance_restriction(bool state)
+{
+    this->change_balance_restriction = state;
+}
+
+void Person::set_buy_add_restriction(bool state)
+{
+    this->restrict_buy_add_product = state;
+}
+
 QString Person::get_name() const
 {
     return this->name;
@@ -109,4 +124,19 @@ bool Person::get_deleted_status() const
 unsigned int Person::get_balance() const
 {
     return this->balance;
+}
+
+bool Person::get_login_restriction() const
+{
+    return this->login_restriction;
+}
+
+bool Person::get_change_balance_restriction() const
+{
+    return this->change_balance_restriction;
+}
+
+bool Person::get_buy_add_restriction() const
+{
+    return this->restrict_buy_add_product;
 }
