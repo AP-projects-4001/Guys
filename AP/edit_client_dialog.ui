@@ -694,40 +694,6 @@ QStatusBar
 	border-color: #051a39;
 
 }
-
-QCheckBox:disabled
-{
-color: #414141;
-}
-
-QCheckBox::indicator{
-    color: #b1b1b1;
-    background-color: #323232;
-    border: 1px solid #b1b1b1;
-    width:  12px;
-    height:  12px;
-}
-
-QRadioButton::indicator
-{
-    border-radius: 6px;
-}
-
-QCheckBox::indicator:hover
-{
-    border: 1px solid #8399ff;
-}
-
-QCheckBox::indicator:checked
-{
-	border-image: url(:/included_images/Check_mark.png) 0 0 0 0 stretch stretch;
-	background-color: #ffffff;
-}
-
-QCheckBox::indicator:disabled
-{
-    border: 1px solid #444;
-}
 </string>
   </property>
   <widget class="QWidget" name="layoutWidget">
@@ -853,18 +819,39 @@ QCheckBox::indicator:disabled
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>50</y>
+     <x>410</x>
+     <y>80</y>
      <width>251</width>
-     <height>151</height>
+     <height>166</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QCheckBox" name="checkBox_enter_limit">
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+      </property>
       <property name="text">
        <string>Restrict to enter</string>
       </property>
@@ -872,6 +859,27 @@ QCheckBox::indicator:disabled
     </item>
     <item>
      <widget class="QCheckBox" name="checkBox_balance_limit">
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+      </property>
       <property name="text">
        <string>Limit to increase balance</string>
       </property>
@@ -879,6 +887,27 @@ QCheckBox::indicator:disabled
     </item>
     <item>
      <widget class="QCheckBox" name="checkBox_buy_product">
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+      </property>
       <property name="text">
        <string>Restrict to buy products</string>
       </property>

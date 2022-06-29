@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>687</width>
-    <height>429</height>
+    <width>708</width>
+    <height>378</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>708</width>
+    <height>378</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>708</width>
+    <height>378</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -681,48 +693,13 @@ QStatusBar
 	color: #ffffff;
 	border-color: #051a39;
 
-}
-
-QCheckBox:disabled
-{
-color: #414141;
-}
-
-QCheckBox::indicator{
-    color: #b1b1b1;
-    background-color: #323232;
-    border: 1px solid #b1b1b1;
-    width:  12px;
-    height:  12px;
-}
-
-QRadioButton::indicator
-{
-    border-radius: 6px;
-}
-
-QCheckBox::indicator:hover
-{
-    border: 1px solid #8399ff;
-}
-
-QCheckBox::indicator:checked
-{
-	border-image: url(:/included_images/Check_mark.png) 0 0 0 0 stretch stretch;
-	background-color: #ffffff;
-}
-
-QCheckBox::indicator:disabled
-{
-    border: 1px solid #444;
-}
-</string>
+}</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>380</y>
+     <x>480</x>
+     <y>330</y>
      <width>171</width>
      <height>32</height>
     </rect>
@@ -776,37 +753,35 @@ QCheckBox::indicator:disabled
   <widget class="QCheckBox" name="available_checkBox">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>230</y>
-     <width>80</width>
+     <x>100</x>
+     <y>250</y>
+     <width>131</width>
      <height>24</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+   </property>
    <property name="text">
     <string>Available</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>100</y>
-     <width>54</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Color : </string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="color_lineedit">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>100</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -833,52 +808,6 @@ QCheckBox::indicator:disabled
    </property>
    <property name="text">
     <string>Weight :</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_8">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>140</y>
-     <width>54</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Brand :</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="brand_line">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>140</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="type_line">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>180</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>180</y>
-     <width>41</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Type : </string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -988,6 +917,60 @@ QCheckBox::indicator:disabled
        </size>
       </property>
      </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>90</y>
+     <width>291</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Color : </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="color_lineedit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Brand :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="brand_line"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Type : </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="type_line"/>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>632</width>
-    <height>429</height>
+    <width>672</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>551</width>
-    <height>428</height>
+    <width>672</width>
+    <height>446</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>672</width>
+    <height>446</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -694,40 +694,6 @@ QStatusBar
 	border-color: #051a39;
 
 }
-
-QCheckBox:disabled
-{
-color: #414141;
-}
-
-QCheckBox::indicator{
-    color: #b1b1b1;
-    background-color: #323232;
-    border: 1px solid #b1b1b1;
-    width:  12px;
-    height:  12px;
-}
-
-QRadioButton::indicator
-{
-    border-radius: 6px;
-}
-
-QCheckBox::indicator:hover
-{
-    border: 1px solid #8399ff;
-}
-
-QCheckBox::indicator:checked
-{
-	border-image: url(:/included_images/Check_mark.png) 0 0 0 0 stretch stretch;
-	background-color: #ffffff;
-}
-
-QCheckBox::indicator:disabled
-{
-    border: 1px solid #444;
-}
 </string>
   </property>
   <widget class="QWidget" name="layoutWidget">
@@ -823,8 +789,8 @@ QCheckBox::indicator:disabled
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>380</y>
+     <x>310</x>
+     <y>390</y>
      <width>341</width>
      <height>34</height>
     </rect>
@@ -853,18 +819,39 @@ QCheckBox::indicator:disabled
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>60</y>
-     <width>211</width>
-     <height>141</height>
+     <x>420</x>
+     <y>70</y>
+     <width>227</width>
+     <height>191</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QCheckBox" name="checkBox_enter_limit">
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+      </property>
       <property name="text">
        <string>Restrict to enter</string>
       </property>
@@ -872,6 +859,27 @@ QCheckBox::indicator:disabled
     </item>
     <item>
      <widget class="QCheckBox" name="checkBox_balance_limit">
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+      </property>
       <property name="text">
        <string>Limit to increase balance</string>
       </property>
@@ -879,6 +887,33 @@ QCheckBox::indicator:disabled
     </item>
     <item>
      <widget class="QCheckBox" name="checkBox_add_product">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+      </property>
       <property name="text">
        <string>Restrict to add products</string>
       </property>
