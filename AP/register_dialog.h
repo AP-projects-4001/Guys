@@ -38,6 +38,8 @@ private slots:
 
     void on_lineEdit_password_editingFinished();
 
+    void on_lineEdit_email_editingFinished();
+
 private:
     Ui::Register_Dialog *ui;
 };

@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <regex>
 #include "client.h"
 #include "costumer.h"
 #include "process.h"
@@ -38,7 +39,7 @@ void add_viewed(vector <Product> &, int);
 QString show_balance(vector <Client>& , QString);
 QString show_balance2(vector <Costumer>& , QString);
 void confirm_payment(QString);
-
+bool check_email(QString email);
 //QString show_balance(vector <Costumer>& , QString);
 
 #endif // LOAD_SAVE_H

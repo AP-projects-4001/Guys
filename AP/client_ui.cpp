@@ -457,9 +457,13 @@ void client_Ui::on_pushButton_3_clicked()
     else if(!(ui->lineEdit_phone_num->text().toStdString().find_first_not_of("0123456789") == string::npos))
     {
         QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
-        ui->lineEdit_phone_num->setText("");
+//        ui->lineEdit_phone_num->setText("");
     }
-
+    else if (!check_email(ui->lineEdit_email->text()))
+    {
+        QMessageBox::warning(this, "Error", "Email is not valid");
+//        ui->lineEdit_email->setText("");
+    }
     else
     {
         int index = current_client_index(current_client);
