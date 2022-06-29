@@ -28,8 +28,8 @@ void increase_balance::on_pushButton_clicked()
         p->set_flag(true);
         connect(this,SIGNAL(send_bank_to_gateway(QString,int)),p,SLOT(recieve_bank(QString, int)));
         emit send_bank_to_gateway(ui->comboBox->currentText(),ui->lineEdit->text().toInt());
-        p->exec();
         close();
+        p->exec();
     }
 }
 

@@ -107,10 +107,6 @@ void costumer_products::on_pushButton_clicked()
         save_product(global_product);
         close();
       }
-      else
-      {
-        QMessageBox::warning(this, "Info", "Product is not deleted...");
-      }
 }
 
 

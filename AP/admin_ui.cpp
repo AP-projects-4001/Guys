@@ -6,6 +6,7 @@ admin_ui::admin_ui(QWidget *parent) :
     ui(new Ui::admin_ui)
 {
     ui->setupUi(this);
+    on_tabWidget_tabBarClicked(0);
 }
 
 admin_ui::~admin_ui()
@@ -49,7 +50,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
                 on_tabWidget_tabBarClicked(0);
             });
         }
-        ui->product_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->costumer_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         temp.clear();
         temp.shrink_to_fit();
     }
@@ -87,7 +88,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
                 on_tabWidget_tabBarClicked(1);
             });
         }
-        ui->product_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->client_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         temp.clear();
         temp.shrink_to_fit();
     }

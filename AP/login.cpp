@@ -105,6 +105,7 @@ void Login::on_pushButton_clicked()
                         ui->login_confirm->setMovie(Movie);
                         ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
                         ui->login_confirm->show();
+                        ui->pushButton->setEnabled(false);
                         Movie->start();
                         Delay(2300);
                         client_Ui *ClientUi = new client_Ui();
@@ -156,6 +157,7 @@ void Login::on_pushButton_clicked()
                         ui->login_confirm->setMovie(Movie);
                         ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
                         ui->login_confirm->show();
+                        ui->pushButton->setEnabled(false);
                         Movie->start();
                         Delay(2300);
                         costumer_Ui *CostumerUi = new costumer_Ui();
@@ -204,6 +206,7 @@ void Login::on_pushButton_clicked()
                     ui->login_confirm->setMovie(Movie);
                     ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
                     ui->login_confirm->show();
+                    ui->pushButton->setEnabled(false);
                     Movie->start();
                     Delay(2300);
                     admin_ui * admin = new admin_ui(this);

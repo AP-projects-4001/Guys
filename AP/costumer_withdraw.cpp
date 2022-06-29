@@ -29,6 +29,10 @@ void Costumer_Withdraw::on_pushButton_confirm_clicked()
     {
         QMessageBox::warning(this,"Not Enough Balance","You don't have enough balance to withdarw");
     }
+    else if(ui->lineEdit_amout->text().toInt()== 0)
+    {
+        QMessageBox::warning(this,"Erroe","Withdraw amount can't be zero...");
+    }
     else
     {
         emit to_withdraw(ui->lineEdit_amout->text().toInt());

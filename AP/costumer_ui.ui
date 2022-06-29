@@ -6,16 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
-    <height>521</height>
+    <width>813</width>
+    <height>522</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <property name="styleSheet">
-    <string notr="true">
+  <property name="styleSheet">
+   <string notr="true">
 QWidget
 {
 	background-color: #500c10;
@@ -681,11 +680,14 @@ QStatusBar
 	background-color: #565656;
 	color: #ffffff;
 	border-color: #051a39;
-
 }
 
 
 </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">

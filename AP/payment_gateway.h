@@ -22,6 +22,7 @@ public:
     QString getCaptcha();
     void set_user(QString,int);
     void set_flag(bool);
+    void find_bank();
 private slots:
     void recieve_bank(QString, int);// Bank , total amount
 
@@ -31,6 +32,10 @@ private slots:
 
 
     void on_lineEdit_captcha_clicked();
+
+    void on_lineEdit_second4_editingFinished();
+
+    void on_lineEdit_first4_editingFinished();
 
 signals:
     void send_purchase();

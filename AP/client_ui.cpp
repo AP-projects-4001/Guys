@@ -371,6 +371,8 @@ void client_Ui::on_Purchase_Button_clicked()
                     for (int i = 0 ; i < ui->cart_table->rowCount() ; ++i)
                         ui->cart_table->removeRow(i);
                     ui->cart_table->clearContents();
+                    show_products(1);
+
                 }
             }
         }

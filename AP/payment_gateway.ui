@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>641</width>
-    <height>469</height>
+    <width>638</width>
+    <height>470</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -332,7 +332,7 @@ QStatusBar
     <string/>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -408,6 +408,25 @@ QStatusBar
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QLineEdit" name="Bank_name">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>203</y>
+     <width>113</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit
+{
+	background-color : transparent;
+}</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <resources/>

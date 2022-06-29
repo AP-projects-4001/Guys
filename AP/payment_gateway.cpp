@@ -54,6 +54,74 @@ void Payment_gateway::set_flag(bool _flag)
     flag = _flag;
 }
 
+void Payment_gateway::find_bank()
+{
+    string first_num = ui->lineEdit_first4->text().toStdString() + ui->lineEdit_second4->text().toStdString();
+    if (first_num.length() >=6){
+        first_num = first_num.substr(0 , 6);
+        switch (stoi(first_num))
+        {
+            case 603799:
+                ui->Bank_name->setText("Meli Bank");
+                break;
+            case 589210:
+                ui->Bank_name->setText("Sepah Bank");
+                break;
+            case 603770:
+                ui->Bank_name->setText("Keshavarzi Bank");
+                break;
+            case 628023:
+                ui->Bank_name->setText("Maskan Bank");
+                break;
+            case 627760:
+                ui->Bank_name->setText("Iran Post Bank");
+                break;
+            case 627412:
+                ui->Bank_name->setText("Eghtesad novin Bank");
+                break;
+            case 622106:
+                ui->Bank_name->setText("Parsian Bank");
+                break;
+            case 502229:
+                ui->Bank_name->setText("Pasargad Bank");
+                break;
+            case 621986:
+                ui->Bank_name->setText("Saman Bank");
+                break;
+            case 639346:
+                ui->Bank_name->setText("Sina Bank");
+                break;
+            case 639607:
+                ui->Bank_name->setText("Sarmayeh Bank");
+                break;
+            case 502806:
+                ui->Bank_name->setText("Shahr Bank");
+                break;
+            case 502938:
+                ui->Bank_name->setText("Dey Bank");
+                break;
+            case 603769:
+                ui->Bank_name->setText("Saderat Bank");
+                break;
+            case 610433:
+                ui->Bank_name->setText("Melat Bank");
+                break;
+            case 627353:
+                ui->Bank_name->setText("Tejarat Bank");
+                break;
+            case 589463:
+                ui->Bank_name->setText("Refah Bank");
+                break;
+            case 627381:
+                ui->Bank_name->setText("Ansar Bank");
+                break;
+            default:
+                ui->Bank_name->clear();
+                break;
+        }
+    }
+}
+
 void Payment_gateway::recieve_bank(QString bank, int total)
 {
     ui->total_lineEdit->setText(QString::number(total));
@@ -157,5 +225,18 @@ void Payment_gateway::on_cancel_button_clicked()
 void Payment_gateway::on_lineEdit_captcha_clicked()
 {
     ui->lineEdit_captcha->setText(getCaptcha());
+}
+
+
+void Payment_gateway::on_lineEdit_second4_editingFinished()
+{
+    find_bank();
+}
+
+
+
+void Payment_gateway::on_lineEdit_first4_editingFinished()
+{
+    find_bank();
 }
 

@@ -32,16 +32,13 @@ void costumer_Ui::set_userID(QString user)
    QLabel *spacer = new QLabel(); // fake spacer
    ui->statusbar->addPermanentWidget(spacer, 1);
    connect(leftButton2, &QPushButton::clicked, [=](){
+       vector<Costumer> global_costumers = load_costumer();
        Costumer_Withdraw *p = new Costumer_Withdraw(this);
        connect(this,SIGNAL(send_amount(int)),p,SLOT(recieve_amount(int)));
        connect(p,SIGNAL(to_withdraw(int)),this,SLOT(withdraw(int)));
        int index = current_costumer_index(current_costumer);
        emit send_amount(global_costumers[index].get_balance());
-//       connect(this,SIGNAL(send_to_increase_balance(QString)),p,SLOT(recieve_client(QString)));
-//       emit send_to_increase_balance(current_client);
        p->exec();
-//       vector<Costumer> global_costumers = load_costumer();
-//       leftButton2->setText(show_balance2(global_costumers, current_costumer));
    });
    global_costumers.clear();
    global_costumers.shrink_to_fit();
@@ -159,8 +156,9 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                 connect(btn_edit, &QPushButton::clicked, [=]() {
                     costumer_products *p = new costumer_products(this);
                         connect(this, SIGNAL(send_index(int)), p, SLOT(recieve_index(int)));
-                    emit send_index(i);
-                    p->exec();
+                        emit send_index(i);
+                        p->exec();
+                        on_tabWidget_tabBarClicked(1);
                 });
                 ++count;
 
