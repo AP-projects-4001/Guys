@@ -41,6 +41,11 @@ void New_Password_Dialog::on_pushButton_2_clicked()
             ui->lineEdit_new->clear();
             ui->lineEdit_confirm->clear();
         }
+        else if(ui->lineEdit_new->text().contains(' '))
+        {
+            QMessageBox::warning(this, "Error", "Password can't contain space...");
+            ui->lineEdit_new->clear();
+        }
         else if(ui->lineEdit_new->text() != ui->lineEdit_confirm->text())
         {
             QMessageBox::warning(this, "Error", "New Passwords don't match");
@@ -68,6 +73,11 @@ void New_Password_Dialog::on_pushButton_2_clicked()
             QMessageBox::warning(this, "Error", "Password can't be less than 5 characters...");
             ui->lineEdit_new->clear();
             ui->lineEdit_confirm->clear();
+        }
+        else if(ui->lineEdit_new->text().contains(' '))
+        {
+            QMessageBox::warning(this, "Error", "Password can't contain space...");
+            ui->lineEdit_new->clear();
         }
         else if(ui->lineEdit_new->text() != ui->lineEdit_confirm->text())
         {

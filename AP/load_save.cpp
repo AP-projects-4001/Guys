@@ -1257,3 +1257,9 @@ QString show_balance2(vector<Costumer> &costumers, QString current)
     }
     return "";
 }
+
+bool check_email(QString email)
+{
+    const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    return regex_match(email.toStdString(),pattern);
+}

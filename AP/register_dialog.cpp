@@ -129,3 +129,13 @@ void Register_Dialog::on_lineEdit_password_editingFinished()
     }
 }
 
+
+void Register_Dialog::on_lineEdit_email_editingFinished()
+{
+    if(!check_email(ui->lineEdit_email->text()))
+    {
+        QMessageBox::warning(this, "Error", "Email is not valid !");
+        ui->lineEdit_email->clear();
+    }
+}
+

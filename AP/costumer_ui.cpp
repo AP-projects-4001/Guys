@@ -331,11 +331,15 @@ void costumer_Ui::on_pushButton_save_change_clicked()
     {
         QMessageBox::warning(this, "Error", "Fields can't be empty...");
     }
-
     else if(!(ui->lineEdit_phone->text().toStdString().find_first_not_of("0123456789") == string::npos))
     {
         QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
-        ui->lineEdit_phone->setText("");
+//        ui->lineEdit_phone->setText("");
+    }
+    else if (!check_email(ui->lineEdit_email->text()))
+    {
+        QMessageBox::warning(this, "Error", "Email is not valid");
+//        ui->lineEdit_email->setText("");
     }
     else
     {
