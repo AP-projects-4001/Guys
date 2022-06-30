@@ -18,6 +18,7 @@
 #include "product.h"
 //#include <QThread>
 #include <QEventLoop>
+#include <chrono>
 using namespace std;
 
 void save_client(vector<Client>&);
@@ -40,6 +41,7 @@ QString show_balance(vector <Client>& , QString);
 QString show_balance2(vector <Costumer>& , QString);
 void confirm_payment(QString);
 bool check_email(QString email);
+void check_accounts();
 //QString show_balance(vector <Costumer>& , QString);
 
 #endif // LOAD_SAVE_H

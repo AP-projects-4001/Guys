@@ -1279,3 +1279,58 @@ bool check_email(QString email)
     const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
     return regex_match(email.toStdString(),pattern);
 }
+
+void check_accounts()
+{
+    vector<Client> clients = load_client();
+    vector<Client> new_clients;
+    vector<Costumer> costumers = load_costumer();
+    vector<Costumer> new_costumers;
+    vector<Product> products = load_product();
+    vector<Product> new_products = products;
+    const auto p1 = std::chrono::system_clock::now();
+    int now = std::chrono::duration_cast<std::chrono::seconds>(p1.time_since_epoch()).count();
+
+    for(unsigned int i = 0; i < clients.size(); i++)
+    {
+        if(clients[i].get_deleted_status() && ((clients[i].get_delete_time() - now) >= 259200))
+        {}
+        else
+            new_clients.push_back(clients[i]);
+    }
+
+    int counter = 0;
+    for(unsigned int i = 0; i < costumers.size(); i++)
+    {
+        int num = (now - costumers[i].get_delete_time());
+        if(costumers[i].get_deleted_status() && (num >= 259200))
+        {
+            for(unsigned int j = 0; j < products.size(); j++)
+            {
+                if(products[j].get_costumer_username() == costumers[i].get_user_name())
+                {
+                    new_products.erase(new_products.begin() + j - counter);
+                    counter++;
+                }
+            }
+        }
+        else
+            new_costumers.push_back(costumers[i]);
+    }
+
+    clients.clear();
+    clients.shrink_to_fit();
+    costumers.clear();
+    costumers.shrink_to_fit();
+    products.clear();
+    products.shrink_to_fit();
+    save_client(new_clients);
+    save_costumer(new_costumers);
+    save_product(new_products);
+    new_clients.clear();
+    new_clients.shrink_to_fit();
+    new_costumers.clear();
+    new_costumers.shrink_to_fit();
+    new_products.clear();
+    new_products.shrink_to_fit();
+}
