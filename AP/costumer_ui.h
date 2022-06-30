@@ -39,6 +39,8 @@ private slots:
     void on_pushButton_change_pass_clicked();
 
     void withdraw(int);
+
+    void check_balance();
 signals:
     void send_index(int);
     void send_transaction(QString);

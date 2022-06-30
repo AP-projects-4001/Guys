@@ -89,6 +89,7 @@ void costumer_Ui::set_userID(QString user)
    global_costumers.clear();
    global_costumers.shrink_to_fit();
 
+   check_balance();
 }
 
 
@@ -398,3 +399,14 @@ void costumer_Ui::withdraw(int amount)
 
 }
 
+
+void costumer_Ui::check_balance()
+{
+    //check if balance is 0
+    if(leftButton2->text() == "balance : 0")
+    {
+        leftButton2->setEnabled(false);
+        leftButton2->setToolTip("You don't have any balance to withdraw!");
+    }
+
+}

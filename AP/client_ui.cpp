@@ -145,7 +145,7 @@ void client_Ui::show_products(vector<Product> &products)
             else
                 btn_edit->setEnabled(true);
             connect(btn_edit, &QPushButton::clicked, [=,&products](){
-//                products[i].set_viewed(products[i].get_viewed()+1);
+                products[i].set_viewed(products[i].get_viewed()+1);
                 for(unsigned int k = 0; k < products_2.size(); k++)
                 {
                     if(products_2[k].get_name() == products[i].get_name() &&
