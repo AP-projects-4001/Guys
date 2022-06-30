@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>638</width>
-    <height>470</height>
+    <width>641</width>
+    <height>472</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>641</width>
+    <height>472</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>641</width>
+    <height>472</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -84,8 +96,8 @@ QStatusBar
   <widget class="QLabel" name="Bank_label">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>10</y>
+     <x>77</x>
+     <y>11</y>
      <width>491</width>
      <height>181</height>
     </rect>
@@ -305,6 +317,9 @@ QStatusBar
    <layout class="QHBoxLayout" name="horizontalLayout_6">
     <item>
      <widget class="QPushButton" name="purchase_button">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
       <property name="text">
        <string>Purchase</string>
       </property>
@@ -312,6 +327,9 @@ QStatusBar
     </item>
     <item>
      <widget class="QPushButton" name="cancel_button">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
       <property name="text">
        <string>Cancel</string>
       </property>
@@ -394,7 +412,7 @@ QStatusBar
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Total amount : </string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Total amount : &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>

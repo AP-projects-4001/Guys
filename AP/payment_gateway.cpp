@@ -184,13 +184,31 @@ void Payment_gateway::on_purchase_button_clicked()
             ui->lineEdit_third4->text().length()!=4||ui->lineEdit_fourth4->text().length()!=4)
         QMessageBox::warning(this,"Payment Error","The card number must be entered correctly");
     else if(ui->lineEdit_year->text().toInt()<0||ui->lineEdit_month->text().toInt()<0||
-            ui->lineEdit_month->text().toInt()>12)
+            ui->lineEdit_month->text().toInt()>12){
         QMessageBox::warning(this,"Error","Expiry Date is invalid");
-    else if(ui->lineEdit_cvv2->text().length()<3)
+        ui->lineEdit_month->clear();
+        ui->lineEdit_year->clear();
+        ui->lineEdit_check->clear();
+        ui->lineEdit_captcha->setText(getCaptcha());
+    }
+    else if (ui->lineEdit_password->text().length() < 5){
+        QMessageBox::warning(this,"Error","The password is incorrect...");
+        ui->lineEdit_password->clear();
+        ui->lineEdit_check->clear();
+        ui->lineEdit_captcha->setText(getCaptcha());
+
+    }
+    else if(ui->lineEdit_cvv2->text().length()<3){
         QMessageBox::warning(this,"Error","The CVV2 must be entered correctly");
+        ui->lineEdit_cvv2->clear();
+        ui->lineEdit_check->clear();
+        ui->lineEdit_captcha->setText(getCaptcha());
+
+    }
     else if(ui->lineEdit_captcha->text() != ui->lineEdit_check->text())
     {
         QMessageBox::warning(this,"Captcha faild","Try again...");
+        ui->lineEdit_check->clear();
         ui->lineEdit_captcha->setText(getCaptcha());
     }
     else
