@@ -11,6 +11,7 @@ void Delay(int n)
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
+
 Login::Login(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Login)
@@ -26,6 +27,7 @@ Login::Login(QWidget *parent)
     ui->label_3->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     check_and_create();
+    check_accounts();
     client_users = load_client();
     costumer_users = load_costumer();
 }
@@ -97,8 +99,8 @@ void Login::on_pushButton_clicked()
     else{
         if(ui->radioButton_client->isChecked())
         {
-            unsigned int i = 0;
-            for(i; i<client_users.size(); i++)
+            unsigned int i;
+            for(i = 0; i<client_users.size(); i++)
             {
                 if(client_users[i].get_user_name() == ui->lineEdit_user->text())
                 {
@@ -148,6 +150,7 @@ void Login::on_pushButton_clicked()
                     break;
                 }
             }
+
             if(i == client_users.size())
             {
                 ui->statusbar->showMessage("No client with such username!", 5000);
@@ -165,8 +168,8 @@ void Login::on_pushButton_clicked()
 
         else if(ui->radioButton_costumer->isChecked())
         {
-            unsigned int i = 0;
-            for(i; i<costumer_users.size(); i++)
+            unsigned int i;
+            for(i = 0; i<costumer_users.size(); i++)
             {
                 if(costumer_users[i].get_user_name() == ui->lineEdit_user->text())
                 {
@@ -282,8 +285,8 @@ void Login::on_pushButton_clicked()
 void Login::on_pushButton_forgot_pass_clicked()
 {
     Forgot_Pass_Dialog * forgot_pass = new Forgot_Pass_Dialog(this);
-    connect(forgot_pass, SIGNAL(send_forgot(QString, QString, bool, bool)), this,
-            SLOT(recieve_forgot_pass(QString, QString, bool, bool)));
+    connect(forgot_pass, SIGNAL(send_forgot(QString,QString,bool,bool)), this,
+            SLOT(recieve_forgot_pass(QString,QString,bool,bool)));
     forgot_pass->exec();
 }
 
@@ -293,7 +296,7 @@ void Login::recieve_forgot_pass(QString _user_name, QString _new_password, bool 
     {
         if(client)
         {
-            for(unsigned long long int i = 0; i < client_users.size(); i++)
+            for(unsigned int i = 0; i < client_users.size(); i++)
             {
                 if (client_users[i].get_user_name() == _user_name)
                 {
@@ -305,7 +308,7 @@ void Login::recieve_forgot_pass(QString _user_name, QString _new_password, bool 
         }
         else
         {
-            for(unsigned long long int i = 0; i < costumer_users.size(); i++)
+            for(unsigned int i = 0; i < costumer_users.size(); i++)
             {
                 if (costumer_users[i].get_user_name() == _user_name)
                 {

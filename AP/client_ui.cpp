@@ -59,7 +59,7 @@ void client_Ui::set_userId(QString user)
         ui->radioButton_credit->setEnabled(true);
     }
 
-    connect(leftButton, &QPushButton::clicked, [=](){
+    connect(leftButton, &QPushButton::clicked, leftButton,[=](){
         increase_balance *p = new increase_balance(this);
         connect(this,SIGNAL(send_to_increase_balance(QString)),p,SLOT(recieve_client(QString)));
         emit send_to_increase_balance(current_client);
@@ -144,7 +144,7 @@ void client_Ui::show_products(vector<Product> &products)
             }
             else
                 btn_edit->setEnabled(true);
-            connect(btn_edit, &QPushButton::clicked, [=,&products](){
+            connect(btn_edit, &QPushButton::clicked, btn_edit, [=,&products](){
                 products[i].set_viewed(products[i].get_viewed()+1);
                 for(unsigned int k = 0; k < products_2.size(); k++)
                 {
@@ -209,7 +209,7 @@ void client_Ui::show_products(unsigned int index)
             }
             else
                 btn_edit->setEnabled(true);
-            connect(btn_edit, &QPushButton::clicked, [=]() {
+            connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                 buy_products *p = new buy_products(this);
                 p->edit_button();
                 connect(this, SIGNAL(send_product_cart(Product, unsigned int)), p, SLOT(recieve_product(Product,unsigned int)));
@@ -235,7 +235,7 @@ void client_Ui::show_products(unsigned int index)
             }
             else
                 btn_delete->setEnabled(true);
-            connect(btn_delete, &QPushButton::clicked, [=]() {
+            connect(btn_delete, &QPushButton::clicked, btn_delete, [=]() {
                 QMessageBox::StandardButton reply;
                 reply = QMessageBox::question(this, "Delete item", "Are you sure you want to delete this item ?",  QMessageBox::Yes|QMessageBox::No);
                 if (reply == QMessageBox::Yes)
@@ -307,7 +307,7 @@ void client_Ui::show_products(unsigned int index)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->transaction_table->setCellWidget(i, 2, pWidget);
-            connect(btn_edit, &QPushButton::clicked, [=]() {
+            connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                 show_transaction *t = new show_transaction(this);
                 t->set_Userid(current_client);
                 connect(this, SIGNAL(send_transaction(QString)), t, SLOT(recieve_date(QString)));
@@ -334,6 +334,7 @@ void client_Ui::show_setting()
 
 void client_Ui::on_refresh_button_clicked()
 {
+    check_accounts();
     products_2 = load_product();
     products_copy = products_2;
     ui->lineEdit->clear();

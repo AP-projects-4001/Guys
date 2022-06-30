@@ -42,7 +42,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->costumer_table->setCellWidget(i, 5, pWidget);
-            connect(btn_edit, &QPushButton::clicked, [=]() {
+            connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                 Edit_Costumer_Dialog *p = new Edit_Costumer_Dialog(this);
                     connect(this, SIGNAL(send_costumer_index(int)), p, SLOT(recieve_costumer_index(int)));
                 emit send_costumer_index(i);
@@ -80,7 +80,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->client_table->setCellWidget(i, 5, pWidget);
-            connect(btn_edit, &QPushButton::clicked, [=]() {
+            connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                 Edit_Client_Dialog *p = new Edit_Client_Dialog(this);
                     connect(this, SIGNAL(send_client_index(int)), p, SLOT(recieve_client_index(int)));
                 emit send_client_index(i);
@@ -129,7 +129,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->product_table->setCellWidget(i, 9, pWidget);
-            connect(btn_edit, &QPushButton::clicked, [=]() {
+            connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                 costumer_products *p = new costumer_products(this);
                     connect(this, SIGNAL(send_index_admin(int)), p, SLOT(recieve_index(int)));
                 emit send_index_admin(i);
@@ -183,7 +183,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             pLayout->setContentsMargins(0, 0, 0, 0);
             pWidget->setLayout(pLayout);
             ui->transaction_table->setCellWidget(i, 2, pWidget);
-            connect(btn_edit, &QPushButton::clicked, [=]() {
+            connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                 show_transaction *t = new show_transaction(this);
                 t->set_Userid("");
                 connect(this, SIGNAL(send_transaction_admin(QString)), t, SLOT(recieve_date_admin(QString)));

@@ -39,8 +39,8 @@ void Forgot_Pass_Dialog::on_lineEdit_user_editingFinished()
             QJsonObject o = d.object();
             QJsonArray users;
             users = o["Users"].toArray();
-            qsizetype i = 0;
-            for(i; i<users.size(); i++)
+            qsizetype i;
+            for(i= 0; i<users.size(); i++)
             {
                 if(users[i].toString() == ui->lineEdit_user->text())
                     break;
@@ -68,8 +68,8 @@ void Forgot_Pass_Dialog::on_lineEdit_user_editingFinished()
             QJsonObject o = d.object();
             QJsonArray users;
             users = o["Users"].toArray();
-            qsizetype i = 0;
-            for(i; i<users.size(); i++)
+            qsizetype i;
+            for(i = 0; i<users.size(); i++)
             {
                 if(users[i].toString() == ui->lineEdit_user->text())
                     break;
@@ -109,8 +109,8 @@ void Forgot_Pass_Dialog::on_lineEdit_email_editingFinished()
                 QJsonObject o = d.object();
                 QJsonArray emails;
                 emails = o["Emails"].toArray();
-                qsizetype i = 0;
-                for(i; i<emails.size(); i++)
+                qsizetype i;
+                for(i = 0; i<emails.size(); i++)
                 {
                     if(emails[i].toString() == ui->lineEdit_email->text())
                         break;
@@ -138,8 +138,8 @@ void Forgot_Pass_Dialog::on_lineEdit_email_editingFinished()
                 QJsonObject o = d.object();
                 QJsonArray emails;
                 emails = o["Emails"].toArray();
-                qsizetype i = 0;
-                for(i; i<emails.size(); i++)
+                qsizetype i;
+                for(i = 0; i<emails.size(); i++)
                 {
                     if(emails[i].toString() == ui->lineEdit_email->text())
                         break;

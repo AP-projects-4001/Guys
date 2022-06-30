@@ -11,9 +11,9 @@ Costumer_Withdraw::Costumer_Withdraw(QWidget *parent) :
     ui->lineEdit_first4_3->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_first4_4->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_amout->setValidator(new QIntValidator(0,214748364, this));
-    QRegExp rx("[a-zA-Z]+");
-    QValidator *validator = new QRegExpValidator(rx, this);
-    ui->lineEdit->setValidator(validator);
+//    QRegExp rx("[a-zA-Z]+");
+//    QValidator *validator = new QRegExpValidator(rx, this);
+//    ui->lineEdit->setValidator(validator);
 }
 
 Costumer_Withdraw::~Costumer_Withdraw()

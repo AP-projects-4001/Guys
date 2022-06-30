@@ -77,7 +77,7 @@ void costumer_Ui::set_userID(QString user)
         ui->plainTextEdit_info->setEnabled(true);
    }
 
-   connect(leftButton2, &QPushButton::clicked, [=](){
+   connect(leftButton2, &QPushButton::clicked, leftButton2, [=](){
        vector<Costumer> global_costumers = load_costumer();
        Costumer_Withdraw *p = new Costumer_Withdraw(this);
        connect(this,SIGNAL(send_amount(int)),p,SLOT(recieve_amount(int)));
@@ -218,7 +218,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                     btn_edit->setEnabled(true);
                 global_costumers.clear();
                 global_costumers.shrink_to_fit();
-                connect(btn_edit, &QPushButton::clicked, [=]() {
+                connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                     costumer_products *p = new costumer_products(this);
                         connect(this, SIGNAL(send_index(int)), p, SLOT(recieve_index(int)));
                         emit send_index(i);
@@ -287,7 +287,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                 pLayout->setContentsMargins(0, 0, 0, 0);
                 pWidget->setLayout(pLayout);
                 ui->transactions_table->setCellWidget(i, 3, pWidget);
-                connect(btn_edit, &QPushButton::clicked, [=]() {
+                connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                     show_transactions_customer *t = new show_transactions_customer(this);
                     t->set_USERID(current_costumer);
                     connect(this, SIGNAL(send_transaction(QString)), t, SLOT(recieve_date(QString)));
