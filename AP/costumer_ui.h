@@ -11,9 +11,10 @@
 #include <QFileInfo>
 #include <QPixmap>
 #include <QDir>
+#include <QMovie>
 #include "show_transactions_customer.h"
 #include "costumer_withdraw.h"
-inline QString current_costumer ;
+inline QString current_costumer;
 namespace Ui {
 class costumer_Ui;
 }
@@ -25,6 +26,7 @@ class costumer_Ui : public QMainWindow
 public:
     explicit costumer_Ui(QWidget *parent = nullptr);
     ~costumer_Ui();
+    void Delay_c(int);
 public slots:
     void set_userID(QString user);
 private slots:

@@ -6,7 +6,7 @@
 vector <Product> products;
 // Transactions JSON
 QPushButton *leftButton2;
-
+QMovie *Confirm;
 costumer_Ui::costumer_Ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::costumer_Ui)
@@ -21,6 +21,13 @@ costumer_Ui::~costumer_Ui()
     delete ui;
     products.clear();
     products.shrink_to_fit();
+}
+
+void costumer_Ui::Delay_c(int n)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
 void costumer_Ui::set_userID(QString user)
@@ -131,8 +138,16 @@ void costumer_Ui::on_Button_add_clicked()
             tmp->set_additional_info("");
         products.push_back(*tmp);
         save_product(*tmp);
+        // For Confirmation Gif
+        Confirm = new QMovie(":/included_images/confimation_gif.gif");
+        ui->Confirm_Gif->setMovie(Confirm);
+        ui->Confirm_Gif->movie()->setScaledSize(QSize(80, 80));
+        ui->Confirm_Gif->show();
+        Confirm->start();
+        Delay_c(1335);
+        Confirm->stop();
+        ui->Confirm_Gif->setVisible(false);
 
-        QMessageBox::information(this, "Info", "Added Succesfully");
         ui->lineEdit_brand->setText("");
         ui->lineEdit_name->setText("");
         ui->lineEdit_color->setText("");
@@ -219,6 +234,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 
     else if(index == 2)
     {
+        ui->transactions_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         vector <Transaction> all_transactions = load_transaction();
         vector <QString> dates;
         for (unsigned int i = 0 ; i < all_transactions.size() ; ++i){
@@ -277,10 +293,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                     emit send_transaction(dates[i]);
                     t->exec();
                 });
-                ui->transactions_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
             }
-
         }
     }
 
@@ -330,16 +343,17 @@ void costumer_Ui::on_pushButton_save_change_clicked()
        ui->lineEdit_email->text().isEmpty() || ui->lineEdit_phone->text().isEmpty())
     {
         QMessageBox::warning(this, "Error", "Fields can't be empty...");
+        on_tabWidget_tabBarClicked(3);
     }
     else if(!(ui->lineEdit_phone->text().toStdString().find_first_not_of("0123456789") == string::npos))
     {
         QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
-//        ui->lineEdit_phone->setText("");
+        on_tabWidget_tabBarClicked(3);
     }
     else if (!check_email(ui->lineEdit_email->text()))
     {
         QMessageBox::warning(this, "Error", "Email is not valid");
-//        ui->lineEdit_email->setText("");
+        on_tabWidget_tabBarClicked(3);
     }
     else
     {
@@ -352,7 +366,14 @@ void costumer_Ui::on_pushButton_save_change_clicked()
         save_costumer(tmp);
         tmp.clear();
         tmp.shrink_to_fit();
-        QMessageBox::warning(this, "Save Changes", "Saved Successfully!");
+        Confirm = new QMovie(":/included_images/confimation_gif.gif");
+        ui->confirm_gif->setMovie(Confirm);
+        ui->confirm_gif->movie()->setScaledSize(QSize(121, 121));
+        ui->confirm_gif->show();
+        Confirm->start();
+        Delay_c(1335);
+        Confirm->stop();
+        ui->confirm_gif->setVisible(false);
     }
 }
 

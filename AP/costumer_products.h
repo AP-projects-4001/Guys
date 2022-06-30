@@ -5,6 +5,7 @@
 #include "load_save.h"
 #include <QMessageBox>
 #include <QPixmap>
+#include <QMovie>
 namespace Ui {
 class costumer_products;
 }
@@ -18,9 +19,13 @@ public:
     ~costumer_products();
 private slots:
     void recieve_index(int);
-    void on_buttonBox_accepted();
+
 
     void on_pushButton_clicked();
+
+    void on_save_Button_clicked();
+
+    void on_cancel_Button_clicked();
 
 private:
     Ui::costumer_products *ui;

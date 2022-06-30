@@ -6,7 +6,6 @@
         <file>Saderat.png</file>
         <file>Pasargad.png</file>
         <file>No-image.png</file>
-        <file>logo.png</file>
         <file>store_logo.png</file>
         <file>Confirm-login.gif</file>
         <file>0-100Loading.gif</file>
@@ -14,6 +13,7 @@
         <file>Check_mark.png</file>
         <file>off-button.png</file>
         <file>on-button.png</file>
+        <file>confimation_gif.gif</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>
