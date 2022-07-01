@@ -1,6 +1,5 @@
 #include "admin_ui.h"
 #include "ui_admin_ui.h"
-
 admin_ui::admin_ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::admin_ui)
@@ -16,12 +15,13 @@ admin_ui::admin_ui(QWidget *parent) :
 admin_ui::~admin_ui()
 {
     delete ui;
+    close();
 }
 
 
 void admin_ui::on_tabWidget_tabBarClicked(int index)
 {
-    if(index == 0) // costumer
+    if(index == 0) // customer
     {
         vector<Costumer> temp = load_costumer();
         ui->costumer_table->setRowCount(temp.size());
@@ -196,6 +196,18 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
         all_transactions.shrink_to_fit();
         dates.clear();
         dates.shrink_to_fit();
+    }
+}
+
+
+void admin_ui::on_action_logout_triggered()
+{
+    QMessageBox::StandardButton logout3;
+    logout3 = QMessageBox::question(this, "Log Out", "Are you sure you want to log out?",  QMessageBox::Yes|QMessageBox::No);
+    if (logout3 == QMessageBox::Yes)
+    {
+//        close();
+        this->~admin_ui();
     }
 }
 

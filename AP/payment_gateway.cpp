@@ -183,7 +183,7 @@ void Payment_gateway::on_purchase_button_clicked()
     else if(ui->lineEdit_first4->text().length()!=4||ui->lineEdit_second4->text().length()!=4||
             ui->lineEdit_third4->text().length()!=4||ui->lineEdit_fourth4->text().length()!=4)
         QMessageBox::warning(this,"Payment Error","The card number must be entered correctly");
-    else if(ui->lineEdit_year->text().toInt()<0||ui->lineEdit_month->text().toInt()<0||
+    else if(ui->lineEdit_year->text().toInt()<=0||ui->lineEdit_month->text().toInt()<=0||
             ui->lineEdit_month->text().toInt()>12){
         QMessageBox::warning(this,"Error","Expiry Date is invalid");
         ui->lineEdit_month->clear();

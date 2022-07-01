@@ -14,6 +14,7 @@
         <file>on-button.png</file>
         <file>confimation_gif.gif</file>
         <file>person-icon-edited.png</file>
+        <file>logout-icon.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

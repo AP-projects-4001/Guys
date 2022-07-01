@@ -20,9 +20,9 @@ costumer_Ui::costumer_Ui(QWidget *parent) :
 }
 costumer_Ui::~costumer_Ui()
 {
-    delete ui;
     products.clear();
     products.shrink_to_fit();
+    delete ui;
 }
 
 void costumer_Ui::Delay_c(int n)
