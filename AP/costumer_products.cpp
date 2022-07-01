@@ -67,6 +67,7 @@ void costumer_products::on_pushButton_clicked()
       reply = QMessageBox::question(this, "Warning", "Are you sure you want to delete this product?",QMessageBox::Yes|QMessageBox::No);
       if (reply == QMessageBox::Yes)
       {
+          ui->pushButton->setEnabled(false);
           confirm_ui_pro = new QMovie(":/included_images/confimation_gif.gif");
           ui->Gif->setMovie(confirm_ui_pro);
           ui->Gif->movie()->setScaledSize(QSize(61, 61));
@@ -120,7 +121,7 @@ void costumer_products::on_save_Button_clicked()
         else
             global_product[global_index].set_size(ui->size_lineEdit->text());
         save_product(global_product);
-
+        ui->save_Button->setEnabled(false);
         confirm_ui_pro = new QMovie(":/included_images/confimation_gif.gif");
         ui->Gif->setMovie(confirm_ui_pro);
         ui->Gif->movie()->setScaledSize(QSize(61, 61));

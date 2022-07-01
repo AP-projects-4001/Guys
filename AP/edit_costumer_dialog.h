@@ -2,6 +2,7 @@
 #define EDIT_COSTUMER_DIALOG_H
 
 #include <QDialog>
+#include <QMovie>
 #include "load_save.h"
 inline int costumer_index;
 

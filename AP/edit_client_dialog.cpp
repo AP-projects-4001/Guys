@@ -1,6 +1,6 @@
 #include "edit_client_dialog.h"
 #include "ui_edit_client_dialog.h"
-
+QMovie *confirm_edit_client;
 Edit_Client_Dialog::Edit_Client_Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Edit_Client_Dialog)
@@ -33,6 +33,12 @@ void Edit_Client_Dialog::on_pushButton_cancel_clicked()
 {
     close();
 }
+void Delay_edit_client(int n)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 
 
 void Edit_Client_Dialog::on_pushButton_save_clicked()
@@ -50,6 +56,7 @@ void Edit_Client_Dialog::on_pushButton_save_clicked()
 
     else
     {
+        ui->pushButton_save->setEnabled(false);
         vector<Client> tmp = load_client();
         tmp[client_index].set_address(ui->lineEdit_address->text());
         tmp[client_index].set_email(ui->lineEdit_email->text());
@@ -64,7 +71,18 @@ void Edit_Client_Dialog::on_pushButton_save_clicked()
             tmp[client_index].set_login_restriction(false);
         if(ui->checkBox_balance_limit->isChecked())
             tmp[client_index].set_change_balance_restriction(true);
-        QMessageBox::warning(this, "Save Changes", "Saved Successfully!");
+
+        // Appear confirm gif
+        confirm_edit_client = new QMovie(":/included_images/confimation_gif.gif");
+        ui->CONFIRM_Gif->setMovie(confirm_edit_client);
+        ui->CONFIRM_Gif->movie()->setScaledSize(QSize(71, 71));
+        ui->CONFIRM_Gif->show();
+        confirm_edit_client->start();
+        Delay_edit_client(1335);
+        confirm_edit_client->stop();
+        ui->CONFIRM_Gif->hide();
+
+        // Save changes
         save_client(tmp);
         tmp.clear();
         tmp.shrink_to_fit();
@@ -75,10 +93,21 @@ void Edit_Client_Dialog::on_pushButton_save_clicked()
 
 void Edit_Client_Dialog::on_pushButton_del_clicked()
 {
+    ui->pushButton_del->setEnabled(false);
     vector<Client> tmp = load_client();
     tmp[client_index].set_deleted_status(true);
     tmp[client_index].set_time_delete();
-    QMessageBox::warning(this, "Delete client", "Deleted Successfully!");
+    // Appear confirm gif
+    confirm_edit_client = new QMovie(":/included_images/confimation_gif.gif");
+    ui->CONFIRM_Gif->setMovie(confirm_edit_client);
+    ui->CONFIRM_Gif->movie()->setScaledSize(QSize(71, 71));
+    ui->CONFIRM_Gif->show();
+    confirm_edit_client->start();
+    Delay_edit_client(1335);
+    confirm_edit_client->stop();
+    ui->CONFIRM_Gif->hide();
+
+    // Save changes
     save_client(tmp);
     tmp.clear();
     tmp.shrink_to_fit();

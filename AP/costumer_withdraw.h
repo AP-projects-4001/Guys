@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QIntValidator>
 #include <QMessageBox>
+#include <QTimer>
+#include <QMovie>
 namespace Ui {
 class Costumer_Withdraw;
 }
