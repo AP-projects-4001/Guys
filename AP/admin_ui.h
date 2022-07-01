@@ -23,6 +23,8 @@ public:
 private slots:
     void on_tabWidget_tabBarClicked(int index);
 
+
+
 signals:
     void send_transaction_admin(QString);
 

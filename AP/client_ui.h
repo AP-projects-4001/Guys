@@ -1,4 +1,4 @@
-#ifndef CLIENT_UI_H
+﻿#ifndef CLIENT_UI_H
 #define CLIENT_UI_H
 
 #include <QMainWindow>
@@ -11,6 +11,7 @@
 #include "payment_gateway.h"
 #include "new_password_dialog.h"
 #include <QWidget>
+#include <QTimer>
 #include "increase_balance.h"
 #include "show_transaction.h"
 inline QString current_client;
@@ -49,7 +50,7 @@ private slots:
 
     void on_pushButton_4_clicked();
     void confirm_purchase();
-
+    void update_client();
     void on_pushButton_2_clicked();
 
 private:

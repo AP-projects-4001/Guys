@@ -14,7 +14,9 @@ costumer_Ui::costumer_Ui(QWidget *parent) :
     ui->setupUi(this);
     ui->hidden_lineedit->hide();
     products = load_product();
-
+    QTimer *timer_c = new QTimer(this);
+    QObject::connect(timer_c, SIGNAL(timeout()), this, SLOT(update_customer()));
+    timer_c->start(30*1000);
 }
 costumer_Ui::~costumer_Ui()
 {
@@ -33,6 +35,7 @@ void costumer_Ui::Delay_c(int n)
 void costumer_Ui::set_userID(QString user)
 {
    current_costumer = user;
+   ui->my_account->setText(user);
    vector<Costumer> global_costumers = load_costumer();
    leftButton2 = new QPushButton(show_balance2(global_costumers, current_costumer));
    ui->statusbar->addPermanentWidget(leftButton2);
@@ -41,7 +44,7 @@ void costumer_Ui::set_userID(QString user)
    if(global_costumers[current_costumer_index(current_costumer)].get_change_balance_restriction())
    {
        leftButton2->setEnabled(false);
-       leftButton2->setToolTip("You cannot change your balance because admin has banned you!");
+       leftButton2->setToolTip("You cannot withdraw money because admin has banned you!");
    }
    else
        leftButton2->setEnabled(true);
@@ -409,4 +412,53 @@ void costumer_Ui::check_balance()
         leftButton2->setToolTip("You don't have any balance to withdraw!");
     }
 
+}
+
+void costumer_Ui::update_customer()
+{
+    vector <Costumer> global_customer = load_costumer();
+    if(global_customer[current_costumer_index(current_costumer)].get_change_balance_restriction())
+    {
+        leftButton2->setEnabled(false);
+        leftButton2->setToolTip("You cannot withdraw money because admin has banned you!");
+    }
+    else
+        leftButton2->setEnabled(true);
+
+    if(global_customer[current_costumer_index(current_costumer)].get_buy_add_restriction())
+    {
+         ui->Button_add->setEnabled(false);
+         ui->Button_add->setToolTip("You cannot add anything because admin has banned you!");
+         ui->pushButton->setEnabled(false);
+         ui->pushButton->setToolTip("You cannot add anything because admin has banned you!");
+         ui->lineEdit_name->setEnabled(false);
+         ui->lineEdit_brand->setEnabled(false);
+         ui->lineEdit_type->setEnabled(false);
+         ui->lineEdit_color->setEnabled(false);
+         ui->lineEdit_size->setEnabled(false);
+         ui->lineEdit_stock->setEnabled(false);
+         ui->lineEdit_weight->setEnabled(false);
+         ui->lineEdit_price->setEnabled(false);
+         ui->plainTextEdit_info->setEnabled(false);
+    }
+    else
+    {
+         ui->Button_add->setEnabled(true);
+         ui->pushButton->setEnabled(true);
+         ui->lineEdit_name->setEnabled(true);
+         ui->lineEdit_brand->setEnabled(true);
+         ui->lineEdit_type->setEnabled(true);
+         ui->lineEdit_color->setEnabled(true);
+         ui->lineEdit_size->setEnabled(true);
+         ui->lineEdit_stock->setEnabled(true);
+         ui->lineEdit_weight->setEnabled(true);
+         ui->lineEdit_price->setEnabled(true);
+         ui->plainTextEdit_info->setEnabled(true);
+    }
+    if (global_customer[current_costumer_index(current_costumer)].get_login_restriction() || global_customer[current_costumer_index(current_costumer)].get_deleted_status())
+    {
+        QMessageBox::warning(this, "Admin has banned you!" , "Sorry, you can't stay in your account anymore...");
+        // Log out
+    }
+    check_balance();
 }

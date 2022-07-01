@@ -41,6 +41,7 @@ private slots:
     void withdraw(int);
 
     void check_balance();
+    void update_customer();
 signals:
     void send_index(int);
     void send_transaction(QString);

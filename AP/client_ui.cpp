@@ -15,6 +15,12 @@ client_Ui::client_Ui(QWidget *parent) :
     products_2 = load_product();
     products_copy = products_2;
     show_products(products_2);
+    ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    QTimer *timer = new QTimer(this);
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(updateCompass()));
+    timer->start(90*1000);
 }
 
 client_Ui::~client_Ui()
@@ -31,6 +37,7 @@ client_Ui::~client_Ui()
 void client_Ui::set_userId(QString user)
 {
     current_client = user;
+    ui->My_account->setText(user);
     leftButton = new QPushButton(show_balance(global_clients, current_client));
     ui->statusbar->addPermanentWidget(leftButton);
     QLabel *spacer = new QLabel(); // fake spacer
@@ -163,7 +170,6 @@ void client_Ui::show_products(vector<Product> &products)
                 p->exec();
             });
         }
-        ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void client_Ui::show_products(unsigned int index)
@@ -258,7 +264,6 @@ void client_Ui::show_products(unsigned int index)
 
         //  else if(index==1)
         ui->total_lineedit->setText(QString::number(total));
-        ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 
 
@@ -314,7 +319,6 @@ void client_Ui::show_products(unsigned int index)
                 emit send_transaction(dates[i]);
                 t->exec();
             });
-            ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
         }
 
@@ -507,6 +511,40 @@ void client_Ui::confirm_purchase()
     for (int i = 0 ; i < ui->cart_table->rowCount() ; ++i)
         ui->cart_table->removeRow(i);
     ui->cart_table->clearContents();
+}
+
+void client_Ui::update_client()
+{
+
+    if(global_clients[current_client_index(current_client)].get_change_balance_restriction())
+    {
+        leftButton->setEnabled(false);
+        leftButton->setToolTip("You cannot increase you balance because admin has banned you!");
+    }
+    else
+        leftButton->setEnabled(true);
+
+    if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
+    {
+        ui->Purchase_Button->setEnabled(false);
+        ui->Purchase_Button->setToolTip("You cannot buy anything because admin has banned you!");
+        ui->comboBox->setEnabled(false);
+        ui->radioButton_Balance->setEnabled(false);
+        ui->radioButton_credit->setEnabled(false);
+    }
+    else
+    {
+        ui->Purchase_Button->setEnabled(true);
+        ui->comboBox->setEnabled(true);
+        ui->radioButton_Balance->setEnabled(true);
+        ui->radioButton_credit->setEnabled(true);
+    }
+    if (global_clients[current_client_index(current_client)].get_login_restriction() || global_clients[current_client_index(current_client)].get_deleted_status())
+    {
+        QMessageBox::warning(this, "Admin has banned you!" , "Sorry, you can't stay in your account anymore...");
+        // Log out
+    }
+
 }
 
 

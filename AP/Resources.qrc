@@ -10,10 +10,10 @@
         <file>Confirm-login.gif</file>
         <file>0-100Loading.gif</file>
         <file>wrong_gif.gif</file>
-        <file>Check_mark.png</file>
         <file>off-button.png</file>
         <file>on-button.png</file>
         <file>confimation_gif.gif</file>
+        <file>person-icon-edited.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

@@ -7,6 +7,10 @@ admin_ui::admin_ui(QWidget *parent) :
 {
     ui->setupUi(this);
     on_tabWidget_tabBarClicked(0);
+    ui->costumer_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->client_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->product_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 admin_ui::~admin_ui()
@@ -50,7 +54,6 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
                 on_tabWidget_tabBarClicked(0);
             });
         }
-        ui->costumer_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         temp.clear();
         temp.shrink_to_fit();
     }
@@ -88,7 +91,6 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
                 on_tabWidget_tabBarClicked(1);
             });
         }
-        ui->client_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         temp.clear();
         temp.shrink_to_fit();
     }
@@ -137,7 +139,6 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             });
         }
 
-        ui->product_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         products.clear();
         products.shrink_to_fit();
     }
@@ -190,7 +191,6 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
                 emit send_transaction_admin(dates[i]);
                 t->exec();
             });
-            ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         }
         all_transactions.clear();
         all_transactions.shrink_to_fit();
@@ -198,3 +198,4 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
         dates.shrink_to_fit();
     }
 }
+
