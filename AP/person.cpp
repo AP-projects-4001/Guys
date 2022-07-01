@@ -81,6 +81,11 @@ void Person::set_buy_add_restriction(bool state)
     this->restrict_buy_add_product = state;
 }
 
+void Person::set_theme(bool theme)
+{
+    this->dark_theme = theme;
+}
+
 QString Person::get_name() const
 {
     return this->name;
@@ -139,4 +144,9 @@ bool Person::get_change_balance_restriction() const
 bool Person::get_buy_add_restriction() const
 {
     return this->restrict_buy_add_product;
+}
+
+bool Person::get_theme() const
+{
+    return this->dark_theme;
 }

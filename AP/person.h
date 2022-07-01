@@ -19,6 +19,7 @@ protected:
     bool login_restriction{false};
     bool change_balance_restriction{false};
     bool restrict_buy_add_product{false};
+    bool dark_theme{true};
 
 public:
     Person();
@@ -36,6 +37,7 @@ public:
     void set_login_restriction(bool);
     void set_change_balance_restriction(bool);
     void set_buy_add_restriction(bool);
+    void set_theme(bool);
     QString get_name() const;
     QString get_address() const;
     QString get_email() const;
@@ -48,6 +50,7 @@ public:
     bool get_login_restriction() const;
     bool get_change_balance_restriction() const;
     bool get_buy_add_restriction() const;
+    bool get_theme() const;
 };
 
 #endif // PERSON_H

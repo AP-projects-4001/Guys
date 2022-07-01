@@ -2,7 +2,8 @@
 
 void save_client(vector<Client>& client_user)
 {
-    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances, deleted_times, login_res, buy_res, balance_res;
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances, deleted_times, login_res, buy_res, balance_res,
+               themes;
     for(unsigned int i = 0; i<client_user.size(); i++)
     {
         names.append(client_user[i].get_name());
@@ -16,6 +17,7 @@ void save_client(vector<Client>& client_user)
         login_res.append(client_user[i].get_login_restriction());
         buy_res.append(client_user[i].get_buy_add_restriction());
         balance_res.append(client_user[i].get_change_balance_restriction());
+        themes.append(client_user[i].get_theme());
         QString line;
         for (unsigned int j = 0; j<client_user[i].get_shopped_items().size(); j++)
         {
@@ -48,6 +50,7 @@ void save_client(vector<Client>& client_user)
     j["Login_Restriction"] = login_res;
     j["Buy_Restriction"] = buy_res;
     j["Balance_Restriction"] = balance_res;
+    j["Themes"] = themes;
 
     QJsonDocument d(j);
     QFile f("All_client.json");
@@ -90,11 +93,15 @@ void save_client(vector<Client>& client_user)
     len = balance_res.count();
     for(int i=0; i<len; i++)
         balance_res.removeAt(0);
+    len = themes.count();
+    for(int i=0; i<len; i++)
+        themes.removeAt(0);
 }
 
 void save_costumer(vector<Costumer> costumer_user)
 {
-    QJsonArray names, addresses, emails, phones, users, passwords, balances, deleted_times, login_res, add_res, balance_res;
+    QJsonArray names, addresses, emails, phones, users, passwords, balances, deleted_times, login_res, add_res, balance_res,
+               themes;
     for(unsigned int i = 0; i<costumer_user.size(); i++)
     {
         names.append(costumer_user[i].get_name());
@@ -108,6 +115,7 @@ void save_costumer(vector<Costumer> costumer_user)
         login_res.append(costumer_user[i].get_login_restriction());
         add_res.append(costumer_user[i].get_buy_add_restriction());
         balance_res.append(costumer_user[i].get_change_balance_restriction());
+        themes.append(costumer_user[i].get_theme());
     }
 
     QJsonObject j;
@@ -122,6 +130,7 @@ void save_costumer(vector<Costumer> costumer_user)
     j["Login_Restriction"] = login_res;
     j["Add_Restriction"] = add_res;
     j["Balance_Restriction"] = balance_res;
+    j["Themes"] = themes;
 
     QJsonDocument d(j);
     QFile f("All_costumer.json");
@@ -161,6 +170,9 @@ void save_costumer(vector<Costumer> costumer_user)
     len = balance_res.count();
     for(int i=0; i<len; i++)
         balance_res.removeAt(0);
+    len = themes.count();
+    for(int i=0; i<len; i++)
+        themes.removeAt(0);
 }
 
 void save_client(Client & user)
@@ -171,7 +183,7 @@ void save_client(Client & user)
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
     QJsonArray names, addresses, emails, phones, users, passwords, old_shopped, new_shopped, balances, deleted_times,
-               login_res, buy_res, balance_res;
+               login_res, buy_res, balance_res, themes;
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -184,6 +196,7 @@ void save_client(Client & user)
     login_res = o["Login_Restriction"].toArray();
     buy_res = o["Buy_Restriction"].toArray();
     balance_res = o["Balance_Restriction"].toArray();
+    themes = o["Themes"].toArray();
     f.close();
 
     for (int l = 0; l <old_shopped.size(); l++)
@@ -234,6 +247,7 @@ void save_client(Client & user)
     j["Login_Restriction"] = login_res;
     j["Buy_Restriction"] = buy_res;
     j["Balance_Restriction"] = balance_res;
+    j["Themes"] = themes;
 
     QJsonDocument d2(j);
     f.open(QIODevice::WriteOnly);
@@ -279,6 +293,9 @@ void save_client(Client & user)
     len = balance_res.count();
     for(int i=0; i<len; i++)
         balance_res.removeAt(0);
+    len = themes.count();
+    for(int i=0; i<len; i++)
+        themes.removeAt(0);
 }
 
 void save_product(vector<Product> products)
@@ -562,7 +579,9 @@ vector<Client> load_client()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances, deleted_times, login_res, buy_res, balance_res;;
+    QJsonArray names, addresses, emails, phones, users, passwords, shopped, balances, deleted_times, login_res, buy_res, balance_res,
+               themes;
+
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -575,6 +594,7 @@ vector<Client> load_client()
     login_res = o["Login_Restriction"].toArray();
     buy_res = o["Buy_Restriction"].toArray();
     balance_res = o["Balance_Restriction"].toArray();
+    themes = o["Themes"].toArray();
 
     vector<Client> client_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -591,6 +611,7 @@ vector<Client> load_client()
         tmp->set_login_restriction(login_res[i].toBool());
         tmp->set_buy_add_restriction(buy_res[i].toBool());
         tmp->set_change_balance_restriction(balance_res[i].toBool());
+        tmp->set_theme(themes[i].toBool());
         if((deleted_times[i].toInt()) != -1)
             tmp->set_deleted_status(true);
         vector<Product> pro_temp;
@@ -685,6 +706,9 @@ vector<Client> load_client()
     len = balance_res.count();
     for(int i=0; i<len; i++)
         balance_res.removeAt(0);
+    len = themes.count();
+    for(int i=0; i<len; i++)
+        themes.removeAt(0);
     return client_tmp;
 }
 
@@ -695,7 +719,9 @@ vector<Costumer> load_costumer()
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject o = d.object();
-    QJsonArray names, addresses, emails, phones, users, passwords, balances, deleted_times, login_res, add_res, balance_res;
+    QJsonArray names, addresses, emails, phones, users, passwords, balances, deleted_times, login_res, add_res, balance_res,
+               themes;
+
     names = o["Names"].toArray();
     addresses = o["Addresses"].toArray();
     emails = o["Emails"].toArray();
@@ -707,6 +733,7 @@ vector<Costumer> load_costumer()
     login_res = o["Login_Restriction"].toArray();
     add_res = o["Add_Restriction"].toArray();
     balance_res = o["Balance_Restriction"].toArray();
+    themes = o["Themes"].toArray();
 
     vector<Costumer> costumer_tmp;
     for(qsizetype i = 0; i<names.size(); i++)
@@ -723,6 +750,7 @@ vector<Costumer> load_costumer()
         tmp->set_login_restriction(login_res[i].toBool());
         tmp->set_buy_add_restriction(add_res[i].toBool());
         tmp->set_change_balance_restriction(balance_res[i].toBool());
+        tmp->set_theme(themes[i].toBool());
         if((deleted_times[i].toInt()) != -1)
             tmp->set_deleted_status(true);
         costumer_tmp.push_back(*tmp);
@@ -762,6 +790,9 @@ vector<Costumer> load_costumer()
     len = balance_res.count();
     for(int i=0; i<len; i++)
         balance_res.removeAt(0);
+    len = themes.count();
+    for(int i=0; i<len; i++)
+        themes.removeAt(0);
     return costumer_tmp;
 }
 
