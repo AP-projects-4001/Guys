@@ -127,6 +127,7 @@ void Login::on_pushButton_clicked()
                             ui->pushButton->setEnabled(false);
                             Movie->start();
                             Delay(2300);
+                            hide();
                             client_Ui *ClientUi = new client_Ui();
                             connect(this, SIGNAL(send_clientID(QString)), ClientUi, SLOT(set_userId(QString)));
                             emit send_clientID(client_users[i].get_user_name());
@@ -145,7 +146,6 @@ void Login::on_pushButton_clicked()
                         Delay(3300);
                         Movie->stop();
                         ui->login_confirm->hide();
-
                     }
                     break;
                 }
