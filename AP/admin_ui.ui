@@ -215,9 +215,27 @@ QLineEdit::disabled
 	border-radius: 7px;
 	border-color: #051a39;
 	padding: 2px;
+}
+QPlainTextEdit
+{
+	background-color: #525251;
+	color: #ffffff;
+	border-width: 1px;
+	border-radius: 7px;
+	border-color: #051a39;
+	padding: 2px;
 
 }
 
+QPlainTextEdit::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-width: 1px;
+	border-radius: 7px;
+	border-color: #051a39;
+	padding: 2px;
+}
 QTextEdit
 {
 	background-color: #ffffff;

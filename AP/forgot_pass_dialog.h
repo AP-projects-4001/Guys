@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QMessageBox>
 #include <QFile>
+#include <QMovie>
 #include <vector>
 #include "load_save.h"
 
@@ -23,11 +24,13 @@ public:
     ~Forgot_Pass_Dialog();
 
 private slots:
-    void on_buttonBox_accepted();
-
     void on_lineEdit_user_editingFinished();
 
     void on_lineEdit_email_editingFinished();
+
+    void on_confirm_button_clicked();
+
+    void on_Cancel_button_clicked();
 
 signals:
     void send_forgot(QString, QString, bool, bool);

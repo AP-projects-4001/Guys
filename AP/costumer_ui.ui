@@ -1487,7 +1487,7 @@ QPushButton::pressed
     </iconset>
    </property>
    <property name="text">
-    <string> </string>
+    <string/>
    </property>
   </action>
  </widget>

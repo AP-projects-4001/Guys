@@ -19,7 +19,7 @@ client_Ui::client_Ui(QWidget *parent) :
     ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     QTimer *timer = new QTimer(this);
-    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(updateCompass()));
+    QObject::connect(timer, SIGNAL(timeout()), this, SLOT(update_client()));
     timer->start(90*1000);
 }
 
