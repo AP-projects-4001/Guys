@@ -12,7 +12,7 @@ void Transaction::set_client_user_name(QString user)
 
 void Transaction::set_bought_product(std::vector<Product> & product_list)
 {
-    this->bouhgt_product = product_list;
+    this->bought_product = product_list;
 }
 
 void Transaction::set_date_time()
@@ -31,6 +31,11 @@ void Transaction::set_address(QString _address)
     this->address = _address;
 }
 
+void Transaction::push_product(Product ITEM)
+{
+    bought_product.push_back(ITEM);
+}
+
 QString Transaction::get_client_user_name() const
 {
     return this->client_username;
@@ -38,7 +43,7 @@ QString Transaction::get_client_user_name() const
 
 std::vector<Product> Transaction::get_bought_product() const
 {
-    return this->bouhgt_product;
+    return this->bought_product;
 }
 
 QString Transaction::get_date_time() const

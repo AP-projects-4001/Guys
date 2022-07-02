@@ -1255,6 +1255,10 @@ void confirm_payment(QString client_id)
     vector<Client> all_clients = load_client();
     vector<Costumer> all_costumers = load_costumer();
     Transaction tmp;
+    Transaction TEMP;
+    TEMP.set_client_user_name(client_id);
+    TEMP.set_date_time();
+    TEMP.set_address(all_clients[Index].get_address());
     for (unsigned int i = 0  ; i < all_clients[Index].get_shopped_items().size() ; ++i)
     {
         for (unsigned int j = 0 ; j < all_products.size() ; ++j)
@@ -1278,11 +1282,13 @@ void confirm_payment(QString client_id)
         tmp.set_address(all_clients[Index].get_address());
         vector<Product> temp;
         temp.push_back(all_clients[Index].get_shopped_items()[i]);
+        TEMP.push_product(temp[0]);
         tmp.set_bought_product(temp);
         save_transaction(tmp);
         temp.clear();
         temp.shrink_to_fit();
     }
+    send_email(TEMP, client_id);
     all_clients[Index].clear_shopped_items();
     save_product(all_products);
     save_client(all_clients);
@@ -1364,4 +1370,28 @@ void check_accounts()
     new_costumers.shrink_to_fit();
     new_products.clear();
     new_products.shrink_to_fit();
+}
+
+void send_email(Transaction transactions, QString Clients_Id)
+{
+    vector <Client> global_clients = load_client();
+    string text = "";
+    int INDEX = current_client_index(Clients_Id);
+    ofstream factor("temp.txt", ios::out);
+    factor << global_clients[INDEX].get_name().toStdString() << endl;
+    factor << global_clients[INDEX].get_email().toStdString() << endl;
+    text += "Hello dear " + global_clients[INDEX].get_name().toStdString() + ", Thanks for your shopping from our store \n";
+    text += "Your orders has been sent at " + transactions.get_date_time().toStdString() + " . \nYou bought ";
+    for (unsigned int i = 0 ; i < transactions.get_bought_product().size() ; ++i)
+    {
+        text += QString::number(transactions.get_bought_product()[i].get_added_to_cart()).toStdString() + " " +
+                transactions.get_bought_product()[i].get_name().toStdString() + " ّfor amount of " +
+                QString::number(transactions.get_bought_product()[i].get_price()).toStdString() + ", ";
+    }
+    text.pop_back();
+    text.pop_back();
+    text += ". \n";
+    text += "From Guys store ❤ \n";
+    factor << text ;
+    factor.close();
 }

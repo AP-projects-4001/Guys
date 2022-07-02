@@ -19,6 +19,7 @@
 //#include <QThread>
 #include <QEventLoop>
 #include <chrono>
+#include <fstream>
 using namespace std;
 
 void save_client(vector<Client>&);
@@ -27,6 +28,7 @@ void save_client(Client &);
 void save_product(vector<Product>);
 void save_product(Product &);
 void save_transaction(Transaction &a);
+void send_email(Transaction, QString);
 vector<Transaction> load_transaction();
 vector<Client> load_client();
 vector<Costumer> load_costumer();

@@ -29,6 +29,7 @@ public:
     ~client_Ui();
     void Delay_c(int);
 
+
 signals:
     void send_index(Product);
     void send_product_cart(Product, unsigned int);

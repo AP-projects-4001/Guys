@@ -8,7 +8,7 @@
 class Transaction
 {
 private:
-    std::vector<Product> bouhgt_product;
+    std::vector<Product> bought_product;
     QString client_username;
     QString date_time;
     QString address;
@@ -19,6 +19,7 @@ public:
     void set_date_time();
     void set_date_time(QString);
     void set_address(QString);
+    void push_product(Product);
     QString get_client_user_name() const;
     std::vector<Product> get_bought_product() const;
     QString get_date_time() const;
