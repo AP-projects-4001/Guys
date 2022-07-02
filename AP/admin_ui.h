@@ -27,6 +27,10 @@ private slots:
 
     void on_action_logout_triggered();
 
+    void on_actionLight_triggered();
+
+    void on_actionDark_triggered();
+
 signals:
     void send_transaction_admin(QString);
 

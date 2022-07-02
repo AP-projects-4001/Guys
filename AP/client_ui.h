@@ -27,6 +27,7 @@ class client_Ui : public QMainWindow
 public:
     explicit client_Ui(QWidget *parent = nullptr);
     ~client_Ui();
+    void Delay_c(int);
 
 signals:
     void send_index(Product);
@@ -52,6 +53,8 @@ private slots:
     void confirm_purchase();
     void update_client();
     void on_pushButton_2_clicked();
+
+    void on_checkBox_theme_clicked();
 
 private:
     Ui::client_Ui *ui;

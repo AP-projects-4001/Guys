@@ -42,6 +42,8 @@ private slots:
 
     void check_balance();
     void update_customer();
+    void on_checkBox_theme_clicked();
+
 signals:
     void send_index(int);
     void send_transaction(QString);

@@ -1145,6 +1145,8 @@ QPushButton::pressed
     <bool>false</bool>
    </attribute>
    <addaction name="action_logout"/>
+   <addaction name="actionLight"/>
+   <addaction name="actionDark"/>
   </widget>
   <action name="action_logout">
    <property name="icon">
@@ -1156,6 +1158,30 @@ QPushButton::pressed
    </property>
    <property name="toolTip">
     <string>Log Out</string>
+   </property>
+  </action>
+  <action name="actionLight">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/included_images/light.png</normaloff>:/included_images/light.png</iconset>
+   </property>
+   <property name="text">
+    <string>Light</string>
+   </property>
+   <property name="toolTip">
+    <string>Light Mode</string>
+   </property>
+  </action>
+  <action name="actionDark">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/included_images/dark.png</normaloff>:/included_images/dark.png</iconset>
+   </property>
+   <property name="text">
+    <string>Dark</string>
+   </property>
+   <property name="toolTip">
+    <string>Dark Mode</string>
    </property>
   </action>
  </widget>

@@ -15,6 +15,13 @@
         <file>confimation_gif.gif</file>
         <file>person-icon-edited.png</file>
         <file>logout-icon.png</file>
+        <file>dark.png</file>
+        <file>light.png</file>
+        <file>dark_mode.png</file>
+        <file>light_mode.png</file>
     </qresource>
-    <qresource prefix="/new/prefix1"/>
+    <qresource prefix="/themes">
+        <file>dark_theme.qss</file>
+        <file>light_theme.qss</file>
+    </qresource>
 </RCC>

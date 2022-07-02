@@ -75,7 +75,79 @@ void client_Ui::set_userId(QString user)
         leftButton->setText(show_balance(global_clients, current_client));
     });
     //  ***
+
+    ui->checkBox_theme->setChecked(global_clients[current_client_index(current_client)].get_theme());
+    if(!global_clients[current_client_index(current_client)].get_theme())
+    {
+        QFile styleFile( ":/themes/light_theme.qss" );
+        styleFile.open( QFile::ReadOnly );
+        QString style( styleFile.readAll() );
+        client_Ui::setStyleSheet(style);
+        ui->show_table->setStyleSheet(
+                    "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
+
+                    "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
+
+                    "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
+
+                    "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
+
+                    "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
+
+                    "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
+
+                    "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
+                    );
+        ui->cart_table->setStyleSheet(
+                    "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
+
+                    "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
+
+                    "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
+
+                    "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
+
+                    "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
+
+                    "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
+
+                    "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
+                    );
+        ui->transaction_table->setStyleSheet(
+                    "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
+
+                    "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
+
+                    "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
+
+                    "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
+
+                    "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
+
+                    "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
+
+                    "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
+                    );
+    }
+    else
+    {
+        QFile styleFile( ":/themes/dark_theme.qss" );
+        styleFile.open( QFile::ReadOnly );
+        QString style( styleFile.readAll() );
+        client_Ui::setStyleSheet(style);
+        ui->show_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
+        ui->cart_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
+        ui->transaction_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
+    }
 }
+
+void client_Ui::Delay_c(int n)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
 
 void client_Ui::sorter(QString from_price, QString to_price, QString from_weight, QString to_weight, QString color, QString brand, QString type, bool min, bool max, bool newest, bool oldest, bool M_shopped, bool M_viewed, bool none, bool availale)
 {
@@ -109,67 +181,67 @@ void client_Ui::add_to_cart(Product item)
 
 void client_Ui::show_products(vector<Product> &products)
 {
-        for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
-            ui->show_table->removeRow(i);
-        ui->show_table->clearContents();
+    for (int i = 0 ; i < ui->show_table->rowCount() ; ++i)
+        ui->show_table->removeRow(i);
+    ui->show_table->clearContents();
 
-        ui->show_table->setRowCount(products.size());
-        for (unsigned int i = 0 ; i < products.size(); i++)
+    ui->show_table->setRowCount(products.size());
+    for (unsigned int i = 0 ; i < products.size(); i++)
+    {
+
+        ui->show_table->setItem(i , 0, new QTableWidgetItem(products[i].get_name()));
+        ui->show_table->item(i ,  0)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(i , 1, new QTableWidgetItem(products[i].get_brand()));
+        ui->show_table->item(i ,  1)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(i , 2, new QTableWidgetItem(products[i].get_type()));
+        ui->show_table->item(i ,  2)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(i , 3, new QTableWidgetItem(products[i].get_color()));
+        ui->show_table->item(i ,  3)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(i , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
+        ui->show_table->item(i ,  4)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(i , 5, new QTableWidgetItem(products[i].get_size()));
+        ui->show_table->item(i ,  5)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(i , 6, new QTableWidgetItem(QString::number(products[i].get_weight())));
+        ui->show_table->item(i ,  6)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->setItem(i , 7, new QTableWidgetItem(products[i].get_additional_info()));
+        ui->show_table->item(i ,  7)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+
+        QWidget* pWidget = new QWidget();
+        QPushButton* btn_edit = new QPushButton();
+        btn_edit->setText("Show");
+        QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+        pWidget->setAutoFillBackground(true);
+        pLayout->addWidget(btn_edit);
+        pLayout->setAlignment(Qt::AlignCenter);
+        pLayout->setContentsMargins(0, 0, 0, 0);
+        pWidget->setLayout(pLayout);
+        ui->show_table->setCellWidget(i, 8, pWidget);
+        if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
         {
-
-            ui->show_table->setItem(i , 0, new QTableWidgetItem(products[i].get_name()));
-            ui->show_table->item(i ,  0)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(i , 1, new QTableWidgetItem(products[i].get_brand()));
-            ui->show_table->item(i ,  1)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(i , 2, new QTableWidgetItem(products[i].get_type()));
-            ui->show_table->item(i ,  2)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(i , 3, new QTableWidgetItem(products[i].get_color()));
-            ui->show_table->item(i ,  3)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(i , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
-            ui->show_table->item(i ,  4)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(i , 5, new QTableWidgetItem(products[i].get_size()));
-            ui->show_table->item(i ,  5)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(i , 6, new QTableWidgetItem(QString::number(products[i].get_weight())));
-            ui->show_table->item(i ,  6)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-            ui->show_table->setItem(i , 7, new QTableWidgetItem(products[i].get_additional_info()));
-            ui->show_table->item(i ,  7)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
-
-            QWidget* pWidget = new QWidget();
-            QPushButton* btn_edit = new QPushButton();
-            btn_edit->setText("Show");
-            QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
-            pWidget->setAutoFillBackground(true);
-            pLayout->addWidget(btn_edit);
-            pLayout->setAlignment(Qt::AlignCenter);
-            pLayout->setContentsMargins(0, 0, 0, 0);
-            pWidget->setLayout(pLayout);
-            ui->show_table->setCellWidget(i, 8, pWidget);
-            if(global_clients[current_client_index(current_client)].get_buy_add_restriction())
-            {
-                btn_edit->setEnabled(false);
-                btn_edit->setToolTip("You cannot buy anything because admin has banned you!");
-            }
-            else
-                btn_edit->setEnabled(true);
-            connect(btn_edit, &QPushButton::clicked, btn_edit, [=,&products](){
-                products[i].set_viewed(products[i].get_viewed()+1);
-                for(unsigned int k = 0; k < products_2.size(); k++)
-                {
-                    if(products_2[k].get_name() == products[i].get_name() &&
-                       products_2[k].get_costumer_username() == products[i].get_costumer_username())
-                    {
-                        products_2[k].set_viewed(products_2[k].get_viewed()+1);
-                        break;
-                    }
-                }
-                save_product(products_2);
-                buy_products *p = new buy_products(this);
-                connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
-                connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
-                emit send_index(products[i]);
-                p->exec();
-            });
+            btn_edit->setEnabled(false);
+            btn_edit->setToolTip("You cannot buy anything because admin has banned you!");
         }
+        else
+            btn_edit->setEnabled(true);
+        connect(btn_edit, &QPushButton::clicked, btn_edit, [=,&products](){
+            products[i].set_viewed(products[i].get_viewed()+1);
+            for(unsigned int k = 0; k < products_2.size(); k++)
+            {
+                if(products_2[k].get_name() == products[i].get_name() &&
+                   products_2[k].get_costumer_username() == products[i].get_costumer_username())
+                {
+                    products_2[k].set_viewed(products_2[k].get_viewed()+1);
+                    break;
+                }
+            }
+            save_product(products_2);
+            buy_products *p = new buy_products(this);
+            connect(this, SIGNAL(send_index(Product)), p, SLOT(recieve_index(Product)));
+            connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
+            emit send_index(products[i]);
+            p->exec();
+        });
+    }
 }
 
 void client_Ui::show_products(unsigned int index)
@@ -218,7 +290,7 @@ void client_Ui::show_products(unsigned int index)
             connect(btn_edit, &QPushButton::clicked, btn_edit, [=]() {
                 buy_products *p = new buy_products(this);
                 p->edit_button();
-                connect(this, SIGNAL(send_product_cart(Product, unsigned int)), p, SLOT(recieve_product(Product,unsigned int)));
+                connect(this, SIGNAL(send_product_cart(Product,uint)), p, SLOT(recieve_product(Product,uint)));
                 connect(p, SIGNAL(send_ITEM(Product)), this, SLOT(add_to_cart(Product)));
                 emit send_product_cart(global_clients[Index].get_shopped_items()[i],
                                        global_clients[Index].get_shopped_items()[i].get_added_to_cart());
@@ -429,7 +501,7 @@ void client_Ui::on_Purchase_Button_clicked()
     if(ui->radioButton_credit->isChecked())
     {
         Payment_gateway* p1 = new Payment_gateway(this);
-        connect(this,SIGNAL(send_to_gateway(QString, int)),p1,SLOT(recieve_bank(QString, int)));
+        connect(this,SIGNAL(send_to_gateway(QString,int)),p1,SLOT(recieve_bank(QString,int)));
         connect(p1, SIGNAL(send_purchase()), this, SLOT(confirm_purchase()));
         p1->set_flag(false);
         emit send_to_gateway(ui->comboBox->currentText(), ui->total_lineedit->text().toInt());
@@ -469,17 +541,20 @@ void client_Ui::on_pushButton_3_clicked()
        ui->lineEdit_email->text().isEmpty() || ui->lineEdit_phone_num->text().isEmpty())
     {
         QMessageBox::warning(this, "Error", "Fields can't be empty...");
+        on_tabWidget_tabBarClicked(3);
     }
 
     else if(!(ui->lineEdit_phone_num->text().toStdString().find_first_not_of("0123456789") == string::npos))
     {
         QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
-//        ui->lineEdit_phone_num->setText("");
+        int index = current_client_index(current_client);
+        ui->lineEdit_phone_num->setText(global_clients[index].get_phone_number());
     }
     else if (!check_email(ui->lineEdit_email->text()))
     {
         QMessageBox::warning(this, "Error", "Email is not valid");
-//        ui->lineEdit_email->setText("");
+        int index = current_client_index(current_client);
+        ui->lineEdit_email->setText(global_clients[index].get_email());
     }
     else
     {
@@ -488,8 +563,17 @@ void client_Ui::on_pushButton_3_clicked()
         global_clients[index].set_address(ui->lineEdit_address->text());
         global_clients[index].set_phone_number(ui->lineEdit_phone_num->text());
         global_clients[index].set_email(ui->lineEdit_email->text());
+        global_clients[index].set_theme(ui->checkBox_theme->isChecked());
         save_client(global_clients);
-        QMessageBox::warning(this, "Save Changes", "Saved Successfully!");
+        QMovie *Confirm;
+        Confirm = new QMovie(":/included_images/confimation_gif.gif");
+        ui->confirm_gif->setMovie(Confirm);
+        ui->confirm_gif->movie()->setScaledSize(QSize(121, 121));
+        ui->confirm_gif->show();
+        Confirm->start();
+        Delay_c(1335);
+        Confirm->stop();
+        ui->confirm_gif->setVisible(false);
     }
 }
 
@@ -548,7 +632,6 @@ void client_Ui::update_client()
 }
 
 
-
 void client_Ui::on_pushButton_2_clicked()
 {
     if(ui->lineEdit_2->text()!="")
@@ -578,6 +661,73 @@ void client_Ui::on_pushButton_2_clicked()
         tmp2.clear();
         tmp2.shrink_to_fit();
         show_products(products_copy);
+    }
+}
+
+void client_Ui::on_checkBox_theme_clicked()
+{
+    if(!ui->checkBox_theme->isChecked()) // dark is active
+    {
+        QFile styleFile( ":/themes/light_theme.qss" );
+        styleFile.open( QFile::ReadOnly );
+        QString style( styleFile.readAll() );
+        client_Ui::setStyleSheet(style);
+        ui->show_table->setStyleSheet(
+                    "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
+
+                    "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
+
+                    "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
+
+                    "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
+
+                    "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
+
+                    "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
+
+                    "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
+                    );
+        ui->cart_table->setStyleSheet(
+                    "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
+
+                    "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
+
+                    "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
+
+                    "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
+
+                    "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
+
+                    "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
+
+                    "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
+                    );
+        ui->transaction_table->setStyleSheet(
+                    "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
+
+                    "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
+
+                    "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
+
+                    "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
+
+                    "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
+
+                    "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
+
+                    "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
+                    );
+    }
+
+    else // light is active
+    {
+        QFile styleFile( ":/themes/dark_theme.qss" );
+        styleFile.open( QFile::ReadOnly );
+        QString style( styleFile.readAll() );
+        client_Ui::setStyleSheet(style);
+        ui->show_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
+        ui->cart_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
+        ui->transaction_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
     }
 }
 
