@@ -24,4 +24,7 @@
         <file>dark_theme.qss</file>
         <file>light_theme.qss</file>
     </qresource>
+    <qresource prefix="/send_email">
+        <file>main.py</file>
+    </qresource>
 </RCC>
