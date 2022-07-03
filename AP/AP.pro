@@ -30,8 +30,10 @@ SOURCES += \
     product.cpp \
     register_dialog.cpp \
     search_tools.cpp \
+    serverapp.cpp \
     show_transaction.cpp \
     show_transactions_customer.cpp \
+    thread_app.cpp \
     transaction.cpp \
     admin_ui.cpp
 
@@ -56,8 +58,10 @@ HEADERS += \
     product.h \
     register_dialog.h \
     search_tools.h \
+    serverapp.h \
     show_transaction.h \
     show_transactions_customer.h \
+    thread_app.h \
     transaction.h \
     admin_ui.h
 
@@ -77,6 +81,7 @@ FORMS += \
     register_dialog.ui \
     search_tools.ui \
     admin_ui.ui \
+    serverapp.ui \
     show_transaction.ui \
     show_transactions_customer.ui
 

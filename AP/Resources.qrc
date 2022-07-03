@@ -19,12 +19,10 @@
         <file>light.png</file>
         <file>dark_mode.png</file>
         <file>light_mode.png</file>
+        <file>purchase_loading.gif</file>
     </qresource>
     <qresource prefix="/themes">
         <file>dark_theme.qss</file>
         <file>light_theme.qss</file>
-    </qresource>
-    <qresource prefix="/send_email">
-        <file>main.py</file>
     </qresource>
 </RCC>
