@@ -568,6 +568,9 @@ QPushButton::pressed
               </item>
               <item>
                <widget class="QLineEdit" name="lineEdit_user_name">
+                <property name="cursor">
+                 <cursorShape>ForbiddenCursor</cursorShape>
+                </property>
                 <property name="readOnly">
                  <bool>true</bool>
                 </property>
@@ -666,6 +669,9 @@ QPushButton::pressed
                 <width>161</width>
                 <height>81</height>
                </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">QCheckBox::indicator
@@ -787,6 +793,9 @@ QCheckBox::indicator:checked
               </property>
               <item>
                <widget class="QPushButton" name="pushButton_change_pass">
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
                 <property name="text">
                  <string>Change Password</string>
                 </property>
@@ -794,6 +803,9 @@ QCheckBox::indicator:checked
               </item>
               <item>
                <widget class="QPushButton" name="pushButton_save_change">
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
                 <property name="text">
                  <string>Save Changes</string>
                 </property>

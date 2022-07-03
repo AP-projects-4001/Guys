@@ -400,6 +400,7 @@ void client_Ui::show_products(unsigned int index)
 
 void client_Ui::show_setting()
 {
+    ui->lineEdit_username->setDisabled(true);
     int index = current_client_index(current_client);
     ui->lineEdit_name->setText(global_clients[index].get_name());
     ui->lineEdit_username->setText(global_clients[index].get_user_name());
@@ -558,6 +559,7 @@ void client_Ui::on_pushButton_3_clicked()
     }
     else
     {
+        ui->pushButton_3->setEnabled(false);
         int index = current_client_index(current_client);
         global_clients[index].set_name(ui->lineEdit_name->text());
         global_clients[index].set_address(ui->lineEdit_address->text());
@@ -574,6 +576,7 @@ void client_Ui::on_pushButton_3_clicked()
         Delay_c(1335);
         Confirm->stop();
         ui->confirm_gif->setVisible(false);
+        ui->pushButton_3->setEnabled(true);
     }
 }
 

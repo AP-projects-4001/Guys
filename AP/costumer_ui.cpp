@@ -360,6 +360,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
         ui->lineEdit_phone->setText(tmp[user_index].get_phone_number());
         tmp.clear();
         tmp.shrink_to_fit();
+        ui->lineEdit_user_name->setDisabled(true);
     }
 }
 

@@ -147,6 +147,9 @@
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
             <widget class="QCheckBox" name="checkBox_enter_limit">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
              <property name="styleSheet">
               <string notr="true">QCheckBox::indicator
 {
@@ -175,6 +178,9 @@ QCheckBox::indicator:checked
            </item>
            <item>
             <widget class="QCheckBox" name="checkBox_balance_limit">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
              <property name="styleSheet">
               <string notr="true">QCheckBox::indicator
 {
@@ -203,6 +209,9 @@ QCheckBox::indicator:checked
            </item>
            <item>
             <widget class="QCheckBox" name="checkBox_buy_product">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
              <property name="styleSheet">
               <string notr="true">QCheckBox::indicator
 {
@@ -290,6 +299,9 @@ QCheckBox::indicator:checked
             <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
               <widget class="QPushButton" name="pushButton_del">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="text">
                 <string>Delete Client</string>
                </property>
@@ -297,6 +309,9 @@ QCheckBox::indicator:checked
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_save">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="text">
                 <string>Save Changes</string>
                </property>
@@ -304,6 +319,9 @@ QCheckBox::indicator:checked
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_cancel">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="text">
                 <string>Cancel</string>
                </property>

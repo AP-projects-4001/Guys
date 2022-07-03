@@ -11,7 +11,7 @@ costumer_products::costumer_products(QWidget *parent) :
 {
     ui->setupUi(this);
     global_product = load_product();
-    deleted = false;
+    deleted = false;    
 }
 
 costumer_products::~costumer_products()
@@ -20,7 +20,7 @@ costumer_products::~costumer_products()
 }
 
 void costumer_products::recieve_index(int index)
-{
+{    
       global_index = index;
       ui->name_lineEdit->setText(global_product[index].get_name());
       ui->brand_lineEdit->setText(global_product[index].get_brand());
@@ -31,6 +31,11 @@ void costumer_products::recieve_index(int index)
       ui->weight_lineEdit->setText(QString::number(global_product[index].get_weight()));
       ui->price_lineEdit->setText(QString::number(global_product[index].get_price()));
       ui->stock_lineEdit->setText(QString::number(global_product[index].get_stock()));
+      // Unchangable parameters
+      ui->name_lineEdit->setDisabled(true);
+      ui->brand_lineEdit->setDisabled(true);
+      ui->type_lineEdit->setDisabled(true);
+
       // if path is not available
       if(global_product[index].get_path() != "")
       {
@@ -101,6 +106,21 @@ void costumer_products::on_save_Button_clicked()
        ui->weight_lineEdit->text().isEmpty()) && !deleted)
     {
         QMessageBox::warning(this, "Error", "Fields starting with * can't be empty...");
+    }
+    else if(!(ui->weight_lineEdit->text().toStdString().find_first_not_of("0123456789") == string::npos))
+    {
+        QMessageBox::warning(this, "Error", "Weight can't contain characters...");
+        ui->weight_lineEdit->setText("");
+    }
+    else if(!(ui->price_lineEdit->text().toStdString().find_first_not_of("0123456789") == string::npos))
+    {
+        QMessageBox::warning(this, "Error", "Price can't contain characters...");
+        ui->price_lineEdit->setText("");
+    }
+    else if(!(ui->stock_lineEdit->text().toStdString().find_first_not_of("0123456789") == string::npos))
+    {
+        QMessageBox::warning(this, "Error", "Stock can't contain characters...");
+        ui->stock_lineEdit->setText("");
     }
     else if(!deleted)
     {

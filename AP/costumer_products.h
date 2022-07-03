@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include <QMovie>
+#include <QIntValidator>
 namespace Ui {
 class costumer_products;
 }
