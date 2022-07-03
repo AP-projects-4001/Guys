@@ -763,7 +763,11 @@ QCheckBox::indicator:disabled
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_new_pass"/>
+            <widget class="QLineEdit" name="lineEdit_new_pass">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -773,6 +777,9 @@ QCheckBox::indicator:disabled
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="QRadioButton" name="radioButton_client">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Client</string>
            </property>
@@ -783,6 +790,9 @@ QCheckBox::indicator:disabled
          </item>
          <item>
           <widget class="QRadioButton" name="radioButton_costumer">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Customer</string>
            </property>
@@ -830,6 +840,9 @@ QCheckBox::indicator:disabled
      </item>
      <item>
       <widget class="QPushButton" name="confirm_button">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Confirm</string>
        </property>
@@ -837,6 +850,9 @@ QCheckBox::indicator:disabled
      </item>
      <item>
       <widget class="QPushButton" name="Cancel_button">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>

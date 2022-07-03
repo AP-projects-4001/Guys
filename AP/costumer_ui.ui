@@ -327,6 +327,9 @@
                <layout class="QVBoxLayout" name="verticalLayout_7">
                 <item>
                  <widget class="QPushButton" name="pushButton">
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
                   <property name="text">
                    <string>Add image</string>
                   </property>
@@ -334,6 +337,9 @@
                 </item>
                 <item>
                  <widget class="QPushButton" name="Button_add">
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
                   <property name="text">
                    <string>Add to products</string>
                   </property>

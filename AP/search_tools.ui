@@ -161,6 +161,9 @@
          </item>
          <item>
           <widget class="QCheckBox" name="available_checkBox">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="styleSheet">
             <string notr="true">QCheckBox::indicator
 {
@@ -193,6 +196,9 @@ QCheckBox::indicator:checked
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QRadioButton" name="min_to_max">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Min to Max Price</string>
            </property>
@@ -200,6 +206,9 @@ QCheckBox::indicator:checked
          </item>
          <item>
           <widget class="QRadioButton" name="max_to_min">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Max to Min Price</string>
            </property>
@@ -207,6 +216,9 @@ QCheckBox::indicator:checked
          </item>
          <item>
           <widget class="QRadioButton" name="newest_Button">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Newest</string>
            </property>
@@ -214,6 +226,9 @@ QCheckBox::indicator:checked
          </item>
          <item>
           <widget class="QRadioButton" name="oldest_Button">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Oldest</string>
            </property>
@@ -221,6 +236,9 @@ QCheckBox::indicator:checked
          </item>
          <item>
           <widget class="QRadioButton" name="mostshopped_button">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Most shopped</string>
            </property>
@@ -228,6 +246,9 @@ QCheckBox::indicator:checked
          </item>
          <item>
           <widget class="QRadioButton" name="mostviewed_button">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Most viewed</string>
            </property>
@@ -235,6 +256,9 @@ QCheckBox::indicator:checked
          </item>
          <item>
           <widget class="QRadioButton" name="none_button">
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>None</string>
            </property>

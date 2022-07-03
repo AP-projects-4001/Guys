@@ -367,6 +367,9 @@ QStatusBar
         <property name="enabled">
          <bool>true</bool>
         </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton
 {
@@ -435,6 +438,9 @@ QStatusBar
      <width>113</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">QLineEdit

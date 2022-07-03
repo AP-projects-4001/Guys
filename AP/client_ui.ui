@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>652</width>
-    <height>652</height>
+    <width>631</width>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,8 +42,9 @@
           </item>
           <item>
            <widget class="QLineEdit" name="lineEdit_2">
-            <property name="placeholderText">
-             <string>Example</string>
+            <property name="toolTip">
+             <string>Example)
+	12Mp 7inches 4500mA OLED</string>
             </property>
            </widget>
           </item>
@@ -413,6 +414,13 @@ QPushButton::pressed
                   <string>Pasargad</string>
                  </property>
                 </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string/>
+                </property>
                </widget>
               </item>
              </layout>
