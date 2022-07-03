@@ -1299,6 +1299,7 @@ void confirm_payment(QString client_id)
     all_products.shrink_to_fit();
     all_costumers.clear();
     all_costumers.shrink_to_fit();
+
 }
 
 QString show_balance2(vector<Costumer> &costumers, QString current)
@@ -1385,13 +1386,17 @@ void send_email(Transaction transactions, QString Clients_Id)
     for (unsigned int i = 0 ; i < transactions.get_bought_product().size() ; ++i)
     {
         text += QString::number(transactions.get_bought_product()[i].get_added_to_cart()).toStdString() + " " +
-                transactions.get_bought_product()[i].get_name().toStdString() + " ّfor amount of " +
+                transactions.get_bought_product()[i].get_name().toStdString() + " for amount of " +
                 QString::number(transactions.get_bought_product()[i].get_price()).toStdString() + ", ";
     }
     text.pop_back();
     text.pop_back();
     text += ". \n";
-    text += "From Guys store ❤ \n";
+    text += "From Guys store <3 \n";
     factor << text ;
     factor.close();
+    QStringList arguments { "../AP/main.py" };
+    QProcess p;
+    p.start("python", arguments);
+    p.waitForFinished();
 }

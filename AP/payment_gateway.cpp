@@ -216,6 +216,8 @@ void Payment_gateway::on_purchase_button_clicked()
         // thread ==> emit
         movie->start();
         ui->purchase_button->setEnabled(false);
+        ui->cancel_button->setEnabled(false);
+
         delay(5200);
         if(!flag){
             emit send_purchase();

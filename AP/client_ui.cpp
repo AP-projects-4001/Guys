@@ -6,6 +6,8 @@ std::vector <Product> products_2;
 std::vector <Product> products_copy;
 std::vector <Client> global_clients; // Change password
 QPushButton *leftButton;
+QMovie *loading;
+QTimer *timer;
 client_Ui::client_Ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::client_Ui)
@@ -18,9 +20,10 @@ client_Ui::client_Ui(QWidget *parent) :
     ui->show_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->cart_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    QTimer *timer = new QTimer(this);
+    ui->label_10->hide();
+    timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(update_client()));
-    timer->start(90*1000);
+    timer->start(20*1000);
 }
 
 client_Ui::~client_Ui()
@@ -85,47 +88,29 @@ void client_Ui::set_userId(QString user)
         client_Ui::setStyleSheet(style);
         ui->show_table->setStyleSheet(
                     "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
-
                     "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
-
                     "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
-
                     "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
-
                     "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
-
                     "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
-
                     "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
                     );
         ui->cart_table->setStyleSheet(
                     "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
-
                     "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
-
                     "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
-
                     "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
-
                     "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
-
                     "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
-
                     "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
                     );
         ui->transaction_table->setStyleSheet(
                     "QWidget{background-color:#ececec; color: #000000; border-color: #0250c5;}"
-
                     "QToolTip{ border : 1px solid #ff4a4a; background-color: #020274; color: #ffffff; border-color: #0c0275;}"
-
                     "QPushButton{ padding: 0 5px 0 5px; border-style: solid; border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #c1c9cf, stop:1 #d2d8dd); border-right-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-bottom-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #c1c9cf, stop:1 #d2d8dd); border-width: 2px; border-radius: 8px; color: #616161; font-weight: bold; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #fbfdfd, stop:0.5 #ffffff, stop:1 #fbfdfd);}"
-
                     "QPushButton::default{ border: 2px solid transparent; color: #FFFFFF; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #84afe5, stop:1 #1168e4);}"
-
                     "QPushButton:hover{ color: #3d3d3d; border: 2px solid  #046dd6;}"
-
                     "QPushButton:pressed{ color: #000000; background-color:  #c7e3ff; border: 2px solid  #023d78;}"
-
                     "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
                     );
     }
@@ -519,7 +504,19 @@ void client_Ui::on_Purchase_Button_clicked()
                 }else{
                     global_clients[i].set_balance(global_clients[i].get_balance() - ui->total_lineedit->text().toInt());
                     save_client(global_clients);
-                    confirm_payment(current_client);
+
+
+                    class thread SEND(confirm_payment,current_client);
+                    loading = new QMovie(":/included_images/purchase_loading.gif");
+                    ui->label_10->setMovie(loading);
+                    ui->label_10->movie()->setScaledSize(QSize(120, 25));
+                    ui->label_10->show();
+                    loading->start();
+                    Delay_c(5000);
+                    SEND.join();
+                    loading->stop();
+                    ui->label_10->hide();
+
                     leftButton->setText(show_balance(global_clients, current_client));
                     global_clients = load_client();
                     products_2 = load_product();
@@ -602,7 +599,7 @@ void client_Ui::confirm_purchase()
 
 void client_Ui::update_client()
 {
-
+    global_clients = load_client();
     if(global_clients[current_client_index(current_client)].get_change_balance_restriction())
     {
         leftButton->setEnabled(false);
@@ -630,6 +627,8 @@ void client_Ui::update_client()
     {
         QMessageBox::warning(this, "Admin has banned you!" , "Sorry, you can't stay in your account anymore...");
         // Log out
+        close();
+        this->~client_Ui();
     }
 
 }

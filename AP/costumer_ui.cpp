@@ -517,6 +517,8 @@ void costumer_Ui::update_customer()
     {
         QMessageBox::warning(this, "Admin has banned you!" , "Sorry, you can't stay in your account anymore...");
         // Log out
+        close();
+        this->~costumer_Ui();
     }
     check_balance();
 }

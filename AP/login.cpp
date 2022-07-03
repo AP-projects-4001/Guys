@@ -88,6 +88,8 @@ void Login::recieve_register(QString _name, QString _user_name, QString _address
 void Login::on_pushButton_clicked()
 {
     // If fields are empty
+    client_users = load_client();
+    costumer_users = load_costumer();
     if (ui->lineEdit_user->text().isEmpty()){
         QMessageBox::warning(this, "Error", "Username can't be empty...");
     }

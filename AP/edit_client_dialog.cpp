@@ -6,6 +6,7 @@ Edit_Client_Dialog::Edit_Client_Dialog(QWidget *parent) :
     ui(new Ui::Edit_Client_Dialog)
 {
     ui->setupUi(this);
+    ui->lineEdit_user->setDisabled(true);
 }
 
 Edit_Client_Dialog::~Edit_Client_Dialog()

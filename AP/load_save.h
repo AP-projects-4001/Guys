@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QProcess>
 #include <regex>
 #include "client.h"
 #include "costumer.h"
@@ -16,7 +17,7 @@
 #include "admin.h"
 #include "transaction.h"
 #include "product.h"
-//#include <QThread>
+#include <thread>
 #include <QEventLoop>
 #include <chrono>
 #include <fstream>
