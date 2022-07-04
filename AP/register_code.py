@@ -7,7 +7,7 @@ Code = sys.argv[3]
 
 sender = "ap.guys.store@gmail.com"
 recevier = Email
-password = "uzhsypapwsrayzdx"
+password = sys.argv[4]
 subject = "Registration Confirmation"
 body = 'Dear ' + Name + ', The registration proccess has been initiated for your e-mail'
 body += ' on the AP Guys Store program\n'

@@ -18,7 +18,7 @@ void Transaction::set_bought_product(std::vector<Product> & product_list)
 void Transaction::set_date_time()
 {
     QDateTime date = QDateTime::currentDateTime();
-    this->date_time = date.toString("dd.MM.yyyy hh:mm:ss");
+    this->date_time = date.toString("MM.dd.yyyy hh:mm:ss");
 }
 
 void Transaction::set_date_time(QString date_time_)

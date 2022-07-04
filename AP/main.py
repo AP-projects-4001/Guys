@@ -1,5 +1,6 @@
 import smtplib
-
+import sys
+import os
 with open('temp.txt', 'r') as f:
     lines = f.readlines()
 
@@ -11,12 +12,9 @@ for line in lines[2:]:
     string += line.strip() + '\n'
 
 
-# passssss "uzhsypapwsrayzdx"
-
-
 sender = "ap.guys.store@gmail.com"
 recevier = email
-password = "uzhsypapwsrayzdx"
+password = sys.argv[1]
 subject = "Your Payment was Successfull :)"
 body = string
 
@@ -35,3 +33,5 @@ try:
     print("email sent")
 except:
     print("can't send")
+
+os.remove("temp.txt")

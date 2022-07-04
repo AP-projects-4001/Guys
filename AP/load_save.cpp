@@ -1026,17 +1026,6 @@ vector<Product> sort_function(vector<Product> allproducts, QString from_price, Q
     vector<unsigned long long int> list;
     for(unsigned long long int i = 0; i <updated.size() ;i++)
     {
-//        bool check{false};
-//        if(updated[i].get_color() != color || updated[i].get_brand() != brand || updated[i].get_type() != type)
-//            check = true;
-//        else if(updated[i].get_price()<from_price.toInt() || updated[i].get_price() > to_price.toInt() || updated[i].get_weight()<from_weight.toInt() || updated[i].get_weight() > to_weight.toInt())
-//            check = true;
-//        else if(availale)
-//            if(updated[i].get_stock()==0)
-//                check = true;
-//        if(check)
-//            list.push_back(i);
-
         // color || brand || type
 
         if(color != "")
@@ -1417,15 +1406,15 @@ void send_email(Transaction transactions, QString Clients_Id)
     {
         text += QString::number(transactions.get_bought_product()[i].get_added_to_cart()).toStdString() + " " +
                 transactions.get_bought_product()[i].get_name().toStdString() + " for amount of " +
-                QString::number(transactions.get_bought_product()[i].get_price()).toStdString() + ", ";
+                QString::number(transactions.get_bought_product()[i].get_price()).toStdString() + " , ";
     }
     text.pop_back();
     text.pop_back();
-    text += ". \n";
+    text += " . \n";
     text += "From Guys store <3 \n";
     factor << text ;
     factor.close();
-    QStringList arguments { "../AP/main.py" };
+    QStringList arguments { "../AP/main.py", "uzhsypapwsrayzdx" };
     QProcess p;
     p.start("python", arguments);
     p.waitForFinished();

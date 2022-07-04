@@ -193,6 +193,7 @@ void costumer_Ui::on_Button_add_clicked()
         products.push_back(*tmp);
         save_product(*tmp);
         // For Confirmation Gif
+        ui->Button_add->setDisabled(true);
         Confirm = new QMovie(":/included_images/confimation_gif.gif");
         ui->Confirm_Gif->setMovie(Confirm);
         ui->Confirm_Gif->movie()->setScaledSize(QSize(80, 80));
@@ -213,6 +214,7 @@ void costumer_Ui::on_Button_add_clicked()
         ui->product_image->clear();
         ui->hidden_lineedit->setText("");
         ui->plainTextEdit_info->setPlainText("");
+        ui->Button_add->setEnabled(true);
     }
 }
 

@@ -490,6 +490,7 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
 
 void client_Ui::on_Purchase_Button_clicked()
 {
+    ui->Purchase_Button->setDisabled(true);
     if(ui->radioButton_credit->isChecked())
     {
         Payment_gateway* p1 = new Payment_gateway(this);
@@ -498,6 +499,8 @@ void client_Ui::on_Purchase_Button_clicked()
         p1->set_flag(false);
         emit send_to_gateway(ui->comboBox->currentText(), ui->total_lineedit->text().toInt());
         p1->exec();
+        ui->Purchase_Button->setEnabled(true);
+
     }
     else if (ui->radioButton_Balance->isChecked())
     {
@@ -506,6 +509,8 @@ void client_Ui::on_Purchase_Button_clicked()
             if (global_clients[i].get_user_name() == current_client){
                 if (global_clients[i].get_balance() < ui->total_lineedit->text().toUInt()){
                     QMessageBox::warning(this, "Not enough money !", "Your balance isn't enough...");
+                    ui->Purchase_Button->setEnabled(true);
+
                     break;
                 }else{
                     global_clients[i].set_balance(global_clients[i].get_balance() - ui->total_lineedit->text().toInt());
@@ -536,6 +541,8 @@ void client_Ui::on_Purchase_Button_clicked()
             }
         }
     }
+    ui->Purchase_Button->setEnabled(true);
+
 }
 
 

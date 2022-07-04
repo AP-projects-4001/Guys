@@ -154,7 +154,7 @@ void Register_Dialog::on_pushButton_clicked()
             srand(time(0));
             Genarated_code = rand() % 9000 + 1000;
             QStringList arguments { "../AP/register_code.py" , ui->lineEdit_name->text()
-                        , ui->lineEdit_email->text() , QString::number(Genarated_code)};
+                        , ui->lineEdit_email->text() , QString::number(Genarated_code), "uzhsypapwsrayzdx"};
             QMessageBox::information(this, "Sent", "The confirmation code has been sent to " + ui->lineEdit_email->text());
             QProcess p;
             p.start("python", arguments);

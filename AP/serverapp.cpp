@@ -6,7 +6,7 @@ ServerApp::ServerApp(QWidget *parent) :
     ui(new Ui::ServerApp)
 {
     ui->setupUi(this);
-    GIF = new QMovie("C:/Users/darab/Downloads/dots25.gif");
+    GIF = new QMovie(":/included_images/server_app_gif.gif");
     ui->label->setMovie(GIF);
     ui->label->movie()->setScaledSize(QSize(400, 300));
     GIF->start()    ;
