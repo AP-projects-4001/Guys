@@ -243,6 +243,9 @@ QCheckBox::indicator:checked
            </item>
            <item>
             <widget class="QCheckBox" name="checkBox_change_to_admin">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
              <property name="styleSheet">
               <string notr="true">QCheckBox::indicator
 {

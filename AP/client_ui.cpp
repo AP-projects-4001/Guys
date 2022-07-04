@@ -398,6 +398,7 @@ void client_Ui::show_setting()
 
 void client_Ui::on_refresh_button_clicked()
 {
+    ui->refresh_button->setDisabled(true);
     check_accounts();
     products_2 = load_product();
     products_copy = products_2;
@@ -413,6 +414,9 @@ void client_Ui::on_refresh_button_clicked()
     }
     else
         leftButton->setEnabled(true);
+    Delay_c(1000);
+    ui->refresh_button->setDisabled(false);
+
 }
 
 void client_Ui::on_pushButton_clicked()

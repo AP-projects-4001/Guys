@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QThread>
+#include <QMovie>
 #include "thread_app.h"
 namespace Ui {
 class ServerApp;
