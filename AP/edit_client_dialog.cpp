@@ -68,6 +68,11 @@ void Edit_Client_Dialog::on_pushButton_save_clicked()
         QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
         ui->lineEdit_phone->setText("");
     }
+    else if(!check_email(ui->lineEdit_email->text()))
+    {
+        QMessageBox::warning(this, "Error", "E-mail is not valid");
+//        ui->lineEdit_email->clear();
+    }
 
     else
     {
