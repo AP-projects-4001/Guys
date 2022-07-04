@@ -8,6 +8,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QFile>
+#include <QProcess>
+#include <QIntValidator>
 #include <vector>
 #include <algorithm>
 #include "load_save.h"
@@ -30,7 +32,6 @@ signals:
     void send_register(QString, QString, QString, QString, QString, QString, bool, bool);
 
 private slots:
-    void on_buttonBox_accepted();
 
     void on_lineEdit_username_editingFinished();
 
@@ -39,6 +40,10 @@ private slots:
     void on_lineEdit_password_editingFinished();
 
     void on_lineEdit_email_editingFinished();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::Register_Dialog *ui;

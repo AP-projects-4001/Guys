@@ -1,32 +1,17 @@
 #include "register_dialog.h"
 #include "ui_register_dialog.h"
-
+int Genarated_code;
 Register_Dialog::Register_Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Register_Dialog)
 {
     ui->setupUi(this);
+    ui->lineEdit->setValidator(new QIntValidator(0,9999, this));
 }
 
 Register_Dialog::~Register_Dialog()
 {
     delete ui;
-}
-
-void Register_Dialog::on_buttonBox_accepted()
-{
-    bool flag = false;
-    if(ui->lineEdit_name->text().isEmpty() || ui->lineEdit_username->text().isEmpty() ||
-       ui->lineEdit_address->text().isEmpty() || ui->lineEdit_email->text().isEmpty() ||
-       ui->lineEdit_password->text().isEmpty() || ui->lineEdit_phone->text().isEmpty())
-    {
-        QMessageBox::warning(this, "Error", "Fields can't be empty...");
-        flag = true;
-    }
-    emit send_register(ui->lineEdit_name->text(), ui->lineEdit_username->text(),
-                       ui->lineEdit_address->text(), ui->lineEdit_email->text(),
-                       ui->lineEdit_password->text(), ui->lineEdit_phone->text(),
-                       ui->radioButton_client->isChecked(), flag);
 }
 
 bool binarySearch(vector<QString>& arr, QString x,int n)
@@ -136,6 +121,60 @@ void Register_Dialog::on_lineEdit_email_editingFinished()
     {
         QMessageBox::warning(this, "Error", "Email is not valid !");
         ui->lineEdit_email->clear();
+    }
+}
+
+
+void Register_Dialog::on_pushButton_2_clicked()
+{
+    close();
+}
+
+
+void Register_Dialog::on_pushButton_clicked()
+{
+    bool flag = false;
+    if(ui->lineEdit_name->text().isEmpty() || ui->lineEdit_username->text().isEmpty() ||
+       ui->lineEdit_address->text().isEmpty() || ui->lineEdit_email->text().isEmpty() ||
+       ui->lineEdit_password->text().isEmpty() || ui->lineEdit_phone->text().isEmpty())
+    {
+        QMessageBox::warning(this, "Error", "Fields can't be empty...");
+        flag = true;
+    }
+    else{
+        if (ui->pushButton->text() == "Send Code")
+        {
+            ui->lineEdit_name->setDisabled(true);
+            ui->lineEdit_username->setDisabled(true);
+            ui->lineEdit_address->setDisabled(true);
+            ui->lineEdit_email->setDisabled(true);
+            ui->lineEdit_password->setDisabled(true);
+            ui->lineEdit_phone->setDisabled(true);
+            ui->lineEdit->setEnabled(true);
+            srand(time(0));
+            Genarated_code = rand() % 9000 + 1000;
+            QStringList arguments { "../AP/register_code.py" , ui->lineEdit_name->text()
+                        , ui->lineEdit_email->text() , QString::number(Genarated_code)};
+            QMessageBox::information(this, "Sent", "The confirmation code has been sent to " + ui->lineEdit_email->text());
+            QProcess p;
+            p.start("python", arguments);
+            p.waitForFinished();
+            ui->pushButton->setText("Confirm");
+
+        }
+        else{
+            if (ui->lineEdit->text() == QString::number(Genarated_code)){
+            emit send_register(ui->lineEdit_name->text(), ui->lineEdit_username->text(),
+                               ui->lineEdit_address->text(), ui->lineEdit_email->text(),
+                               ui->lineEdit_password->text(), ui->lineEdit_phone->text(),
+                               ui->radioButton_client->isChecked(), flag);
+                close();
+            }
+            else{
+                QMessageBox::warning(this, "Error !" ,"The confirmation code isn't correct...");
+            }
+
+        }
     }
 }
 
