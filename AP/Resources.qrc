@@ -20,6 +20,7 @@
         <file>dark_mode.png</file>
         <file>light_mode.png</file>
         <file>purchase_loading.gif</file>
+        <file>favicon.png</file>
     </qresource>
     <qresource prefix="/themes">
         <file>dark_theme.qss</file>

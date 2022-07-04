@@ -18,6 +18,7 @@ void Edit_Costumer_Dialog::recieve_costumer_index(int _costumer_index)
 {
     costumer_index = _costumer_index;
     vector<Costumer> tmp = load_costumer();
+    vector<Admin> temp = load_admin();
     ui->lineEdit_name->setText(tmp[costumer_index].get_name());
     ui->lineEdit_address->setText(tmp[costumer_index].get_address());
     ui->lineEdit_email->setText(tmp[costumer_index].get_email());
@@ -26,21 +27,33 @@ void Edit_Costumer_Dialog::recieve_costumer_index(int _costumer_index)
     ui->checkBox_enter_limit->setChecked(tmp[costumer_index].get_login_restriction());
     ui->checkBox_balance_limit->setChecked(tmp[costumer_index].get_change_balance_restriction());
     ui->checkBox_add_product->setChecked(tmp[costumer_index].get_buy_add_restriction());
+    bool flag = false;
+    for(unsigned int i = 0; i < temp.size(); i++)
+    {
+        if(temp[i].get_user_name() == tmp[costumer_index].get_user_name())
+        {
+            flag = true;
+            break;
+        }
+    }
+    ui->checkBox_change_to_admin->setChecked(flag);
     tmp.clear();
     tmp.shrink_to_fit();
+    temp.clear();
+    temp.shrink_to_fit();
 }
 
 void Edit_Costumer_Dialog::on_pushButton_cancel_clicked()
 {
     close();
 }
+
 void Delay_edit_clinet(int n)
 {
     QTime dieTime= QTime::currentTime().addMSecs(n);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
-
 
 void Edit_Costumer_Dialog::on_pushButton_save_clicked()
 {
@@ -74,6 +87,17 @@ void Edit_Costumer_Dialog::on_pushButton_save_clicked()
             tmp[costumer_index].set_change_balance_restriction(true);
         else
             tmp[costumer_index].set_change_balance_restriction(false);
+
+        if(ui->checkBox_change_to_admin->isChecked())
+        {
+            Admin temporary;
+            temporary.set_user_name(tmp[costumer_index].get_user_name());
+            temporary.set_password(tmp[costumer_index].get_password());
+            save_admin(temporary);
+        }
+
+        else
+            delete_from_admins(tmp[costumer_index].get_user_name());
 
         // Appear confirm gif
         confirm_customer = new QMovie(":/included_images/confimation_gif.gif");

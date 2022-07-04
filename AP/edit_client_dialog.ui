@@ -238,6 +238,34 @@ QCheckBox::indicator:checked
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox_admin">
+             <property name="styleSheet">
+              <string notr="true">QCheckBox::indicator
+{
+    width: 50px;
+    height: 50px;
+}
+
+QCheckBox::indicator:unchecked
+{
+    image: url(&quot;:/included_images/off-button.png&quot;);
+	border: none;
+	background-color: none;
+}
+
+QCheckBox::indicator:checked
+{
+    image: url(&quot;:/included_images/on-button.png&quot;);
+	border: none;
+	background-color: none;
+}</string>
+             </property>
+             <property name="text">
+              <string>Promote to admin</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
