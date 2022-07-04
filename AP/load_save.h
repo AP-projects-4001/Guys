@@ -21,6 +21,7 @@
 #include <QEventLoop>
 #include <chrono>
 #include <fstream>
+#include <iostream>
 using namespace std;
 
 void save_client(vector<Client>&);
@@ -45,6 +46,8 @@ QString show_balance2(vector <Costumer>& , QString);
 void confirm_payment(QString);
 bool check_email(QString email);
 void check_accounts();
-//QString show_balance(vector <Costumer>& , QString);
+void save_admin(Admin);
+void delete_from_admins(QString);
+vector<Admin> load_admin();
 
 #endif // LOAD_SAVE_H

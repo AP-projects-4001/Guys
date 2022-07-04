@@ -1205,6 +1205,12 @@ void check_and_create()
         f.write(d.toJson());
         f.close();
     }
+    if(!check_file("All_admin.txt"))
+    {
+        QFile f("All_admin.txt");
+        f.open(QIODevice::WriteOnly);
+        f.close();
+    }
 }
 
 int current_client_index(QString username)
@@ -1331,8 +1337,21 @@ void check_accounts()
 
     for(unsigned int i = 0; i < clients.size(); i++)
     {
-        if(clients[i].get_deleted_status() && ((clients[i].get_delete_time() - now) >= 259200))
-        {}
+        if(clients[i].get_deleted_status() && ((now - clients[i].get_delete_time()) >= 259200))
+        {
+            vector<Admin> tmp = load_admin();
+            for(unsigned int j = 0; j < tmp.size(); j++)
+            {
+                if(tmp[j].get_user_name() == clients[i].get_user_name())
+                {
+                    delete_from_admins(tmp[j].get_user_name());
+                    break;
+                }
+            }
+            tmp.clear();
+            tmp.shrink_to_fit();
+        }
+
         else
             new_clients.push_back(clients[i]);
     }
@@ -1340,8 +1359,7 @@ void check_accounts()
     int counter = 0;
     for(unsigned int i = 0; i < costumers.size(); i++)
     {
-        int num = (now - costumers[i].get_delete_time());
-        if(costumers[i].get_deleted_status() && (num >= 259200))
+        if(costumers[i].get_deleted_status() && (now - costumers[i].get_delete_time() >= 259200))
         {
             for(unsigned int j = 0; j < products.size(); j++)
             {
@@ -1351,6 +1369,18 @@ void check_accounts()
                     counter++;
                 }
             }
+
+            vector<Admin> tmp = load_admin();
+            for(unsigned int j = 0; j < tmp.size(); j++)
+            {
+                if(tmp[j].get_user_name() == costumers[i].get_user_name())
+                {
+                    delete_from_admins(tmp[j].get_user_name());
+                    break;
+                }
+            }
+            tmp.clear();
+            tmp.shrink_to_fit();
         }
         else
             new_costumers.push_back(costumers[i]);
@@ -1399,4 +1429,84 @@ void send_email(Transaction transactions, QString Clients_Id)
     QProcess p;
     p.start("python", arguments);
     p.waitForFinished();
+}
+
+vector<Admin> load_admin()
+{
+    ifstream admin("All_admin.txt", ios::in);
+    vector<Admin> all_admins;
+    if(admin.is_open())
+    {
+        string dummyLine;
+        while (getline(admin, dummyLine))
+        {
+            if(dummyLine == "")
+                break;
+            size_t pos = 0;
+            string token;
+            string delimiter = ",";
+            vector<string> splitted_line;
+            while ((pos = dummyLine.find(delimiter)) != string::npos) // getting data from the file
+            {
+                token = dummyLine.substr(0, pos);
+                dummyLine.erase(0, pos + delimiter.length());
+                splitted_line.push_back(token);
+            }
+            Admin tmp;
+            tmp.set_user_name(QString::fromStdString(splitted_line[0]));
+            tmp.set_password(QString::fromStdString(splitted_line[1]));
+            all_admins.push_back(tmp);
+            splitted_line.clear();
+            splitted_line.shrink_to_fit();
+        }
+    }
+    admin.close();
+    return all_admins;
+}
+
+void delete_from_admins(QString user)
+{
+    vector<Admin> admins = load_admin();
+    for(unsigned int i = 0; i < admins.size(); i++)
+    {
+        if(admins[i].get_user_name() == user)
+        {
+            admins.erase(admins.begin() + i);
+            break;
+        }
+    }
+    // wipe data from file
+    fstream admin("All_admin.txt", ofstream::out | ofstream::trunc);
+    admin.close();
+
+    //save to file
+    for(unsigned int i = 0; i < admins.size(); i++)
+        save_admin(admins[i]);
+
+    admins.clear();
+    admins.shrink_to_fit();
+}
+
+void save_admin(Admin new_admin)
+{
+    vector<Admin> admins = load_admin();
+    bool flag = false;
+    for(unsigned int i = 0; i < admins.size(); i++)
+    {
+        if(admins[i].get_user_name() == new_admin.get_user_name())
+        {
+            flag = true;
+            break;
+        }
+    }
+
+    if(!flag)
+    {
+        fstream admin("All_admin.txt", ios::app);
+        if(admin.is_open())
+        {
+            admin << new_admin.get_user_name().toStdString() << "," << new_admin.get_password().toStdString() << "," << "\n";
+        }
+        admin.close();
+    }
 }
