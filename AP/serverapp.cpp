@@ -6,6 +6,8 @@ ServerApp::ServerApp(QWidget *parent) :
     ui(new Ui::ServerApp)
 {
     ui->setupUi(this);
+    QPixmap pix(":/included_images/favicon.png");
+    this->setWindowIcon(pix);
 }
 
 ServerApp::~ServerApp()

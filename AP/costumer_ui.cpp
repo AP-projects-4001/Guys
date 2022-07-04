@@ -11,6 +11,8 @@ costumer_Ui::costumer_Ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::costumer_Ui)
 {
+    QPixmap pix(":/included_images/favicon.png");
+    this->setWindowIcon(pix);
     ui->setupUi(this);
     ui->hidden_lineedit->hide();
     products = load_product();
@@ -573,3 +575,16 @@ void costumer_Ui::on_checkBox_theme_clicked()
         ui->transactions_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
     }
 }
+
+void costumer_Ui::on_my_account_triggered()
+{
+    QMessageBox::StandardButton log_out;
+    log_out = QMessageBox::question(this, "Log Out", "Are you sure you want to log out?",  QMessageBox::Yes|QMessageBox::No);
+    if (log_out == QMessageBox::Yes)
+    {
+        close();
+        Delay_c(1000);
+        this->~costumer_Ui();
+    }
+}
+

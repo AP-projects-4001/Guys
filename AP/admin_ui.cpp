@@ -10,6 +10,8 @@ admin_ui::admin_ui(QWidget *parent) :
     ui->client_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->product_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    QPixmap pix(":/included_images/favicon.png");
+    this->setWindowIcon(pix);
 }
 
 admin_ui::~admin_ui()
@@ -199,6 +201,12 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
     }
 }
 
+void Delay_c(int n)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 
 void admin_ui::on_action_logout_triggered()
 {
@@ -206,7 +214,8 @@ void admin_ui::on_action_logout_triggered()
     logout3 = QMessageBox::question(this, "Log Out", "Are you sure you want to log out?",  QMessageBox::Yes|QMessageBox::No);
     if (logout3 == QMessageBox::Yes)
     {
-//        close();
+        close();
+        Delay_c(1000);
         this->~admin_ui();
     }
 }

@@ -20,6 +20,8 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
     ui->login_confirm->hide();
     // Check files ==>
+    QPixmap pix(":/included_images/favicon.png");
+    this->setWindowIcon(pix);
     this->setWindowTitle("Login Menu");
     QPixmap picture(":/included_images/store_logo.png");
     ui->label_3->setPixmap(picture);
@@ -99,7 +101,7 @@ void Login::on_pushButton_clicked()
     }
 
     else{
-        if(ui->radioButton_client->isChecked())
+        if(ui->radioButton_client->isChecked()) //client
         {
             unsigned int i;
             for(i = 0; i<client_users.size(); i++)
@@ -161,14 +163,13 @@ void Login::on_pushButton_clicked()
                 ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
                 ui->login_confirm->show();
                 Movie->start();
-                ui->statusbar->showMessage("Wrong Password!", 5000);
                 Delay(3300);
                 Movie->stop();
                 ui->login_confirm->hide();
             }
         }
 
-        else if(ui->radioButton_costumer->isChecked())
+        else if(ui->radioButton_costumer->isChecked()) // costumer
         {
             unsigned int i;
             for(i = 0; i<costumer_users.size(); i++)
@@ -220,6 +221,7 @@ void Login::on_pushButton_clicked()
                     break;
                 }
             }
+
             if(i == costumer_users.size())
             {
                 ui->statusbar->showMessage("No costumer with such username!", 5000);
@@ -228,14 +230,13 @@ void Login::on_pushButton_clicked()
                 ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
                 ui->login_confirm->show();
                 Movie->start();
-                ui->statusbar->showMessage("Wrong Password!", 5000);
                 Delay(3300);
                 Movie->stop();
                 ui->login_confirm->hide();
             }
         }
 
-        else
+        else //admin
         {
             if(ui->lineEdit_user->text() == "Admin")
             {
@@ -260,24 +261,75 @@ void Login::on_pushButton_clicked()
                     ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
                     ui->login_confirm->show();
                     Movie->start();
-                    ui->statusbar->showMessage("Wrong Password!", 5000);
                     Delay(3300);
                     Movie->stop();
                     ui->login_confirm->hide();
                 }
             }
+
             else
             {
-                ui->statusbar->showMessage("Invalid Username!", 5000);
-                Movie = new QMovie(":/included_images/wrong_gif.gif");
-                ui->login_confirm->setMovie(Movie);
-                ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
-                ui->login_confirm->show();
-                Movie->start();
-                ui->statusbar->showMessage("Wrong Password!", 5000);
-                Delay(3300);
-                Movie->stop();
-                ui->login_confirm->hide();
+                vector<Admin> all_admins = load_admin();
+                if(all_admins.size() == 0)
+                {
+                    ui->statusbar->showMessage("Invalid Username!", 5000);
+                    Movie = new QMovie(":/included_images/wrong_gif.gif");
+                    ui->login_confirm->setMovie(Movie);
+                    ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                    ui->login_confirm->show();
+                    Movie->start();
+                    Delay(3300);
+                    Movie->stop();
+                    ui->login_confirm->hide();
+                    return;
+                }
+
+                for(unsigned int i = 0; i < all_admins.size(); i++)
+                {
+                    if(all_admins[i].get_user_name() == ui->lineEdit_user->text())
+                    {
+                        if(all_admins[i].get_password() == ui->lineEdit_password->text())
+                        {
+                            Movie = new QMovie(":/included_images/Confirm-login.gif");
+                            ui->login_confirm->setMovie(Movie);
+                            ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                            ui->login_confirm->show();
+                            ui->pushButton->setEnabled(false);
+                            Movie->start();
+                            Delay(2300);
+                            admin_ui * admin = new admin_ui(this);
+                            close();
+                            admin->show();
+                        }
+
+                        else
+                        {
+                            ui->statusbar->showMessage("Invalid Password!", 5000);
+                            Movie = new QMovie(":/included_images/wrong_gif.gif");
+                            ui->login_confirm->setMovie(Movie);
+                            ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                            ui->login_confirm->show();
+                            Movie->start();
+                            Delay(3300);
+                            Movie->stop();
+                            ui->login_confirm->hide();
+                        }
+                        break;
+                    }
+
+                    else
+                    {
+                        ui->statusbar->showMessage("Invalid Username!", 5000);
+                        Movie = new QMovie(":/included_images/wrong_gif.gif");
+                        ui->login_confirm->setMovie(Movie);
+                        ui->login_confirm->movie()->setScaledSize(QSize(291, 291));
+                        ui->login_confirm->show();
+                        Movie->start();
+                        Delay(3300);
+                        Movie->stop();
+                        ui->login_confirm->hide();
+                    }
+                }
             }
         }
     }

@@ -57,6 +57,8 @@ private slots:
 
     void on_checkBox_theme_clicked();
 
+    void on_My_account_triggered();
+
 private:
     Ui::client_Ui *ui;
     void show_products(vector <Product> &);
