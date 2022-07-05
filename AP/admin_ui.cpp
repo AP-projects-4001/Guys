@@ -32,14 +32,20 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
         {
             ui->costumer_table->setItem(i , 0, new QTableWidgetItem(temp[i].get_name()));
             ui->costumer_table->item(i ,  0)->setFlags(ui->costumer_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->costumer_table->item(i, 0)->setTextAlignment(5);
             ui->costumer_table->setItem(i , 1, new QTableWidgetItem(temp[i].get_address()));
             ui->costumer_table->item(i ,  1)->setFlags(ui->costumer_table->item(i ,  1)->flags() & ~Qt::ItemIsEditable);
+            ui->costumer_table->item(i, 1)->setTextAlignment(5);
             ui->costumer_table->setItem(i , 2, new QTableWidgetItem(temp[i].get_email()));
             ui->costumer_table->item(i ,  2)->setFlags(ui->costumer_table->item(i ,  2)->flags() & ~Qt::ItemIsEditable);
+            ui->costumer_table->item(i, 2)->setTextAlignment(5);
             ui->costumer_table->setItem(i , 3, new QTableWidgetItem(temp[i].get_phone_number()));
             ui->costumer_table->item(i ,  3)->setFlags(ui->costumer_table->item(i ,  3)->flags() & ~Qt::ItemIsEditable);
+            ui->costumer_table->item(i, 3)->setTextAlignment(5);
             ui->costumer_table->setItem(i , 4, new QTableWidgetItem(temp[i].get_user_name()));
             ui->costumer_table->item(i ,  4)->setFlags(ui->costumer_table->item(i ,  4)->flags() & ~Qt::ItemIsEditable);
+            ui->costumer_table->item(i, 4)->setTextAlignment(5);
+
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
@@ -69,14 +75,19 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
         {
             ui->client_table->setItem(i , 0, new QTableWidgetItem(temp[i].get_name()));
             ui->client_table->item(i ,  0)->setFlags(ui->client_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->client_table->item(i, 0)->setTextAlignment(5);
             ui->client_table->setItem(i , 1, new QTableWidgetItem(temp[i].get_address()));
             ui->client_table->item(i ,  1)->setFlags(ui->client_table->item(i ,  1)->flags() & ~Qt::ItemIsEditable);
+            ui->client_table->item(i, 1)->setTextAlignment(5);
             ui->client_table->setItem(i , 2, new QTableWidgetItem(temp[i].get_email()));
             ui->client_table->item(i ,  2)->setFlags(ui->client_table->item(i ,  2)->flags() & ~Qt::ItemIsEditable);
+            ui->client_table->item(i, 2)->setTextAlignment(5);
             ui->client_table->setItem(i , 3, new QTableWidgetItem(temp[i].get_phone_number()));
             ui->client_table->item(i ,  3)->setFlags(ui->client_table->item(i ,  3)->flags() & ~Qt::ItemIsEditable);
+            ui->client_table->item(i, 3)->setTextAlignment(5);
             ui->client_table->setItem(i , 4, new QTableWidgetItem(temp[i].get_user_name()));
             ui->client_table->item(i ,  4)->setFlags(ui->client_table->item(i ,  4)->flags() & ~Qt::ItemIsEditable);
+            ui->client_table->item(i, 4)->setTextAlignment(5);
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
@@ -109,22 +120,32 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
         {
             ui->product_table->setItem(i , 0, new QTableWidgetItem(products[i].get_name()));
             ui->product_table->item(i ,  0)->setFlags(ui->product_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 0)->setTextAlignment(5);
             ui->product_table->setItem(i , 1, new QTableWidgetItem(products[i].get_brand()));
             ui->product_table->item(i ,  1)->setFlags(ui->product_table->item(i ,  1)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 1)->setTextAlignment(5);
             ui->product_table->setItem(i , 2, new QTableWidgetItem(products[i].get_type()));
             ui->product_table->item(i ,  2)->setFlags(ui->product_table->item(i ,  2)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 2)->setTextAlignment(5);
             ui->product_table->setItem(i , 3, new QTableWidgetItem(products[i].get_color()));
             ui->product_table->item(i ,  3)->setFlags(ui->product_table->item(i ,  3)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 3)->setTextAlignment(5);
             ui->product_table->setItem(i , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
             ui->product_table->item(i ,  4)->setFlags(ui->product_table->item(i ,  4)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 4)->setTextAlignment(5);
             ui->product_table->setItem(i , 5, new QTableWidgetItem(QString::number(products[i].get_stock())));
             ui->product_table->item(i ,  5)->setFlags(ui->product_table->item(i ,  5)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 5)->setTextAlignment(5);
             ui->product_table->setItem(i , 6, new QTableWidgetItem(products[i].get_size()));
             ui->product_table->item(i ,  6)->setFlags(ui->product_table->item(i ,  6)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 6)->setTextAlignment(5);
             ui->product_table->setItem(i , 7, new QTableWidgetItem(QString::number(products[i].get_weight())));
             ui->product_table->item(i ,  7)->setFlags(ui->product_table->item(i ,  7)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 7)->setTextAlignment(5);
             ui->product_table->setItem(i , 8, new QTableWidgetItem(products[i].get_additional_info()));
             ui->product_table->item(i ,  8)->setFlags(ui->product_table->item(i ,  8)->flags() & ~Qt::ItemIsEditable);
+            ui->product_table->item(i, 8)->setTextAlignment(5);
+
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
@@ -171,12 +192,14 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
         for (unsigned int i = 0 ; i < dates.size() ; ++i){
             ui->transaction_table->setItem(i , 0, new QTableWidgetItem(dates[i]));
             ui->transaction_table->item(i ,  0)->setFlags(ui->transaction_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->transaction_table->item(i, 0)->setTextAlignment(5);
             int Price = 0 ;
             for(unsigned int j = 0 ; j < all_transactions.size() ; ++j)
                 if (all_transactions[j].get_date_time() == dates[i])
                     Price += all_transactions[j].get_bought_product()[0].get_price();
             ui->transaction_table->setItem(i , 1, new QTableWidgetItem(QString::number(Price)));
             ui->transaction_table->item(i ,  1)->setFlags(ui->transaction_table->item(i ,  1)->flags() & ~Qt::ItemIsEditable);
+            ui->transaction_table->item(i, 1)->setTextAlignment(5);
 
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();

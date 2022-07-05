@@ -179,20 +179,28 @@ void client_Ui::show_products(vector<Product> &products)
 
         ui->show_table->setItem(i , 0, new QTableWidgetItem(products[i].get_name()));
         ui->show_table->item(i ,  0)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 0)->setTextAlignment(5);
         ui->show_table->setItem(i , 1, new QTableWidgetItem(products[i].get_brand()));
         ui->show_table->item(i ,  1)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 1)->setTextAlignment(5);
         ui->show_table->setItem(i , 2, new QTableWidgetItem(products[i].get_type()));
         ui->show_table->item(i ,  2)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 2)->setTextAlignment(5);
         ui->show_table->setItem(i , 3, new QTableWidgetItem(products[i].get_color()));
         ui->show_table->item(i ,  3)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 3)->setTextAlignment(5);
         ui->show_table->setItem(i , 4, new QTableWidgetItem(QString::number(products[i].get_price())));
         ui->show_table->item(i ,  4)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 4)->setTextAlignment(5);
         ui->show_table->setItem(i , 5, new QTableWidgetItem(products[i].get_size()));
         ui->show_table->item(i ,  5)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 5)->setTextAlignment(5);
         ui->show_table->setItem(i , 6, new QTableWidgetItem(QString::number(products[i].get_weight())));
         ui->show_table->item(i ,  6)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 6)->setTextAlignment(5);
         ui->show_table->setItem(i , 7, new QTableWidgetItem(products[i].get_additional_info()));
         ui->show_table->item(i ,  7)->setFlags(ui->show_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+        ui->show_table->item(i, 7)->setTextAlignment(5);
 
         QWidget* pWidget = new QWidget();
         QPushButton* btn_edit = new QPushButton();
@@ -253,12 +261,18 @@ void client_Ui::show_products(unsigned int index)
         for (unsigned int i = 0 ; i < global_clients[Index].get_shopped_items().size(); i++){
             ui->cart_table->setItem(count , 0, new QTableWidgetItem(global_clients[Index].get_shopped_items()[i].get_name()));
             ui->cart_table->item(count ,  0)->setFlags(ui->cart_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->cart_table->item(i, 0)->setTextAlignment(5);
+
             ui->cart_table->setItem(count , 1, new QTableWidgetItem(QString::number(global_clients[Index].get_shopped_items()[i].get_added_to_cart())));
             ui->cart_table->item(count ,  1)->setFlags(ui->cart_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->cart_table->item(i, 1)->setTextAlignment(5);
+
             ui->cart_table->setItem(count , 2, new QTableWidgetItem(QString::number(global_clients[Index].get_shopped_items()[i].get_price()*
                                                                                     (global_clients[Index].get_shopped_items()[i].get_added_to_cart()))));// !
             total += (global_clients[Index].get_shopped_items()[i].get_price()*(global_clients[Index].get_shopped_items()[i].get_added_to_cart()));
             ui->cart_table->item(count , 2)->setFlags(ui->cart_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->cart_table->item(i, 2)->setTextAlignment(5);
+
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
@@ -356,12 +370,15 @@ void client_Ui::show_products(unsigned int index)
         for (unsigned int i = 0 ; i < dates.size() ; ++i){
             ui->transaction_table->setItem(i , 0, new QTableWidgetItem(dates[i]));
             ui->transaction_table->item(i ,  0)->setFlags(ui->transaction_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->transaction_table->item(i, 0)->setTextAlignment(5);
+
             int Price = 0 ;
             for(unsigned int j = 0 ; j < all_transactions.size() ; ++j)
                 if (all_transactions[j].get_date_time() == dates[i] && all_transactions[j].get_client_user_name() == current_client)
                     Price += all_transactions[j].get_bought_product()[0].get_price();
             ui->transaction_table->setItem(i , 1, new QTableWidgetItem(QString::number(Price)));
             ui->transaction_table->item(i ,  1)->setFlags(ui->transaction_table->item(i ,  0)->flags() & ~Qt::ItemIsEditable);
+            ui->transaction_table->item(i , 1)->setTextAlignment(5);
 
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
