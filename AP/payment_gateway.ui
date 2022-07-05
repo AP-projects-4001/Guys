@@ -137,6 +137,9 @@ QStatusBar
         <pointsize>11</pointsize>
        </font>
       </property>
+      <property name="placeholderText">
+       <string>XXXX</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -146,6 +149,9 @@ QStatusBar
         <family>Tahoma</family>
         <pointsize>11</pointsize>
        </font>
+      </property>
+      <property name="placeholderText">
+       <string>XXXX</string>
       </property>
      </widget>
     </item>
@@ -157,6 +163,9 @@ QStatusBar
         <pointsize>11</pointsize>
        </font>
       </property>
+      <property name="placeholderText">
+       <string>XXXX</string>
+      </property>
      </widget>
     </item>
     <item>
@@ -166,6 +175,9 @@ QStatusBar
         <family>Tahoma</family>
         <pointsize>11</pointsize>
        </font>
+      </property>
+      <property name="placeholderText">
+       <string>XXXX</string>
       </property>
      </widget>
     </item>

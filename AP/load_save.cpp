@@ -1400,16 +1400,17 @@ void send_email(Transaction transactions, QString Clients_Id)
     ofstream factor("temp.txt", ios::out);
     factor << global_clients[INDEX].get_name().toStdString() << endl;
     factor << global_clients[INDEX].get_email().toStdString() << endl;
-    text += "Hello dear " + global_clients[INDEX].get_name().toStdString() + ", Thanks for your shopping from our store \n";
+    text += "Hello dear " + global_clients[INDEX].get_name().toStdString() + ", Thanks for your shopping from our store . \n";
     text += "Your orders has been sent at " + transactions.get_date_time().toStdString() + " . \nYou bought ";
     for (unsigned int i = 0 ; i < transactions.get_bought_product().size() ; ++i)
     {
         text += QString::number(transactions.get_bought_product()[i].get_added_to_cart()).toStdString() + " " +
                 transactions.get_bought_product()[i].get_name().toStdString() + " for amount of " +
-                QString::number(transactions.get_bought_product()[i].get_price()).toStdString() + " , ";
+                QString::number(transactions.get_bought_product()[i].get_price()*transactions.get_bought_product()[i].get_added_to_cart()).toStdString() + " , ";
     }
     text.pop_back();
     text.pop_back();
+    text += " . \n Address : " + global_clients[INDEX].get_address().toStdString();
     text += " . \n";
     text += "From Guys store <3 \n";
     factor << text ;
