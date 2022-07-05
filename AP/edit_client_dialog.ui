@@ -172,7 +172,7 @@ QCheckBox::indicator:checked
 }</string>
              </property>
              <property name="text">
-              <string>Restrict to enter</string>
+              <string>Restrict from logging in</string>
              </property>
             </widget>
            </item>
@@ -203,7 +203,7 @@ QCheckBox::indicator:checked
 }</string>
              </property>
              <property name="text">
-              <string>Limit to increase balance</string>
+              <string>Restrict from increase balance</string>
              </property>
             </widget>
            </item>
@@ -234,7 +234,7 @@ QCheckBox::indicator:checked
 }</string>
              </property>
              <property name="text">
-              <string>Restrict to buy products</string>
+              <string>Restrict from buy products</string>
              </property>
             </widget>
            </item>
