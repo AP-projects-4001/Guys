@@ -6,6 +6,7 @@ Edit_Client_Dialog::Edit_Client_Dialog(QWidget *parent) :
     ui(new Ui::Edit_Client_Dialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Client Modification");
     ui->lineEdit_user->setDisabled(true);
 }
 
@@ -91,6 +92,8 @@ void Edit_Client_Dialog::on_pushButton_save_clicked()
             tmp[client_index].set_login_restriction(false);
         if(ui->checkBox_balance_limit->isChecked())
             tmp[client_index].set_change_balance_restriction(true);
+        else
+            tmp[client_index].set_change_balance_restriction(false);
 
         if(ui->checkBox_admin->isChecked())
         {

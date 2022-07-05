@@ -12,6 +12,7 @@ admin_ui::admin_ui(QWidget *parent) :
     ui->transaction_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     QPixmap pix(":/included_images/favicon.png");
     this->setWindowIcon(pix);
+    this->setWindowTitle("Admin");
 }
 
 admin_ui::~admin_ui()

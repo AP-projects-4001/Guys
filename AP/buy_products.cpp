@@ -7,6 +7,7 @@ buy_products::buy_products(QWidget *parent) :
 {
     ui->setupUi(this);
     Item = new Product();
+    this->setWindowTitle("Buy Product");
 }
 
 buy_products::~buy_products()

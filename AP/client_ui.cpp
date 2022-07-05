@@ -15,6 +15,7 @@ client_Ui::client_Ui(QWidget *parent) :
     QPixmap pix(":/included_images/favicon.png");
     this->setWindowIcon(pix);
     ui->setupUi(this);
+    this->setWindowTitle("Profile");
     global_clients = load_client();
     products_2 = load_product();
     products_copy = products_2;

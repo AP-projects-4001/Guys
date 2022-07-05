@@ -11,9 +11,10 @@ costumer_Ui::costumer_Ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::costumer_Ui)
 {
+    ui->setupUi(this);
     QPixmap pix(":/included_images/favicon.png");
     this->setWindowIcon(pix);
-    ui->setupUi(this);
+    this->setWindowTitle("Profile");
     ui->hidden_lineedit->hide();
     products = load_product();
     QTimer *timer_c = new QTimer(this);

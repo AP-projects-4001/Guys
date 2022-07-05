@@ -7,6 +7,7 @@ Costumer_Withdraw::Costumer_Withdraw(QWidget *parent) :
     ui(new Ui::Costumer_Withdraw)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Withdraw Gateway");
     ui->lineEdit_first4->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_first4_2->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_first4_3->setValidator(new QIntValidator(0,9999, this));

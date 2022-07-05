@@ -11,6 +11,7 @@ costumer_products::costumer_products(QWidget *parent) :
 {
     ui->setupUi(this);
     global_product = load_product();
+    this->setWindowTitle("Product Modification");
     deleted = false;    
 }
 
