@@ -13,6 +13,7 @@ Payment_gateway::Payment_gateway(QWidget *parent) :
     ui(new Ui::Payment_gateway)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Payment Gateway");
     ui->lineEdit_first4->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_second4->setValidator(new QIntValidator(0,9999, this));
     ui->lineEdit_third4->setValidator(new QIntValidator(0,9999, this));

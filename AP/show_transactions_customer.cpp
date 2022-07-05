@@ -6,6 +6,7 @@ show_transactions_customer::show_transactions_customer(QWidget *parent) :
     ui(new Ui::show_transactions_customer)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Transactions");
 }
 
 show_transactions_customer::~show_transactions_customer()

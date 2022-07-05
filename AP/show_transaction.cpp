@@ -6,6 +6,7 @@ show_transaction::show_transaction(QWidget *parent) :
     ui(new Ui::show_transaction)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Transactions");
 }
 
 show_transaction::~show_transaction()

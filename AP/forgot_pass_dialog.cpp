@@ -6,6 +6,7 @@ Forgot_Pass_Dialog::Forgot_Pass_Dialog(QWidget *parent) :
     ui(new Ui::Forgot_Pass_Dialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Change Password Gateway");
 }
 
 Forgot_Pass_Dialog::~Forgot_Pass_Dialog()

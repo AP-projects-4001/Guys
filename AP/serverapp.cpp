@@ -6,6 +6,7 @@ ServerApp::ServerApp(QWidget *parent) :
     ui(new Ui::ServerApp)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Guys Store");
     GIF = new QMovie(":/included_images/server_app_gif.gif");
     ui->label->setMovie(GIF);
     ui->label->movie()->setScaledSize(QSize(400, 300));

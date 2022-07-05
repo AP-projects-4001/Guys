@@ -6,6 +6,7 @@ search_tools::search_tools(QWidget *parent) :
     ui(new Ui::search_tools)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Search Tools");
     ui->from_price->setValidator(new QIntValidator(0,2147483646, this));
     ui->to_price->setValidator(new QIntValidator(1,2147483646, this));
     ui->from_weight->setValidator(new QIntValidator(0,2147483646, this));

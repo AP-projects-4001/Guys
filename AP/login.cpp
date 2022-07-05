@@ -19,6 +19,7 @@ Login::Login(QWidget *parent)
 
     ui->setupUi(this);
     ui->login_confirm->hide();
+    this->setWindowTitle("Login Gateway");
     // Check files ==>
     QPixmap pix(":/included_images/favicon.png");
     this->setWindowIcon(pix);

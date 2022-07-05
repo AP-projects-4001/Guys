@@ -7,6 +7,7 @@ New_Password_Dialog::New_Password_Dialog(QWidget *parent) :
     ui(new Ui::New_Password_Dialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Password Modification");
     c_client = "" ;
     c_costumer = "" ;
 }

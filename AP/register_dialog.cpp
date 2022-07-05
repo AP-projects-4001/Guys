@@ -6,6 +6,7 @@ Register_Dialog::Register_Dialog(QWidget *parent) :
     ui(new Ui::Register_Dialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("New Account Registration");
     ui->lineEdit->setValidator(new QIntValidator(0,9999, this));
 }
 

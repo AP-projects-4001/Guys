@@ -6,6 +6,7 @@ Edit_Costumer_Dialog::Edit_Costumer_Dialog(QWidget *parent) :
     ui(new Ui::Edit_Costumer_Dialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Costumer Modification");
     ui->lineEdit_user->setDisabled(true);
 }
 
