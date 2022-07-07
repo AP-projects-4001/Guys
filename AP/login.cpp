@@ -69,6 +69,7 @@ void Login::recieve_register(QString _name, QString _user_name, QString _address
             client_users.push_back(*tmp);
             save_client(client_users);
             delete(tmp);
+            QMessageBox::information(this,"Register Account","The account registered successfully");
         }
         else
         {
@@ -82,6 +83,7 @@ void Login::recieve_register(QString _name, QString _user_name, QString _address
             costumer_users.push_back(*tmp);
             save_costumer(costumer_users);
             delete(tmp);
+            QMessageBox::information(this,"Register Account","The account registered successfully");
         }
     }
 }
