@@ -205,6 +205,7 @@ void client_Ui::show_products(vector<Product> &products)
         QWidget* pWidget = new QWidget();
         QPushButton* btn_edit = new QPushButton();
         btn_edit->setText("Show");
+        btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
         QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
         pWidget->setAutoFillBackground(true);
         pLayout->addWidget(btn_edit);
@@ -276,6 +277,7 @@ void client_Ui::show_products(unsigned int index)
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
+            btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);
@@ -302,6 +304,7 @@ void client_Ui::show_products(unsigned int index)
             QWidget* pwidget = new QWidget();
             QPushButton* btn_delete = new QPushButton();
             btn_delete->setText("Delete");
+            btn_delete->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* playout = new QHBoxLayout(pwidget);
             playout->addWidget(btn_delete);
             playout->setAlignment(Qt::AlignCenter);
@@ -335,13 +338,7 @@ void client_Ui::show_products(unsigned int index)
 
             ++count;
         }
-
-        //  else if(index==1)
         ui->total_lineedit->setText(QString::number(total));
-
-
-
-
     }
 
     else if(index == 2)
@@ -383,6 +380,7 @@ void client_Ui::show_products(unsigned int index)
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("SHOW");
+            btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);

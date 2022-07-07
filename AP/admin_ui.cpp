@@ -49,6 +49,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
+            btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);
@@ -91,6 +92,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
+            btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);
@@ -149,6 +151,7 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("Edit");
+            btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);
@@ -200,10 +203,10 @@ void admin_ui::on_tabWidget_tabBarClicked(int index)
             ui->transaction_table->setItem(i , 1, new QTableWidgetItem(QString::number(Price)));
             ui->transaction_table->item(i ,  1)->setFlags(ui->transaction_table->item(i ,  1)->flags() & ~Qt::ItemIsEditable);
             ui->transaction_table->item(i, 1)->setTextAlignment(5);
-
             QWidget* pWidget = new QWidget();
             QPushButton* btn_edit = new QPushButton();
             btn_edit->setText("SHOW");
+            btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
             pLayout->addWidget(btn_edit);
             pLayout->setAlignment(Qt::AlignCenter);

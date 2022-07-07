@@ -240,7 +240,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                 ui->show_table->setItem(count , 0, new QTableWidgetItem(products[i].get_name()));
                 ui->show_table->item(count ,  0)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
                 ui->show_table->item(count, 0)->setTextAlignment(5);
-                ui->show_table->setItem(count , 1, new QTableWidgetItem(products[i].get_brand()));
+               ui->show_table->setItem(count , 1, new QTableWidgetItem(products[i].get_brand()));
                 ui->show_table->item(count ,  1)->setFlags(ui->show_table->item(count ,  0)->flags() & ~Qt::ItemIsEditable);
                 ui->show_table->item(count, 1)->setTextAlignment(5);
                 ui->show_table->setItem(count , 2, new QTableWidgetItem(products[i].get_type()));
@@ -268,6 +268,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                 QWidget* pWidget = new QWidget();
                 QPushButton* btn_edit = new QPushButton();
                 btn_edit->setText("Edit");
+                btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
                 QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
                 pLayout->addWidget(btn_edit);
                 pLayout->setAlignment(Qt::AlignCenter);
@@ -353,6 +354,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
                 QWidget* pWidget = new QWidget();
                 QPushButton* btn_edit = new QPushButton();
                 btn_edit->setText("SHOW");
+                btn_edit->setCursor(QCursor(Qt::PointingHandCursor));
                 QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
                 pLayout->addWidget(btn_edit);
                 pLayout->setAlignment(Qt::AlignCenter);
@@ -388,7 +390,7 @@ void costumer_Ui::on_tabWidget_tabBarClicked(int index)
 
 void costumer_Ui::on_pushButton_clicked()
 {
-    QString dirfilename =  QFileDialog::getOpenFileName(this,"Open Document",QDir::currentPath(),tr("*.png *.jpeg *.jpg"));
+    QString dirfilename =  QFileDialog::getOpenFileName(this,"Open Document",QDir::homePath(),tr("*.png *.jpeg *.jpg"));
     QFileInfo dir_filename(dirfilename);
     QString filename = dir_filename.fileName();
     QDir("product_images").exists();

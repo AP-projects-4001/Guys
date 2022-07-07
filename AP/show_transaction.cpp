@@ -59,6 +59,7 @@ void show_transaction::recieve_date(QString Date)
         QWidget* pwidget = new QWidget();
         QPushButton* btn_show = new QPushButton();
         btn_show->setText("Show image");
+        btn_show->setCursor(QCursor(Qt::PointingHandCursor));
         QHBoxLayout* playout = new QHBoxLayout(pwidget);
         playout->addWidget(btn_show);
         playout->setAlignment(Qt::AlignCenter);
@@ -129,6 +130,7 @@ void show_transaction::recieve_date_admin(QString Date)
             QWidget* pwidget = new QWidget();
             QPushButton* btn_show = new QPushButton();
             btn_show->setText("Show image");
+            btn_show->setCursor(QCursor(Qt::PointingHandCursor));
             QHBoxLayout* playout = new QHBoxLayout(pwidget);
             playout->addWidget(btn_show);
             playout->setAlignment(Qt::AlignCenter);
