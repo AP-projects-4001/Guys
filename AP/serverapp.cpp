@@ -11,9 +11,7 @@ ServerApp::ServerApp(QWidget *parent) :
     ui->label->setMovie(GIF);
     ui->label->movie()->setScaledSize(QSize(400, 300));
     GIF->start()    ;
-
     QPixmap pix(":/included_images/favicon.png");
-
     this->setWindowIcon(pix);
 }
 

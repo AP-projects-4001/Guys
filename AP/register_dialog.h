@@ -32,17 +32,11 @@ signals:
     void send_register(QString, QString, QString, QString, QString, QString, bool, bool);
 
 private slots:
-
     void on_lineEdit_username_editingFinished();
-
     void on_lineEdit_phone_editingFinished();
-
     void on_lineEdit_password_editingFinished();
-
     void on_lineEdit_email_editingFinished();
-
     void on_pushButton_2_clicked();
-
     void on_pushButton_clicked();
 
 private:

@@ -8,8 +8,6 @@ increase_balance::increase_balance(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Balance Modification");
     ui->lineEdit->setValidator(new QIntValidator(50000,100000000, this));
-    //ui->comboBox->view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
-
 }
 
 increase_balance::~increase_balance()

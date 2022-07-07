@@ -37,6 +37,7 @@ signals:
     void change_password(QString);
     void send_to_increase_balance(QString);
     void send_transaction(QString);
+
 private slots:
     void set_userId(QString user);
     void sorter(QString,QString,QString,QString,QString,QString,QString,bool,bool,bool,bool,bool,bool,bool,bool);
@@ -45,18 +46,13 @@ private slots:
     void on_refresh_button_clicked();
     void on_pushButton_clicked();
     void on_tabWidget_tabBarClicked(int index);
-
     void on_Purchase_Button_clicked();
-
     void on_pushButton_3_clicked();
-
     void on_pushButton_4_clicked();
     void confirm_purchase();
     void update_client();
     void on_pushButton_2_clicked();
-
     void on_checkBox_theme_clicked();
-
     void on_My_account_triggered();
 
 private:

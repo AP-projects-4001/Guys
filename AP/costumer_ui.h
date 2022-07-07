@@ -27,23 +27,20 @@ public:
     explicit costumer_Ui(QWidget *parent = nullptr);
     ~costumer_Ui();
     void Delay_c(int);
+
 public slots:
     void set_userID(QString user);
+
 private slots:
     void on_Button_add_clicked();
     void on_tabWidget_tabBarClicked(int index);
     void on_pushButton_clicked();
-
     void on_pushButton_save_change_clicked();
-
     void on_pushButton_change_pass_clicked();
-
     void withdraw(int);
-
     void check_balance();
     void update_customer();
     void on_checkBox_theme_clicked();
-
     void on_my_account_triggered();
 
 signals:
@@ -51,6 +48,7 @@ signals:
     void send_transaction(QString);
     void change_password2(QString);
     void send_amount(int);
+
 private:
     Ui::costumer_Ui *ui;
 };

@@ -17,14 +17,15 @@ class Costumer_Withdraw : public QDialog
 public:
     explicit Costumer_Withdraw(QWidget *parent = nullptr);
     ~Costumer_Withdraw();
+
 private slots:
     void recieve_amount(int);
     void on_pushButton_confirm_clicked();
-
     void on_pushButton_cancel_clicked();
 
 private:
     Ui::Costumer_Withdraw *ui;
+
 signals:
     void to_withdraw(int);
 };

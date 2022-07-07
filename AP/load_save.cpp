@@ -1358,7 +1358,6 @@ void check_accounts()
                     counter++;
                 }
             }
-
             vector<Admin> tmp = load_admin();
             for(unsigned int j = 0; j < tmp.size(); j++)
             {

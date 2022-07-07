@@ -32,6 +32,7 @@ void costumer_products::recieve_index(int index)
       ui->weight_lineEdit->setText(QString::number(global_product[index].get_weight()));
       ui->price_lineEdit->setText(QString::number(global_product[index].get_price()));
       ui->stock_lineEdit->setText(QString::number(global_product[index].get_stock()));
+
       // Unchangable parameters
       ui->name_lineEdit->setDisabled(true);
       ui->brand_lineEdit->setDisabled(true);

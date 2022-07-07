@@ -16,10 +16,10 @@ Login::Login(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Login)
 {
-
     ui->setupUi(this);
     ui->login_confirm->hide();
     this->setWindowTitle("Login Gateway");
+
     // Check files ==>
     QPixmap pix(":/included_images/favicon.png");
     this->setWindowIcon(pix);
@@ -28,7 +28,6 @@ Login::Login(QWidget *parent)
     ui->label_3->setPixmap(picture);
     ui->label_3->setPixmap(picture.scaled(654, 381, Qt::KeepAspectRatio));
     ui->label_3->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
     check_and_create();
     check_accounts();
     client_users = load_client();

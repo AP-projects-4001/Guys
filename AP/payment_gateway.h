@@ -23,18 +23,13 @@ public:
     void set_user(QString,int);
     void set_flag(bool);
     void find_bank();
+
 private slots:
     void recieve_bank(QString, int);// Bank , total amount
-
     void on_purchase_button_clicked();
-
     void on_cancel_button_clicked();
-
-
     void on_lineEdit_captcha_clicked();
-
     void on_lineEdit_second4_editingFinished();
-
     void on_lineEdit_first4_editingFinished();
 
 signals:

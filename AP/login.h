@@ -27,17 +27,15 @@ public:
 
 private slots:
     void on_register_pushButton_clicked();
-
     void recieve_register(QString, QString, QString, QString, QString, QString, bool, bool);
-
     void on_pushButton_clicked();
-
     void on_pushButton_forgot_pass_clicked();
-
     void recieve_forgot_pass(QString, QString, bool, bool);
+
 signals:
     void send_costumerID(QString);
     void send_clientID(QString);
+
 private:
     Ui::Login *ui;
 };

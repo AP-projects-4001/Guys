@@ -72,7 +72,7 @@ void Edit_Client_Dialog::on_pushButton_save_clicked()
     else if(!check_email(ui->lineEdit_email->text()))
     {
         QMessageBox::warning(this, "Error", "E-mail is not valid");
-//        ui->lineEdit_email->clear();
+        ui->lineEdit_email->clear();
     }
 
     else
@@ -131,6 +131,7 @@ void Edit_Client_Dialog::on_pushButton_del_clicked()
     vector<Client> tmp = load_client();
     tmp[client_index].set_deleted_status(true);
     tmp[client_index].set_time_delete();
+
     // Appear confirm gif
     confirm_edit_client = new QMovie(":/included_images/confimation_gif.gif");
     ui->CONFIRM_Gif->setMovie(confirm_edit_client);

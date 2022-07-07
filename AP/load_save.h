@@ -10,6 +10,8 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QProcess>
+#include <thread>
+#include <QEventLoop>
 #include <regex>
 #include "client.h"
 #include "costumer.h"
@@ -17,8 +19,6 @@
 #include "admin.h"
 #include "transaction.h"
 #include "product.h"
-#include <thread>
-#include <QEventLoop>
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -31,23 +31,27 @@ void save_product(vector<Product>);
 void save_product(Product &);
 void save_transaction(Transaction &a);
 void send_email(Transaction, QString);
+void check_accounts();
+void save_admin(Admin);
+void delete_from_admins(QString);
+void check_and_create();
+void add_viewed(vector <Product> &, int);
+void confirm_payment(QString);
+
+int current_client_index(QString);
+int current_costumer_index(QString);
+
 vector<Transaction> load_transaction();
 vector<Client> load_client();
 vector<Costumer> load_costumer();
 vector<Product> load_product();
-bool check_file(QString);
 vector<Product> sort_function(vector<Product>, QString,QString,QString,QString,QString,QString,QString, bool,bool,bool,bool,bool,bool,bool,bool);
-void check_and_create();
-int current_client_index(QString);
-int current_costumer_index(QString);
-void add_viewed(vector <Product> &, int);
+vector<Admin> load_admin();
+
+bool check_file(QString);
+bool check_email(QString email);
+
 QString show_balance(vector <Client>& , QString);
 QString show_balance2(vector <Costumer>& , QString);
-void confirm_payment(QString);
-bool check_email(QString email);
-void check_accounts();
-void save_admin(Admin);
-void delete_from_admins(QString);
-vector<Admin> load_admin();
 
 #endif // LOAD_SAVE_H

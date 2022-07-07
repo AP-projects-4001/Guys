@@ -25,6 +25,7 @@ private slots:
 
 signals:
     void send_bank_to_gateway(QString,int);
+
 private:
     Ui::increase_balance *ui;
 };

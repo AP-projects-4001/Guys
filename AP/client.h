@@ -13,7 +13,8 @@ public:
     Client();
     void set_shopped_items(std::vector<Product> &);
     void add_to_shopped(Product &, bool);
-    std::vector<Product> get_shopped_items() const;
     void clear_shopped_items();
+
+    std::vector<Product> get_shopped_items() const;
 };
 #endif // CLIENT_H

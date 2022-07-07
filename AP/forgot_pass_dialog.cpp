@@ -172,7 +172,6 @@ void Forgot_Pass_Dialog::on_confirm_button_clicked()
     confrim_forget->start();
     Delay_forget(1335);
     confrim_forget->stop();
-
     emit send_forgot(ui->lineEdit_user->text(), ui->lineEdit_new_pass->text(),
                      ui->radioButton_client->isChecked(), flag);
     close();

@@ -70,8 +70,8 @@ void Edit_Costumer_Dialog::on_pushButton_save_clicked()
     }
     else if(!check_email(ui->lineEdit_email->text()))
     {
-        QMessageBox::warning(this, "Error", "E-mail is not valid");
-//        ui->lineEdit_email->clear();
+        QMessageBox::warning(this, "Error", "Email is not valid");
+        ui->lineEdit_email->clear();
     }
 
     else

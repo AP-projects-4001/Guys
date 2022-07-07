@@ -71,7 +71,6 @@ void client_Ui::set_userId(QString user)
         ui->radioButton_Balance->setEnabled(true);
         ui->radioButton_credit->setEnabled(true);
     }
-
     connect(leftButton, &QPushButton::clicked, leftButton,[=](){
         increase_balance *p = new increase_balance(this);
         connect(this,SIGNAL(send_to_increase_balance(QString)),p,SLOT(recieve_client(QString)));
@@ -80,7 +79,6 @@ void client_Ui::set_userId(QString user)
         global_clients = load_client();
         leftButton->setText(show_balance(global_clients, current_client));
     });
-    //  ***
 
     ui->checkBox_theme->setChecked(global_clients[current_client_index(current_client)].get_theme());
     if(!global_clients[current_client_index(current_client)].get_theme())
@@ -334,7 +332,6 @@ void client_Ui::show_products(unsigned int index)
                     save_client(global_clients[Index]);
                 }
             });
-
             ++count;
         }
         ui->total_lineedit->setText(QString::number(total));
@@ -441,7 +438,8 @@ void client_Ui::on_pushButton_clicked()
     {
         ui->refresh_button->click();
     }
-    else{
+    else
+    {
         string searched = ui->lineEdit->text().toLower().toStdString();
         for (unsigned int i = 0 ; i < products_copy.size(); ++i){
             if (products_copy[i].get_name().toLower().toStdString().find(searched) != std::string::npos)
@@ -452,7 +450,6 @@ void client_Ui::on_pushButton_clicked()
         tmp.shrink_to_fit();
         show_products(products_copy);
     }
-
 }
 
 
@@ -462,7 +459,6 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
     if (index==0){
         show_products(products_copy);
     }
-
     else if(index==1)
     {
         show_products(1);
@@ -482,11 +478,9 @@ void client_Ui::on_tabWidget_tabBarClicked(int index)
             ui->radioButton_credit->setEnabled(true);
         }
     }
-
     else if(index == 2)
     {
         show_products(2);
-
     }
     else
     {
@@ -518,7 +512,6 @@ void client_Ui::on_Purchase_Button_clicked()
         emit send_to_gateway(ui->comboBox->currentText(), ui->total_lineedit->text().toInt());
         p1->exec();
         ui->Purchase_Button->setEnabled(true);
-
     }
     else if (ui->radioButton_Balance->isChecked())
     {
@@ -533,8 +526,6 @@ void client_Ui::on_Purchase_Button_clicked()
                 }else{
                     global_clients[i].set_balance(global_clients[i].get_balance() - ui->total_lineedit->text().toInt());
                     save_client(global_clients);
-
-
                     class thread SEND(confirm_payment,current_client);
                     loading = new QMovie(":/included_images/purchase_loading.gif");
                     ui->label_10->setMovie(loading);
@@ -545,7 +536,6 @@ void client_Ui::on_Purchase_Button_clicked()
                     SEND.join();
                     loading->stop();
                     ui->label_10->hide();
-
                     leftButton->setText(show_balance(global_clients, current_client));
                     global_clients = load_client();
                     products_2 = load_product();
@@ -560,7 +550,6 @@ void client_Ui::on_Purchase_Button_clicked()
         }
     }
     ui->Purchase_Button->setEnabled(true);
-
 }
 
 
@@ -572,7 +561,6 @@ void client_Ui::on_pushButton_3_clicked()
         QMessageBox::warning(this, "Error", "Fields can't be empty...");
         on_tabWidget_tabBarClicked(3);
     }
-
     else if(!(ui->lineEdit_phone_num->text().toStdString().find_first_not_of("0123456789") == string::npos))
     {
         QMessageBox::warning(this, "Error", "Phone Number can't contain characters...");
@@ -667,7 +655,9 @@ void client_Ui::update_client()
 
 void client_Ui::on_pushButton_2_clicked()
 {
-    if(ui->lineEdit_2->text()!="")
+    if(ui->lineEdit_2->text()=="")
+        on_tabWidget_tabBarClicked(0);
+    else
     {
         vector<string> words;
         string searched = ui->lineEdit_2->text().toLower().toStdString();
@@ -733,7 +723,6 @@ void client_Ui::on_checkBox_theme_clicked()
                     "QPushButton::disabled{ color: #070039; background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #dce7eb, stop:0.5 #e0e8eb, stop:1 #dee7ec);}"
                     );
     }
-
     else // light is active
     {
         QFile styleFile( ":/themes/dark_theme.qss" );
@@ -745,7 +734,6 @@ void client_Ui::on_checkBox_theme_clicked()
         ui->transaction_table->setStyleSheet("QWidget\n{\n	background-color : #242526;\n}\n\nQPushButton\n{\n	background-color: #565656;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}\n\n\nQPushButton::disabled\n{\n	background-color: #404040;\n	color: #656565;\n	border-color: #051a39;\n\n}\n\n\nQPushButton::hover\n{\n	background-color: #8399ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n}\n\n\nQPushButton::pressed\n{\n	background-color: #4969ff;\n	color: #ffffff;\n	border-style: solid;\n	border-width: 1px;\n	border-radius: 10px;\n	border-color: #051a39;\n	padding: 5px;\n\n}");
     }
 }
-
 
 void client_Ui::on_My_account_triggered()
 {

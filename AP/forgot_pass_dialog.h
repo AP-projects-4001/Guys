@@ -25,11 +25,8 @@ public:
 
 private slots:
     void on_lineEdit_user_editingFinished();
-
     void on_lineEdit_email_editingFinished();
-
     void on_confirm_button_clicked();
-
     void on_Cancel_button_clicked();
 
 signals:

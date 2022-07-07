@@ -16,9 +16,9 @@ public:
     explicit show_transaction(QWidget *parent = nullptr);
     ~show_transaction();
     void set_Userid(QString);
+
 private slots:
     void recieve_date(QString);
-
     void recieve_date_admin(QString);
 
 private:

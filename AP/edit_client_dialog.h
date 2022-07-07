@@ -20,11 +20,8 @@ public:
 
 private slots:
     void recieve_client_index(int);
-
     void on_pushButton_cancel_clicked();
-
     void on_pushButton_save_clicked();
-
     void on_pushButton_del_clicked();
 
 private:

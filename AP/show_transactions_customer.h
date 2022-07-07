@@ -17,6 +17,7 @@ public:
     explicit show_transactions_customer(QWidget *parent = nullptr);
     ~show_transactions_customer();
     void set_USERID(QString);
+
 private slots:
     void recieve_date(QString);
 

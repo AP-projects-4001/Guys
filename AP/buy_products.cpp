@@ -91,7 +91,6 @@ void buy_products::recieve_product(Product item, unsigned int spin_box)
         ui->product_image->setPixmap(picture);
         ui->product_image->setPixmap(picture.scaled(w, h, Qt::KeepAspectRatio));
         ui->product_image->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
     }
     else{
         QPixmap picture(item.get_path());
